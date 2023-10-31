@@ -20,7 +20,7 @@ public class Persona {
 	
 	@Email(message = "El correo no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
 	@NotEmpty(message = "El correo no puede estar vacio")
-	private String correo;
+	private String email;
 	
 	public Persona() {
 		// TODO Auto-generated constructor stub
@@ -30,13 +30,13 @@ public class Persona {
 			@NotBlank(message = "El apellido es obligatorio") String apellido,
 			@NotBlank(message = "La cedula es obligatorio") String cedula,
 			@NotBlank(message = "El telefono es obligatorio") String telefono,
-			@Email(message = "El correo no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "El correo no puede estar vacio") String correo) {
+			@Email(message = "El correo no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "El correo no puede estar vacio") String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cedula = cedula;
 		this.telefono = telefono;
-		this.correo = correo;
+		this.email = email;
 	}
 
 	public String getName() {
@@ -71,12 +71,12 @@ public class Persona {
 		this.telefono = telefono;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

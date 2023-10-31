@@ -2,6 +2,7 @@ package com.sena.solution.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 
 public class Entidades {
@@ -22,8 +23,8 @@ public class Entidades {
 	private String telefono;
 	
 	
-	@NotBlank(message ="El Email es obligatorio")
-	@Email
+	@Email(message = "El email no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+	@NotEmpty(message = "El email no puede estar vacio")
 	private String email;
 	
 	public Entidades() {
@@ -34,7 +35,7 @@ public class Entidades {
 			@NotBlank(message = "La direccion es obligatorio") String direccion,
 			@NotBlank(message = "La ciudad es obligatorio") String ciudad,
 			@NotBlank(message = "El Telefono es obligatorio") String telefono,
-			@NotBlank(message = "El Email es obligatorio") @Email String email) {
+			@NotEmpty(message = "El Email es obligatorio") @Email String email) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.ciudad = ciudad;

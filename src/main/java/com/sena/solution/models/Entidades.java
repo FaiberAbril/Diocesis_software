@@ -1,31 +1,27 @@
 package com.sena.solution.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "Entidades")
+
 public class Entidades {
-	@Column(length = 50)
+	
 	@NotBlank(message ="El nombre es obligatorio")
 	private String nombre;
 	
-	@Column(length = 50)
+
 	@NotBlank(message ="La direccion es obligatorio")
 	private String direccion;
 	
-	@Column(length = 50)
+
 	@NotBlank(message ="La ciudad es obligatorio")
 	private String ciudad;
 	
-	@Column(length = 50)
+	
 	@NotBlank(message ="El Telefono es obligatorio")
 	private String telefono;
 	
-	@Column(length = 50)
+	
 	@NotBlank(message ="El Email es obligatorio")
 	@Email
 	private String email;

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sena.solution.models.Parroquia;
 @Repository
-public interface ParroquiaRepositories extends JpaRepository<Parroquia, Long> {
+public interface ParroquiaRepository extends JpaRepository<Parroquia, Long> {
 
 }

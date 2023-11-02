@@ -14,7 +14,7 @@ public class EncargadoService {
 	@Autowired
 	private EncargadoRepository encargadoRepository;
 	
-	public void crearEncargado(Encargado encargado) {
+	public void guardarEncargado(Encargado encargado) {
 		encargadoRepository.save(encargado);
 	}
 	

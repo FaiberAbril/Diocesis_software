@@ -13,7 +13,7 @@ public class VicariaService {
 	@Autowired
 	private VicariaRepository vicariaRepository;
 	
-	public void crearVicaria(Vicaria vicaria) {
+	public void guardarVicaria(Vicaria vicaria) {
 		vicariaRepository.save(vicaria);
 	}
 	

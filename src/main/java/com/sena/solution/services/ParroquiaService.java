@@ -11,7 +11,7 @@ public class ParroquiaService {
 	@Autowired
 	private ParroquiaRepository parroquiarepository;
 
-	public void crearParroquia(Parroquia parroquia) {
+	public void guardarParroquia(Parroquia parroquia) {
 		parroquiarepository.save(parroquia);
 	}
 

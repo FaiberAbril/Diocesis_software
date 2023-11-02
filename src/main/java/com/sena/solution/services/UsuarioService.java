@@ -11,7 +11,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuariorepository;
 
-	public void crearUsuario(Usuario usuario) {
+	public void guardarUsuario(Usuario usuario) {
 		usuariorepository.save(usuario);
 	}
 
@@ -32,3 +32,4 @@ public class UsuarioService {
 	}
 
 }
+

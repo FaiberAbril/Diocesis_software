@@ -29,9 +29,8 @@ public class Usuario extends Persona {
 	private Parroquia parroquia;
 	
 	public Usuario() {
-		// TODO Auto-generated constructor stub
+		
 	}
-	
 	
 
 	public Usuario(Long idUsuario,

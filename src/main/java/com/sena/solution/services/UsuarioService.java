@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.RolUsuario;
 import com.sena.solution.models.Usuario;
 import com.sena.solution.repositories.UsuarioRepository;
 
+
+@Service
 public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuariorepository;

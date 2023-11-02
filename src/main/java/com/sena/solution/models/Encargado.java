@@ -26,7 +26,6 @@ public class Encargado extends Persona {
 	private Long idEncargado;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@Column(nullable = false)
 	private Curia curia;
 	
 	public Encargado() {

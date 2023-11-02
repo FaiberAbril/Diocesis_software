@@ -23,7 +23,6 @@ public class Vicaria extends Entidades{
 	private Long idVicaria;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
-	@Column(nullable = false)
 	private Curia curia;
 	
 	public Vicaria() {

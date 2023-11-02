@@ -11,7 +11,7 @@ public class ParroquiaService {
 	@Autowired
 	private ParroquiaRepository parroquiarepository;
 
-	public void crearParroquia(Parroquia parroquia) {
+	public void guardarParroquia(Parroquia parroquia) {
 		parroquiarepository.save(parroquia);
 	}
 
@@ -27,7 +27,7 @@ public class ParroquiaService {
 		parroquiarepository.delete(parroquia);
 	}
 
-	public Parroquia buscarParroquia(Long idParroquia) {
+	public Parroquia buscarPorIdParroquia(Long idParroquia) {
 		return parroquiarepository.findById(idParroquia).get();
 	}
 

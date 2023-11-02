@@ -1,9 +1,11 @@
 package com.sena.solution.services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sena.solution.models.RolUsuario;
 import com.sena.solution.models.Usuario;
 import com.sena.solution.repositories.UsuarioRepository;
 
@@ -11,7 +13,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuariorepository;
 
-	public void crearUsuario(Usuario usuario) {
+	public void guardarUsuario(Usuario usuario) {
 		usuariorepository.save(usuario);
 	}
 
@@ -27,8 +29,12 @@ public class UsuarioService {
 		usuariorepository.delete(usuario);
 	}
 
-	public Usuario buscarUsuario(Long idUsuario) {
+	public Usuario buscarPorIdUsuario(Long idUsuario) {
 		return usuariorepository.findById(idUsuario).get();
+	}
+	
+	public List<RolUsuario> listarRoles(){
+		return Arrays.asList(RolUsuario.values());
 	}
 
 }

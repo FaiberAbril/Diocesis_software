@@ -14,7 +14,7 @@ public class CuriaService {
 	@Autowired
 	private CuriaRepository curiaRepository;
 	
-	public void crearCuria(Curia curia) {
+	public void guardarCuria(Curia curia) {
 		curiaRepository.save(curia);
 	}
 	

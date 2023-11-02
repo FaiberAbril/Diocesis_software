@@ -18,9 +18,9 @@ import jakarta.validation.constraints.NotEmpty;
 @Table(name = "Usuarios")
 public class Usuario extends Persona {
 
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idUsuario;
+	private Long idUsuario;*/
 	
 	@Enumerated(EnumType.STRING)
 	private RolUsuario rolUsuario;
@@ -33,28 +33,24 @@ public class Usuario extends Persona {
 	}
 	
 
-	public Usuario(Long idUsuario,
-			@NotBlank(message = "El nombre es obligatorio") String nombre,
+
+	public Usuario(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
 			@NotBlank(message = "El apellido es obligatorio") String apellido,
 			@NotBlank(message = "La cedula es obligatorio") String cedula,
 			@NotBlank(message = "El telefono es obligatorio") String telefono,
 			@Email(message = "El correo no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "El correo no puede estar vacio") String email,
 			RolUsuario rolUsuario, Parroquia parroquia) {
-		super(nombre, apellido, cedula, telefono, email);
-		this.idUsuario = idUsuario;
+		super(id, nombre, apellido, cedula, telefono, email);
 		this.rolUsuario = rolUsuario;
 		this.parroquia = parroquia;
 	}
 
 
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+
+
+
 
 	public Parroquia getParroquia() {
 		return parroquia;

@@ -1,11 +1,23 @@
 package com.sena.solution.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Persona {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
 	@NotBlank(message = "El nombre es obligatorio")
 	private String nombre;
@@ -27,26 +39,47 @@ public class Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Persona(@NotBlank(message = "El nombre es obligatorio") String nombre,
+	
+
+	public Persona(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
 			@NotBlank(message = "El apellido es obligatorio") String apellido,
 			@NotBlank(message = "La cedula es obligatorio") String cedula,
 			@NotBlank(message = "El telefono es obligatorio") String telefono,
 			@Email(message = "El correo no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "El correo no puede estar vacio") String email) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cedula = cedula;
 		this.telefono = telefono;
 		this.email = email;
 	}
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
 
-	public String getName() {
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setName(String nombre) {
+
+
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 
 	public String getApellido() {
 		return apellido;

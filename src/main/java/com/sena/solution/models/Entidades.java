@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class Entidades {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank(message ="El nombre es obligatorio")

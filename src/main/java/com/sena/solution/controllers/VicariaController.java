@@ -33,7 +33,7 @@ public class VicariaController {
 	public ModelAndView listaVicaria() {
 		
 		ModelAndView modelAndView = new ModelAndView(VicariaView.LISTV);
-		modelAndView.addObject("listaVicarias", vicariaService.listarVicarias());
+		modelAndView.addObject("listaCurias", curiaService.listarCurias());
 		
 		return modelAndView;
 		
@@ -43,7 +43,7 @@ public class VicariaController {
 	public ModelAndView formularioCrearVicarias() {
 		
 		ModelAndView modelAndView = new ModelAndView(VicariaView.FORMV);
-		modelAndView.addObject("ObjVicaria", new Vicaria());
+		modelAndView.addObject("objVicaria", new Vicaria());
 		modelAndView.addObject("listaCurias", curiaService.listarCurias());
 		
 		return modelAndView;
@@ -62,7 +62,7 @@ public class VicariaController {
 	public ModelAndView formularioActualizarVicaria(@PathVariable("idVicaria")Long idVicaria) {
 		
 		ModelAndView modelAndView = new ModelAndView(VicariaView.FORMUPV);
-		modelAndView.addObject("ObjVicaria", vicariaService.buscarPorIdVicaria(idVicaria));
+		modelAndView.addObject("objVicaria", vicariaService.buscarPorIdVicaria(idVicaria));
 		modelAndView.addObject("listaCurias", curiaService.listarCurias());
 		
 		return modelAndView;

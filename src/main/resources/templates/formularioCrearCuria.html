@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+        <title>FORMULARIO CREAR CURIA</title>
+
+    </head>
+
+    <Body>
+        <!--<a th:href="@{/parroquias/}">
+            <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
+        </a>-->
+        <H1 class="text-center mb-3">REGISTRO CURIA</H1>
+        <form th:action="@{/curia/guardarCuria}" method="post" th:object="${objCuria}">
+            <br>
+            <div class="container">
+
+                <div class="row text-center">
+                    <div class="col-4">
+                        <label for="nombre" class="form-label"> Nombre Curia</label>
+                        <input type="text" class="form-control" th:field="*{nombre}" id="nombre"
+                            name="nombre" required>
+                    </div>
+
+                   
+                    <div class="col-4">
+                        <label for="direccion" class="form-label"> Direccion</label>
+                        <input type="text" class="form-control" th:field="*{direccion}" id="direccion" name="direccion"
+                            required>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="telefono" class="form-label"> Telefono</label>
+                        <input type="text" class="form-control" th:field="*{telefono}" id="telefono" name="telefono"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <div class="row text-center">
+                     
+                    <div class="col-6">
+                        <label for="ciudad" class="form-label"> Ciudad</label>
+                        <input type="text" class="form-control" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
+                    </div>               
+                    <div class="col-6">
+                         <label for="email" class="form-label"> Email</label>
+                        <input type="text" class="form-control" th:field="*{email}" id="email" name="email" required>
+                    </div>  
+                </div>
+
+            </div>
+            <br>
+            <br>
+            <div class="text-center">
+                <button class="btn btn-primary " type="submit">Guardar</button>
+            </div>
+
+
+        </form>
+        <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+        <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+
+    </Body>
+
+</html>

@@ -39,7 +39,7 @@ public class CuriaController {
 	public ModelAndView formularioCrearCuria() {
 		
 		ModelAndView modelAndView = new ModelAndView(CuriaView.FORMC);
-		modelAndView.addObject("ObjCuria", new Curia());
+		modelAndView.addObject("objCuria", new Curia());
 		
 		return modelAndView;
 	}
@@ -57,7 +57,7 @@ public class CuriaController {
 	public ModelAndView formularioActualizarCuria(@PathVariable("idCuria")Long idCuria) {
 		
 		ModelAndView modelAndView = new ModelAndView(CuriaView.FORMUPC);
-		modelAndView.addObject("ObjCuria", curiaService.buscarPorIdCuria(idCuria));
+		modelAndView.addObject("objCuria", curiaService.buscarPorIdCuria(idCuria));
 		
 		return modelAndView;
 	}

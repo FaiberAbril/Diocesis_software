@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-        <title>LISTA DE PARROQUIAS</title>
+        <title>LISTA DE CURIAS</title>
     </head>
 
     <body>
@@ -13,12 +13,12 @@
 		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
 		</a>-->
         <div class="container text-center">
-            <H1>Lista de Parroquias</H1>
+            <H1>Lista de Curias</H1>
             <br>
-            <H2>Crear Parroquias</H2>
+            <H2>Crear Curia</H2>
             <br>
-            <a th:href="@{/parroquias/formularioParroquias}">
-                <button class="btn btn-primary" type="submit">Nueva Parroquia</button>
+            <a th:href="@{/curia/formularioCrearCuria}">
+                <button class="btn btn-primary" type="submit">Nueva Curia</button>
             </a>
         </div>
         <br>
@@ -28,35 +28,33 @@
 
                 <thead>
                     <tr>
-                        <th>Id Parroquia</th>
+                        <th>Id Curia</th>
                         <th>Nombre </th>
                         <th>Direccion</th>
-                         <th>Ciudad</th>
                         <th>Telefono</th>
+                        <th>Ciudad</th>
                         <th>Email</th>
-                        <th>Vicaria/Pertenece</th>
                         <th>Eliminar</th>
                         <th>Actualizar</th>
                     </tr>
     
                 </thead>
                 <tbody>
-                    <tr th:each="Parroquia:${listaParroquias}">
-                        <td th:text="${Parroquia.id}"></td>
-                        <td th:text="${Parroquia.nombre}"></td>
-                        <td th:text="${Parroquia.direccion}"></td>
-                        <td th:text="${Parroquia.ciudad}"></td>
-                        <td th:text="${Parroquia.telefono}"></td>
-                        <td th:text="${Parroquia.Email}"></td>
-                        <td th:text="${Parroquia.vicaria}"></td>
+                    <tr th:each="Curia:${listaCurias}">
+                        <td th:text="${Curia.id}"></td>
+                        <td th:text="${Curia.nombre}"></td>
+                        <td th:text="${Curia.direccion}"></td>
+                        <td th:text="${Curia.telefono}"></td>
+                        <td th:text="${Curia.ciudad}"></td>
+                        <td th:text="${Curia.Email}"></td>
                         <td>
-                            <a th:href="@{/parroquias/eliminarParroquia/{id}(id=${Parroquia.id})}">
+                            <a th:href="@{/curia/eliminarCuria/{id}(id=${Curia.id})}">
                                 <button type="button" class="btn btn-outline-danger" >ELIMINAR</button>
                             </a>
                         </td>
                         <td>
                             <a
-                                th:href="@{/parroquias/formularioActualizarParroquia/{id}(id=${Parroquia.id})}">
+                                th:href="@{/curia/formularioActualizarCuria/{id}(id=${Curia.id})}">
                                 <button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
                             </a>
                         </td>

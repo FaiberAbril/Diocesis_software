@@ -4,14 +4,8 @@ package com.sena.solution.models;
 
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -34,11 +28,6 @@ public class Encargado extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	
-
-
 	public Encargado(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
 			@NotBlank(message = "El apellido es obligatorio") String apellido,
 			@NotBlank(message = "La cedula es obligatorio") String cedula,
@@ -48,10 +37,6 @@ public class Encargado extends Persona {
 		super(id, nombre, apellido, cedula, telefono, email);
 		this.curia = curia;
 	}
-
-
-
-
 
 
 	public Curia getCuria() {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sena.solution.controllers.views.Usuarioview;
+import com.sena.solution.controllers.views.UsuarioView;
 import com.sena.solution.models.Usuario;
 import com.sena.solution.services.ParroquiaService;
 import com.sena.solution.services.UsuarioService;
@@ -25,19 +25,19 @@ public class UsuarioController {
 
 	@GetMapping("/home")
 	public String index() {
-		return Usuarioview.HOME;
+		return UsuarioView.HOME;
 	}
 
 	@GetMapping("/listar")
 	public ModelAndView listarUsuarios() {
-		ModelAndView modelandview = new ModelAndView(Usuarioview.LISTU);
+		ModelAndView modelandview = new ModelAndView(UsuarioView.LISTU);
 		modelandview.addObject("listaUsuarios", usuarioservice.listarUsuarios());
 		return modelandview;
 	}
 
 	@GetMapping("/formularioUsuario")
 	public ModelAndView formularioCrearUsuario() {
-		ModelAndView modelandview = new ModelAndView(Usuarioview.FORMU);
+		ModelAndView modelandview = new ModelAndView(UsuarioView.FORMU);
 		modelandview.addObject("objUsuario", new Usuario());
 		modelandview.addObject("listaParroquias", parroquiaservice.listarParroquias());
 		modelandview.addObject("listRol", usuarioservice.listarRoles());
@@ -53,7 +53,7 @@ public class UsuarioController {
 
 	@GetMapping("/formularioActualizarUsuario/{idUsuario}")
 	public ModelAndView formularioActualizarUsuario(@PathVariable("idUsuario") Long idUsuario) {
-		ModelAndView modelandview = new ModelAndView(Usuarioview.FORMUPU);
+		ModelAndView modelandview = new ModelAndView(UsuarioView.FORMUPU);
 		modelandview.addObject("objUsuario", usuarioservice.buscarPorIdUsuario(idUsuario));
 		modelandview.addObject("listaParroquias", parroquiaservice.listarParroquias());
 		modelandview.addObject("listRol", usuarioservice.listarRoles());

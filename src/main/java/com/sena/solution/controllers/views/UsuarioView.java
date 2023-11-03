@@ -1,6 +1,6 @@
 package com.sena.solution.controllers.views;
 
-public class Usuarioview {
+public class UsuarioView {
  
 	public static final String HOME = "index";
 	public static final String LISTU = "listaUsuarios";

@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-        <title>LISTA DE PARROQUIAS</title>
-    </head>
+<head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+    <title>LISTA DE PARROQUIAS</title>
+</head>
 
-    <body>
-		<!--<a th:href="@{/principal/}">
+<body>
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+    </nav>
+
+    <aside th:insert="~{layout/layoutNavegacion :: aside}">
+        
+    </aside>
+    <div class="content-wrapper" layout:fragment="page-content">
+        <!--<a th:href="@{/principal/}">
 		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
 		</a>-->
         <div class="container text-center">
@@ -38,7 +46,7 @@
                         <th>Eliminar</th>
                         <th>Actualizar</th>
                     </tr>
-    
+
                 </thead>
                 <tbody>
                     <tr th:each="Parroquia:${listaParroquias}">
@@ -60,14 +68,18 @@
                                 <button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
                             </a>
                         </td>
-    
+
                     </tr>
                 </tbody>
             </table>
         </div>
-       
 
-    </body>
-    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+    </div>
+
+
+
+</body>
+<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
 </html>

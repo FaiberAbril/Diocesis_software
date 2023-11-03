@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.sena.solution.controllers.views.Parroquiaview;
+import com.sena.solution.controllers.views.ParroquiaView;
 import com.sena.solution.models.Parroquia;
 import com.sena.solution.services.ParroquiaService;
 
@@ -21,19 +21,19 @@ public class ParroquiaController {
 
 	@GetMapping("/home")
 	public String index() {
-		return Parroquiaview.HOME;
+		return ParroquiaView.HOME;
 	}
 
 	@GetMapping("/listar")
 	public ModelAndView listarParroquias() {
-		ModelAndView modelandview = new ModelAndView(Parroquiaview.LISTP);
+		ModelAndView modelandview = new ModelAndView(ParroquiaView.LISTP);
 		modelandview.addObject("listaParroquias", parroquiaservice.listarParroquias());
 		return modelandview;
 	}
 
 	@GetMapping("/formularioParroquias")
 	public ModelAndView formularioCrearParroquia() {
-		ModelAndView modelandview = new ModelAndView(Parroquiaview.FORMP);
+		ModelAndView modelandview = new ModelAndView(ParroquiaView.FORMP);
 		modelandview.addObject("objParroquia", new Parroquia());
 		return modelandview;
 
@@ -47,7 +47,7 @@ public class ParroquiaController {
 
 	@GetMapping("/formularioActualizarParroquia/{idParroquia}")
 	public ModelAndView formularioActualizarParroquia(@PathVariable("idParroquia") Long idParroquia) {
-		ModelAndView modelandview = new ModelAndView(Parroquiaview.FORMUPP);
+		ModelAndView modelandview = new ModelAndView(ParroquiaView.FORMUPP);
 		modelandview.addObject("objParroquia", parroquiaservice.buscarPorIdParroquia(idParroquia));
 		return modelandview;
 	}
@@ -58,7 +58,7 @@ public class ParroquiaController {
 		return "redirect:/parroquias/listar";
 	}
 	
-	@GetMapping("/eliminarUsuario/{idParroquia}")
+	@GetMapping("/eliminarParroquuia/{idParroquia}")
 	public String eliminarParroquia(@PathVariable("idParroquia") Long idParroquia) {
 		parroquiaservice.eliminarParroquia(parroquiaservice.buscarPorIdParroquia(idParroquia));
 		return "redirect:/parroquias/";

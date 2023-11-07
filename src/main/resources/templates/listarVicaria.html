@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-        <title>LISTA DE VICARIAS</title>
-    </head>
+<head th:insert="~{layout/layoutNavegacion :: head}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<title>LISTA DE VICARIAS</title>
+</head>
 
-    <body>
-		<!--<a th:href="@{/principal/}">
+<body>
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+	</nav>
+
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+	</aside>
+	<!--<a th:href="@{/principal/}">
 		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
 		</a>-->
-        <div class="container text-center">
-            <H1>Lista de Vicarias</H1>
-            <br>
-            <H2>Crear Vicarias</H2>
-            <br>
-            <a th:href="@{/vicaria/formularioCrearVicarias}">
-                <button class="btn btn-primary" type="submit">Nueva Vicaria</button>
-            </a>
-        </div>
-        <br>
-        <br>
-        <div class="container text-center">
-            <table class="table table-bordered">
+	<div class="container text-center">
+		<H1>Lista de Vicarias</H1>
+		<br>
+		<H2>Crear Vicarias</H2>
+		<br>
+		<a th:href="@{/vicaria/formularioCrearVicarias}">
+			<button class="btn btn-primary" type="submit">Nueva Vicaria</button>
+		</a>
+	</div>
+	<br>
+	<br>
+	<div class="container text-center">
+		<table class="table table-bordered">
 
                 <thead>
                     <tr>
@@ -59,7 +66,8 @@
         </div>
        
 
-    </body>
-    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+</body>
+<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
 </html>

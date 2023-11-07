@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
 
-<head>
+<head th:insert="~{layout/layoutNavegacion :: head}">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
@@ -10,6 +10,13 @@
 </head>
 
 <Body>
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+	</nav>
+
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+	</aside>
 	<!--<a th:href="@{/parroquias/}">
             <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
         </a>-->

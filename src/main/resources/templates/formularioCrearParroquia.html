@@ -48,8 +48,7 @@
 			<div class="row text-center">
 				<div class="col-4">
 					<label for="ciudad" class="form-label"> Ciudad</label>
-					<input type="text" class="form-control" th:field="*{ciudad}" id="ciudad" name="ciudad"
-						required>
+					<input type="text" class="form-control" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
 				</div>
 
 				<div class="col-4">
@@ -63,8 +62,10 @@
 					<!--<input type="text" class="form-control" th:field="*{vicaria}" id="vicaria"
                             name="vicaria" required>-->
 					<select class="form-control" name="select" th:field="*{vicaria}">
-						<option th:each="Curia:${listaVicarias}" th:value="${Vicaria.id}"
-							th:text="${Vicaria.nombre}">
+						<option th:each="Vicaria:${listaVicarias}" th:value="${Vicaria.idVicaria}"
+							th:text="${Vicaria.nombreVicaria}">
+						</option>
+					</select>
 
 				</div>
 			</div>

@@ -11,13 +11,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.ParroquiaView;
 import com.sena.solution.models.Parroquia;
 import com.sena.solution.services.ParroquiaService;
+import com.sena.solution.services.VicariaService;
 
 @Controller
 @RequestMapping("/parroquias")
 public class ParroquiaController {
 	
 	@Autowired
-	private ParroquiaService parroquiaservice;
+	private ParroquiaService parroquiaService;
+	
+	@Autowired
+	private VicariaService vicariaService;
 
 	@GetMapping("/home")
 	public String index() {
@@ -27,7 +31,7 @@ public class ParroquiaController {
 	@GetMapping("/listar")
 	public ModelAndView listarParroquias() {
 		ModelAndView modelandview = new ModelAndView(ParroquiaView.LISTP);
-		modelandview.addObject("listaParroquias", parroquiaservice.listarParroquias());
+		modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
 		return modelandview;
 	}
 
@@ -35,33 +39,34 @@ public class ParroquiaController {
 	public ModelAndView formularioCrearParroquia() {
 		ModelAndView modelandview = new ModelAndView(ParroquiaView.FORMP);
 		modelandview.addObject("objParroquia", new Parroquia());
+		modelandview.addObject("listaVicarias", vicariaService.listarVicarias());
 		return modelandview;
 
 	}
 
 	@PostMapping("/guardarParroquia")
 	public String guardarParroquia(@ModelAttribute("objParroquia") Parroquia nuevaParroquia) {
-		parroquiaservice.guardarParroquia(nuevaParroquia);
+		parroquiaService.guardarParroquia(nuevaParroquia);
 		return "redirect:/parroquias/listar";
 	}
 
 	@GetMapping("/formularioActualizarParroquia/{idParroquia}")
 	public ModelAndView formularioActualizarParroquia(@PathVariable("idParroquia") Long idParroquia) {
 		ModelAndView modelandview = new ModelAndView(ParroquiaView.FORMUPP);
-		modelandview.addObject("objParroquia", parroquiaservice.buscarPorIdParroquia(idParroquia));
+		modelandview.addObject("objParroquia", parroquiaService.buscarPorIdParroquia(idParroquia));
 		return modelandview;
 	}
 
 	@PostMapping("/actualizarParroquia")
 	public String actualizarParroquia(@ModelAttribute("objParroquia") Parroquia parroquia) {
-		parroquiaservice.actualizarParroquia(parroquia);
+		parroquiaService.actualizarParroquia(parroquia);
 		return "redirect:/parroquias/listar";
 	}
 	
-	@GetMapping("/eliminarParroquuia/{idParroquia}")
+	@GetMapping("/eliminarParroquia/{idParroquia}")
 	public String eliminarParroquia(@PathVariable("idParroquia") Long idParroquia) {
-		parroquiaservice.eliminarParroquia(parroquiaservice.buscarPorIdParroquia(idParroquia));
-		return "redirect:/parroquias/";
+		parroquiaService.eliminarParroquia(parroquiaService.buscarPorIdParroquia(idParroquia));
+		return "redirect:/parroquias/listar";
 	}
 
 }

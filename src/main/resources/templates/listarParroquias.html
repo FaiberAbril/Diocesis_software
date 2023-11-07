@@ -56,7 +56,7 @@
                         <td th:text="${Parroquia.ciudad}"></td>
                         <td th:text="${Parroquia.telefono}"></td>
                         <td th:text="${Parroquia.Email}"></td>
-                        <td th:text="${Parroquia.vicaria}"></td>
+                        <td th:text="${Parroquia.vicaria.nombreVicaria}"></td>
                         <td>
                             <a th:href="@{/parroquias/eliminarParroquia/{id}(id=${Parroquia.id})}">
                                 <button type="button" class="btn btn-outline-danger" >ELIMINAR</button>

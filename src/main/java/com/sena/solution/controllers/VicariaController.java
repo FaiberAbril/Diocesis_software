@@ -33,7 +33,7 @@ public class VicariaController {
 	public ModelAndView listaVicaria() {
 		
 		ModelAndView modelAndView = new ModelAndView(VicariaView.LISTV);
-		modelAndView.addObject("listaCurias", curiaService.listarCurias());
+		modelAndView.addObject("listaVicarias", vicariaService.listarVicarias());
 		
 		return modelAndView;
 		

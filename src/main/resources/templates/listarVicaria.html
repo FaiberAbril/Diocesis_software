@@ -45,17 +45,17 @@
                 </thead>
                 <tbody>
                     <tr th:each="Vicaria:${listaVicarias}">
-                        <td th:text="${Vicaria.id}"></td>
-                        <td th:text="${Vicaria.nombre}"></td>
-                        <td th:text="${Vicaria.curia}"></td>
+                        <td th:text="${Vicaria.idVicaria}"></td>
+                        <td th:text="${Vicaria.nombreVicaria}"></td>
+                        <td th:text="${Vicaria.curia.nombre}"></td>
                         <td>
-                            <a th:href="@{/vicaria/eliminarVicaria/{id}(id=${Vicaria.id})}">
+                            <a th:href="@{/vicaria/eliminarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
                                 <button type="button" class="btn btn-outline-danger" >ELIMINAR</button>
                             </a>
                         </td>
                         <td>
                             <a
-                                th:href="@{/vicaria/formularioActualizarVicaria/{id}(id=${Vicaria.id})}">
+                                th:href="@{/vicaria/formularioActualizarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
                                 <button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
                             </a>
                         </td>

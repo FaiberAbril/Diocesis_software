@@ -54,7 +54,7 @@ public class GestorDocumentalApplication {
 	    	vicariaRepository.save(vicaria1);
 	    }
 	    
-	    Parroquia parroquia1 = new Parroquia(Long.valueOf(1), "Santisima Trinidad", "cra", "Málaga", "3324324324", "parroquia@gmail.com", vicariaRepository.getById(Long.valueOf(2)));
+	    Parroquia parroquia1 = new Parroquia(Long.valueOf(1), "Santisima Trinidad", "cra", "Málaga", "3324324324", "parroquia@gmail.com", vicariaRepository.getById(Long.valueOf(1)));
 	    if(!parroquiaRepository.existsByNombre("Santisima Trinidad")) {
 	    	parroquiaRepository.save(parroquia1);
 	    }

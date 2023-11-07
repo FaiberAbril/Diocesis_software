@@ -20,39 +20,43 @@
 	<!--<a th:href="@{/parroquias/}">
             <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
         </a>-->
-	<H1 class="text-center mb-3">REGISTRO VICARIAS</H1>
-	<form th:action="@{/vicaria/guardarVicaria}" method="post" th:object="${objVicaria}">
-		<br>
-		<div class="container">
+	<div class="content-wrapper">
+		<div class="container text-center">
+			<H1 class="text-center mb-3">REGISTRO VICARIAS</H1>
+			<form th:action="@{/vicaria/guardarVicaria}" method="post" th:object="${objVicaria}">
+				<br>
+				<div class="container">
 
-			<div class="row text-center">
-				<div class="col-4">
-					<label for="nombreVicaria" class="form-label"> Nombre Vicaria</label>
-					<input type="text" class="form-control" th:field="*{nombreVicaria}" id="nombreVicaria" name="nombreVicaria" required>
+					<div class="row text-center">
+						<div class="col-4">
+							<label for="nombreVicaria" class="form-label"> Nombre Vicaria</label>
+							<input type="text" class="form-control" th:field="*{nombreVicaria}" id="nombreVicaria" name="nombreVicaria" required>
+						</div>
+
+						<div class="col-4">
+							<label for="curia" class="form-label"> Curia</label>
+							<!--<input type="text" class="form-control" th:field="*{curia}" id="vicaria"
+									name="vicaria" required>-->
+							<select class="form-control" name="select" th:field="*{curia}">
+								<option th:each="Curia:${listaCurias}" th:value="${Curia.id}" th:text="${Curia.nombre}">
+								</option>
+							</select>
+						</div>
+
+
+					</div>
+					<br>
+				</div>
+				<br>
+				<br>
+				<div class="text-center">
+					<button class="btn btn-primary " type="submit">Guardar</button>
 				</div>
 
-				<div class="col-4">
-					<label for="curia" class="form-label"> Curia</label>
-					<!--<input type="text" class="form-control" th:field="*{curia}" id="vicaria"
-                            name="vicaria" required>-->
-					<select class="form-control" name="select" th:field="*{curia}">
-						<option th:each="Curia:${listaCurias}" th:value="${Curia.id}" th:text="${Curia.nombre}">
-						</option>
-					</select>
-				</div>
 
-
-			</div>
-			<br>
+			</form>
 		</div>
-		<br>
-		<br>
-		<div class="text-center">
-			<button class="btn btn-primary " type="submit">Guardar</button>
-		</div>
-
-
-	</form>
+	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
 

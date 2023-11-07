@@ -30,10 +30,6 @@
                     <tr>
                         <th>Id Vicaria</th>
                         <th>Nombre </th>
-                        <th>Direccion</th>
-                        <th>Ciudad</th>
-                        <th>Telefono</th>
-                        <th>Email</th>
                         <th>Curia</th>
                         <th>Eliminar</th>
                         <th>Actualizar</th>
@@ -44,10 +40,6 @@
                     <tr th:each="Vicaria:${listaVicarias}">
                         <td th:text="${Vicaria.id}"></td>
                         <td th:text="${Vicaria.nombre}"></td>
-                        <td th:text="${Vicaria.direccion}"></td>
-                        <td th:text="${Vicaria.ciudad}"></td>
-                        <td th:text="${Vicaria.telefono}"></td>
-                        <td th:text="${Vicaria.Email}"></td>
                         <td th:text="${Vicaria.curia}"></td>
                         <td>
                             <a th:href="@{/vicaria/eliminarVicaria/{id}(id=${Vicaria.id})}">

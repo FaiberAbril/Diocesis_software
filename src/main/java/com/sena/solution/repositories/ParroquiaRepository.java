@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.sena.solution.models.Parroquia;
 @Repository
 public interface ParroquiaRepository extends JpaRepository<Parroquia, Long> {
-
+	Boolean existsByNombre(String nombreParroquia);
 }

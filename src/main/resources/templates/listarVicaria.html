@@ -1,73 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-        <title>LISTA DE VICARIAS</title>
-    </head>
+<head th:insert="~{layout/layoutNavegacion :: head}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<title>LISTA DE VICARIAS</title>
+</head>
 
-    <body>
-		<!--<a th:href="@{/principal/}">
+<body>
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+	</nav>
+
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+	</aside>
+	<!--<a th:href="@{/principal/}">
 		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
 		</a>-->
-        <div class="container text-center">
-            <H1>Lista de Vicarias</H1>
-            <br>
-            <H2>Crear Vicarias</H2>
-            <br>
-            <a th:href="@{/vicaria/formularioCrearVicarias}">
-                <button class="btn btn-primary" type="submit">Nueva Vicaria</button>
-            </a>
-        </div>
-        <br>
-        <br>
-        <div class="container text-center">
-            <table class="table table-bordered">
+	<div class="container text-center">
+		<H1>Lista de Vicarias</H1>
+		<br>
+		<H2>Crear Vicarias</H2>
+		<br>
+		<a th:href="@{/vicaria/formularioCrearVicarias}">
+			<button class="btn btn-primary" type="submit">Nueva Vicaria</button>
+		</a>
+	</div>
+	<br>
+	<br>
+	<div class="container text-center">
+		<table class="table table-bordered">
 
-                <thead>
-                    <tr>
-                        <th>Id Vicaria</th>
-                        <th>Nombre </th>
-                        <th>Direccion</th>
-                        <th>Ciudad</th>
-                        <th>Telefono</th>
-                        <th>Email</th>
-                        <th>Curia</th>
-                        <th>Eliminar</th>
-                        <th>Actualizar</th>
-                    </tr>
-    
-                </thead>
-                <tbody>
-                    <tr th:each="Vicaria:${listaVicarias}">
-                        <td th:text="${Vicaria.id}"></td>
-                        <td th:text="${Vicaria.nombre}"></td>
-                        <td th:text="${Vicaria.direccion}"></td>
-                        <td th:text="${Vicaria.ciudad}"></td>
-                        <td th:text="${Vicaria.telefono}"></td>
-                        <td th:text="${Vicaria.Email}"></td>
-                        <td th:text="${Vicaria.curia}"></td>
-                        <td>
-                            <a th:href="@{/vicaria/eliminarVicaria/{id}(id=${Vicaria.id})}">
-                                <button type="button" class="btn btn-outline-danger" >ELIMINAR</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a
-                                th:href="@{/vicaria/formularioActualizarVicaria/{id}(id=${Vicaria.id})}">
-                                <button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-                            </a>
-                        </td>
-    
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-       
+			<thead>
+				<tr>
+					<th>Id Vicaria</th>
+					<th>Nombre </th>
+					<th>Direccion</th>
+					<th>Ciudad</th>
+					<th>Telefono</th>
+					<th>Email</th>
+					<th>Curia</th>
+					<th>Eliminar</th>
+					<th>Actualizar</th>
+				</tr>
 
-    </body>
-    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+			</thead>
+			<tbody>
+				<tr th:each="Vicaria:${listaVicarias}">
+					<td th:text="${Vicaria.id}"></td>
+					<td th:text="${Vicaria.nombre}"></td>
+					<td th:text="${Vicaria.direccion}"></td>
+					<td th:text="${Vicaria.ciudad}"></td>
+					<td th:text="${Vicaria.telefono}"></td>
+					<td th:text="${Vicaria.Email}"></td>
+					<td th:text="${Vicaria.curia}"></td>
+					<td>
+						<a th:href="@{/vicaria/eliminarVicaria/{id}(id=${Vicaria.id})}">
+							<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+						</a>
+					</td>
+					<td>
+						<a th:href="@{/vicaria/formularioActualizarVicaria/{id}(id=${Vicaria.id})}">
+							<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+						</a>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+</body>
+<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
 </html>

@@ -13,6 +13,7 @@ import com.sena.solution.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+	
 	@Autowired
 	private UsuarioRepository usuariorepository;
 
@@ -38,6 +39,7 @@ public class UsuarioService {
 	
 	public List<RolUsuario> listarRoles(){
 		return Arrays.asList(RolUsuario.values());
+		   
 	}
 
 }

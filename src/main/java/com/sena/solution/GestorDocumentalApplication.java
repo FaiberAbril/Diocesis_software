@@ -10,11 +10,6 @@ import com.sena.solution.models.Vicaria;
 import com.sena.solution.repositories.CuriaRepository;
 import com.sena.solution.repositories.ParroquiaRepository;
 import com.sena.solution.repositories.VicariaRepository;
-import com.sena.solution.services.CuriaService;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 @SpringBootApplication
 public class GestorDocumentalApplication {

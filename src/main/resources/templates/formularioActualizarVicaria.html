@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+        <title>FORMULARIO ACTUALIZAR VICARIA</title>
+    </head>
+    <!--<a th:href="@{/productos/}" href="">
+        <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
+    </a>-->
+    <h1 class="text-center">Formulario Actualizar Vicarias</h1>
+    <br>
+    <br>
+    <form class="" th:action="@{/vicaria/actualizarVicaria}" method="post" th:object="${objVicaria}">
+        <input type="hidden" th:field="*{idVicaria}" id="idVicaria" name="idVicaria" required>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-4">
+                    <label for="nombreVicaria" class="form-label">Nombre Vicaria </label>
+                    <input class="form-control" type="text" th:field="*{nombreVicaria}" id="nombreVicaria" name="nombreVicaria" required>
+                </div>
+                <div class="col-4">
+                   <label for="curia" class="form-label"> Curia</label>
+					<select class="form-control" name="select" th:field="*{curia}">
+						<option th:each="Curia:${listaCurias}" th:value="${Curia.id}" th:text="${Curia.nombre}">
+						</option>
+					</select>
+                </div>          
+            </div>    
+        </div>
+        <br>
+        <br>
+        <div class="text-center">
+            <button class="btn btn-primary " type="submit">Guardar</button>
+        </div>
+        
+    </form>
+    	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+</html>

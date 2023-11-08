@@ -54,6 +54,7 @@ public class ParroquiaController {
 	public ModelAndView formularioActualizarParroquia(@PathVariable("idParroquia") Long idParroquia) {
 		ModelAndView modelandview = new ModelAndView(ParroquiaView.FORMUPP);
 		modelandview.addObject("objParroquia", parroquiaService.buscarPorIdParroquia(idParroquia));
+		modelandview.addObject("listaVicarias", vicariaService.listarVicarias());
 		return modelandview;
 	}
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+    <head th:insert="~{layout/layoutNavegacion :: head}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+        <title>FORMULARIO ACTUALIZAR CURIAS</title>
+    </head>
+    <body>
+
+        <nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+        </nav>
+    
+        <aside th:insert="~{layout/layoutNavegacion :: aside}">
+            
+        </aside>
+        <!--<a th:href="@{/curia/}" href="">
+        <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
+    </a>-->
+    <h1  class="text-center">Formulario Actualizar Curia</h1>
+    <form th:action="@{/curia/actualizarCuria}" method="post" th:object="${objCuria}">
+        <input type="hidden" th:field="*{id}" id="id" name="id" required>
+        <br>
+        <br>
+        <div class="container ">
+
+            <div class="row text-center">
+                <div class="col-4">
+                    <label for="nombre" class="form-label">Nombre Curia: </label>
+                    <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
+                </div>
+                <div class="col-4">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input class="form-control" type="text" th:field="*{direccion}" id="direccion" name="direccion" required>
+                </div>
+                <div class="col-4">
+                    <label for="ciudad" class="form-label"> Ciudad</label>
+                    <input class="form-control" type="text" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
+                </div>
+            </div>
+            <br>
+            <div class="row text-center">
+                <div class="col-4">
+                    <label for="telefono" class="form-label"> Telefono</label>
+                    <input class="form-control" type="text" th:field="*{telefono}" id="telefono" name="telefono" required>
+                </div>
+               <div class="col-4">
+                    <label for="email" class="form-label"> Email</label>
+                    <input class="form-control" type="text" th:field="*{email}" id="email" name="email" required>
+               </div>               
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="text-center">
+            <button class="btn btn-primary " type="submit">Guardar</button>
+        </div>
+        
+    </form>
+    	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+        
+    </body>
+
+    
+
+</html>

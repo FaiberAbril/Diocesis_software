@@ -55,7 +55,6 @@ public class CuriaController {
 		
 	@GetMapping("/formularioActualizarCuria/{idCuria}")
 	public ModelAndView formularioActualizarCuria(@PathVariable("idCuria")Long idCuria) {
-		
 		ModelAndView modelAndView = new ModelAndView(CuriaView.FORMUPC);
 		modelAndView.addObject("objCuria", curiaService.buscarPorIdCuria(idCuria));
 		

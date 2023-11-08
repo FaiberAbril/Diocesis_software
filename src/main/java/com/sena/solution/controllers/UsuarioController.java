@@ -18,9 +18,9 @@ import com.sena.solution.services.UsuarioService;
 @RequestMapping("/usuario")
 public class UsuarioController {
 	@Autowired
-	private UsuarioService usuarioservice;
+	private UsuarioService usuarioService;
 	@Autowired
-	private ParroquiaService parroquiaservice;
+	private ParroquiaService parroquiaService;
 	
 
 	@GetMapping("/home")
@@ -31,45 +31,45 @@ public class UsuarioController {
 	@GetMapping("/listar")
 	public ModelAndView listarUsuarios() {
 		ModelAndView modelandview = new ModelAndView(UsuarioView.LISTU);
-		modelandview.addObject("listaUsuarios", usuarioservice.listarUsuarios());
+		modelandview.addObject("listaUsuarios", usuarioService.listarUsuarios());
 		return modelandview;
 	}
 
-	@GetMapping("/formularioUsuario")
+	@GetMapping("/formularioCrearUsuario")
 	public ModelAndView formularioCrearUsuario() {
 		ModelAndView modelandview = new ModelAndView(UsuarioView.FORMU);
 		modelandview.addObject("objUsuario", new Usuario());
-		modelandview.addObject("listaParroquias", parroquiaservice.listarParroquias());
-		modelandview.addObject("listRol", usuarioservice.listarRoles());
+		modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
+		modelandview.addObject("listaRol", usuarioService.listarRoles());
 		return modelandview;
 
 	}
 
 	@PostMapping("/guardarUsuario")
 	public String guardarUsuario(@ModelAttribute("objUsuario") Usuario nuevoUsuario) {
-		usuarioservice.guardarUsuario(nuevoUsuario);
-		return "redirect:/usuarios/listar";
+		usuarioService.guardarUsuario(nuevoUsuario);
+		return "redirect:/usuario/listar";
 	}
 
 	@GetMapping("/formularioActualizarUsuario/{idUsuario}")
 	public ModelAndView formularioActualizarUsuario(@PathVariable("idUsuario") Long idUsuario) {
 		ModelAndView modelandview = new ModelAndView(UsuarioView.FORMUPU);
-		modelandview.addObject("objUsuario", usuarioservice.buscarPorIdUsuario(idUsuario));
-		modelandview.addObject("listaParroquias", parroquiaservice.listarParroquias());
-		modelandview.addObject("listRol", usuarioservice.listarRoles());
+		modelandview.addObject("objUsuario", usuarioService.buscarPorIdUsuario(idUsuario));
+		modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
+		modelandview.addObject("listaRol", usuarioService.listarRoles()); 
 		return modelandview;
 	}
 
 	@PostMapping("/actualizarUsuario")
 	public String actualizarUsuario(@ModelAttribute("objUsuario") Usuario usuario) {
-		usuarioservice.actualizarUsuario(usuario);
-		return "redirect:/usuarios/listar";
+		usuarioService.actualizarUsuario(usuario);
+		return "redirect:/usuario/listar";
 	}
 	
 	@GetMapping("/eliminarUsuario/{idUsuario}")
 	public String eliminarUsuario(@PathVariable("idUsuario") Long idUsuario) {
-		usuarioservice.eliminarUsuario(usuarioservice.buscarPorIdUsuario(idUsuario));
-		return "redirect:/usuarios/";
+		usuarioService.eliminarUsuario(usuarioService.buscarPorIdUsuario(idUsuario));
+		return "redirect:/usuario/";
 	}
 	
 }

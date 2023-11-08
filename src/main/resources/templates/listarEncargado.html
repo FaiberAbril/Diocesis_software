@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-	<title>LISTA DE CURIAS</title>
+	<title>LISTA DE ENCARGADOS</title>
 </head>
 
 <body>
@@ -21,12 +21,12 @@
 		</a>-->
 	<div class="content-wrapper" layout:fragment="page-content">
 		<div class="container text-center">
-			<H1>Lista de Curias</H1>
+			<H1>Lista de encargados</H1>
 			<br>
-			<H2>Crear Curia</H2>
+			<H2>Crear encargados</H2>
 			<br>
-			<a th:href="@{/curia/formularioCrearCuria}">
-				<button class="btn btn-primary" type="submit">Nueva Curia</button>
+			<a th:href="@{/encargado/formularioCrearEncargado}">
+				<button class="btn btn-primary" type="submit">Nuevo Encargado</button>
 			</a>
 		</div>
 
@@ -38,32 +38,36 @@
 
 				<thead>
 					<tr>
-						<th>Id Curia</th>
-						<th>Nombre </th>
-						<th>Direccion</th>
+						<th>Id Encargado</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Cedula</th>
 						<th>Telefono</th>
-						<th>Ciudad</th>
 						<th>Email</th>
+						<th>Curia</th>
 						<th>Eliminar</th>
 						<th>Actualizar</th>
 					</tr>
 
 				</thead>
 				<tbody>
-					<tr th:each="Curia:${listaCurias}">
-						<td th:text="${Curia.id}"></td>
-						<td th:text="${Curia.nombre}"></td>
-						<td th:text="${Curia.direccion}"></td>
-						<td th:text="${Curia.telefono}"></td>
-						<td th:text="${Curia.ciudad}"></td>
-						<td th:text="${Curia.Email}"></td>
+					<tr th:each="Encargado:${listaEncargados}">
+						<td th:text="${Encargado.id}"></td>
+						<td th:text="${Encargado.nombre}"></td>
+						<td th:text="${Encargado.apellido}"></td>
+						<td th:text="${Encargado.cedula}"></td>
+						<td th:text="${Encargado.telefono}"></td>
+						<td th:text="${Encargado.email}"></td>
+						<td th:text="${Encargado.curia.nombre}"></td>
 						<td>
-							<a th:href="@{/curia/eliminarCuria/{id}(id=${Curia.id})}">
+							<a
+								th:href="@{/encargado/eliminarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
 								<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
 							</a>
 						</td>
 						<td>
-							<a th:href="@{/curia/formularioActualizarCuria/{id}(id=${Curia.id})}">
+							<a
+								th:href="@{/encargado/formularioActualizarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
 								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
 							</a>
 						</td>
@@ -73,6 +77,7 @@
 			</table>
 		</div>
 	</div>
+
 
 </body>
 <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>

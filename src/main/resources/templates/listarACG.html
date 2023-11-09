@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+<head th:insert="~{layout/layoutNavegacion :: head}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<title>LISTA DE ARCHIVOS GENERALES</title>
+</head>
+
+<body>
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+	</nav>
+
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+	</aside>
+	<!--<a th:href="@{/principal/}">
+		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
+		</a>-->
+	<div class="content-wrapper" layout:fragment="page-content">
+		<div class="container text-center">
+			<H1>Lista de Archivos Generales</H1>
+			<br>
+			<H2>Crear </H2>
+			<br>
+			<a th:href="@{/acg/formularioCrearACG}">
+				<button class="btn btn-primary" type="submit">Nuevo Archivo</button>
+			</a>
+		</div>
+
+
+		<br>
+		<br>
+		<div class="container text-center">
+			<table class="table table-bordered">
+
+				<thead>
+					<tr>
+						<th>IdACG</th>
+						<th>NombreACG </th>
+						<th>Parroquia</th>
+						<th>Eliminar</th>
+						<th>Actualizar</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					<tr th:each="ACG:${listaACG}">
+						<td th:text="${ACG.idACG}"></td>
+						<td th:text="${ACG.nombre}"></td>
+						<td th:text="${ACG.parroquia.nombre}"></td>
+						<td>
+							<a th:href="@{/acg/eliminarACG/{idACG}(idACG=${ACG.idACG})}">
+								<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+							</a>
+						</td>
+						<td>
+							<a th:href="@{/acg/formularioActualizarACG/{idACG}(idACG=${ACG.idACG})}">
+								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+							</a>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+</html>

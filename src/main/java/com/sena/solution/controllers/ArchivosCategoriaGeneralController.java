@@ -14,7 +14,7 @@ import com.sena.solution.services.ArchivoCategoriaGeneralService;
 
 @Controller
 @RequestMapping("/acg")
-public class ArchivosCategoriaGeneral {
+public class ArchivosCategoriaGeneralController {
 	
 	@Autowired
 	private ArchivoCategoriaGeneralService aCGService;
@@ -38,13 +38,13 @@ public class ArchivosCategoriaGeneral {
 	public ModelAndView formularioCrearACG() {
 		
 		ModelAndView modelAndView = new ModelAndView(ArchivoCategoriaGeneralView.FORMC);
-		modelAndView.addObject("objACG", new ArchivosCategoriaGeneral());
+		modelAndView.addObject("objACG", new ArchivosCategoriaGeneralController());
 		
 		return modelAndView;
 	}
 	
 	@PostMapping("/guardarACG")
-	public String guardarACG(@ModelAttribute("ACG") ArchivoCategoriaGeneral aCG) {
+	public String guardarACG(@ModelAttribute("objACG") ArchivoCategoriaGeneral aCG) {
 		
 		aCGService.guardarACG(aCG);
 		
@@ -61,7 +61,7 @@ public class ArchivosCategoriaGeneral {
 	}
 		
 	@PostMapping("/actualizarACG")
-	public String actualizarACG(@ModelAttribute("ACG") ArchivoCategoriaGeneral aCG) {
+	public String actualizarACG(@ModelAttribute("objACG") ArchivoCategoriaGeneral aCG) {
 		
 		aCGService.actualizarACG(aCG);
 		

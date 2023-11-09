@@ -11,13 +11,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.ArchivoCategoriaGeneralView;
 import com.sena.solution.models.ArchivoCategoriaGeneral;
 import com.sena.solution.services.ArchivoCategoriaGeneralService;
+import com.sena.solution.services.ParroquiaService;
 
 @Controller
 @RequestMapping("/acg")
-public class ArchivosCategoriaGeneralController {
+public class ArchivoCategoriaGeneralController {
 	
 	@Autowired
 	private ArchivoCategoriaGeneralService aCGService;
+	@Autowired
+	private ParroquiaService parroquiaService;
 	
 	@GetMapping("/home")
 	public String index() {
@@ -38,8 +41,8 @@ public class ArchivosCategoriaGeneralController {
 	public ModelAndView formularioCrearACG() {
 		
 		ModelAndView modelAndView = new ModelAndView(ArchivoCategoriaGeneralView.FORMC);
-		modelAndView.addObject("objACG", new ArchivosCategoriaGeneralController());
-		
+		modelAndView.addObject("objACG", new ArchivoCategoriaGeneral());
+		modelAndView.addObject("listaParroquias", parroquiaService.listarParroquias() );
 		return modelAndView;
 	}
 	
@@ -56,7 +59,7 @@ public class ArchivosCategoriaGeneralController {
 	public ModelAndView formularioActualizarCuria(@PathVariable("idACG")Long idACG) {
 		ModelAndView modelAndView = new ModelAndView(ArchivoCategoriaGeneralView.FORMUPC);
 		modelAndView.addObject("objACG", aCGService.buscarPorIdACG(idACG));
-		
+		modelAndView.addObject("listaParroquias", parroquiaService.listarParroquias() );
 		return modelAndView;
 	}
 		

@@ -23,6 +23,10 @@ public class ArchivoCategoriaGeneral{
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Parroquia parroquia;
+	
+	public ArchivoCategoriaGeneral() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public ArchivoCategoriaGeneral(Long idACG, @NotBlank(message = "El nombre es obligatorio") String nombreACG,
 			Parroquia parroquia) {

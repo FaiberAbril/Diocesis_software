@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+<head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+    <title>FORMULARIO ACTUALIZAR ARCHIVOS GENERALES</title>
+</head>
+
+<body>
+
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+    </nav>
+
+    <aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+    </aside>
+
+    <div class="content-wrapper">
+		<div class="container text-center">
+            <!--<a th:href="@{/curia/}" href="">
+                <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
+            </a>-->
+            <h1 class="text-center">Formulario Actualizar Registros Generales</h1>
+            <form th:action="@{/acg/actualizarACG}" method="post" th:object="${objACG}">
+                <input type="hidden" th:field="*{idACG}" id="idACG" name="idACG" required>
+                <br>
+                <br>
+                <div class="container ">
+
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <label for="nombreACG" class="form-label">Nombre Archivo: </label>
+                            <input class="form-control" type="text" th:field="*{nombreACG}" id="nombreACG" name="nombreACG" required>
+                        </div>
+                        <div class="col-6">
+							<label for="parroquia" class="form-label"> Parroquia</label>
+							<select class="form-control" name="select" th:field="*{parroquia}">
+								<option th:each="Parroquia:${listaParroquias}" th:value="${Parroquia.id}"
+									th:text="${Parroquia.nombre}">
+								</option>
+							</select>
+						</div>
+                    </div>
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-primary " type="submit">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>    
+    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+</body>
+
+
+
+</html>

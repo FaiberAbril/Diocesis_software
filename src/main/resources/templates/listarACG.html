@@ -49,7 +49,7 @@
 				<tbody>
 					<tr th:each="ACG:${listaACG}">
 						<td th:text="${ACG.idACG}"></td>
-						<td th:text="${ACG.nombre}"></td>
+						<td th:text="${ACG.nombreACG}"></td>
 						<td th:text="${ACG.parroquia.nombre}"></td>
 						<td>
 							<a th:href="@{/acg/eliminarACG/{idACG}(idACG=${ACG.idACG})}">

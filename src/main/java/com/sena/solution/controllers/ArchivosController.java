@@ -36,6 +36,16 @@ public class ArchivosController {
 		
 		return modelAndView;
 	}
+	
+	
+	@GetMapping("/crearArchivo/{idParroquia}/{idACG}")
+	public ModelAndView crearArchivoACG(){
+		ModelAndView modelAndView = new ModelAndView("listarArchivos");
+		
+		
+		
+		return modelAndView;
+	}
 
 
 }

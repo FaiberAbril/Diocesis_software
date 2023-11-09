@@ -2,38 +2,43 @@
 <html lang="en" layout:decorate="~{layout/layoutNavegacion}">
 
 <head th:insert="~{layout/layoutNavegacion :: head}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-    <title>Manejo archivos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+  <title>Manejo archivos</title>
 </head>
 
 <body>
 
-    <nav th:insert="~{layout/layoutNavegacion :: navbar}">
+  <nav th:insert="~{layout/layoutNavegacion :: navbar}">
 
-    </nav>
+  </nav>
 
-    <aside th:insert="~{layout/layoutNavegacion :: aside}">
+  <aside th:insert="~{layout/layoutNavegacion :: aside}">
 
-    </aside>
+  </aside>
 
-    <div class="content-wrapper">
-		<div class="container text-center">
-            <!--<a th:href="@{/curia/}" href="">
+  <div class="content-wrapper">
+    <div class="container text-center">
+      <!--<a th:href="@{/curia/}" href="">
                 <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
             </a>-->
-            <h1 class="text-center">MANEJO DE ARCHIVOS</h1>
-            <div class="card">
-                <div class="card-body">
-                  This is some text within a card body.
-                </div>
-              </div>
+      <h1 class="text-center">MANEJO DE ARCHIVOS</h1>
+      <div class="card" th:each="ACG : ${listaACG}">
+        
+          <div class="card-body">
+            <a th:href="@{/a/listar}">
+              <h2  th:text="${ACG.nombreACG}"></h2>
+            </a>
            
-        </div>
-    </div>    
-    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+            <p class="card-text" th:text="${ACG.parroquia.nombre}"></p>
+          </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+  <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
 
 </body>
 

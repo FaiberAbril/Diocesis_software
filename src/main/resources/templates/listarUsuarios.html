@@ -46,6 +46,7 @@
 						<th>Parroquia/Pertenece</th>
 						<th>Eliminar</th>
 						<th>Actualizar</th>
+						<th>Archivos</th>
 					</tr>
 
 				</thead>
@@ -69,7 +70,11 @@
 								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
 							</a>
 						</td>
-
+						<td>
+							<a th:href="@{/archivo/archivosACG/{idUsuario}(idUsuario=${Usuario.id})}">
+								<button type="button" class="btn btn-outline-info">ACCEDER</button>
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

@@ -28,52 +28,49 @@
             <a th:href="@{/parroquias/formularioParroquias}">
                 <button class="btn btn-primary" type="submit">Nueva Parroquia</button>
             </a>
+            <div class="text-center mt-5">
+                <table class="table table-bordered">
+    
+                    <thead>
+                        <tr>
+                            <th>Id Parroquia</th>
+                            <th>Nombre </th>
+                            <th>Direccion</th>
+                             <th>Ciudad</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
+                            <th>Vicaria/Pertenece</th>
+                            <th>Eliminar</th>
+                            <th>Actualizar</th>
+                        </tr>
+    
+                    </thead>
+                    <tbody>
+                        <tr th:each="Parroquia:${listaParroquias}">
+                            <td th:text="${Parroquia.id}"></td>
+                            <td th:text="${Parroquia.nombre}"></td>
+                            <td th:text="${Parroquia.direccion}"></td>
+                            <td th:text="${Parroquia.ciudad}"></td>
+                            <td th:text="${Parroquia.telefono}"></td>
+                            <td th:text="${Parroquia.Email}"></td>
+                            <td th:text="${Parroquia.vicaria.nombreVicaria}"></td>
+                            <td>
+                                <a th:href="@{/parroquias/eliminarParroquia/{id}(id=${Parroquia.id})}">
+                                    <button type="button" class="btn btn-outline-danger" >ELIMINAR</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a
+                                    th:href="@{/parroquias/formularioActualizarParroquia/{id}(id=${Parroquia.id})}">
+                                    <button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+                                </a>
+                            </td>
+    
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <br>
-        <br>
-        <div class="container text-center">
-            <table class="table table-bordered">
-
-                <thead>
-                    <tr>
-                        <th>Id Parroquia</th>
-                        <th>Nombre </th>
-                        <th>Direccion</th>
-                         <th>Ciudad</th>
-                        <th>Telefono</th>
-                        <th>Email</th>
-                        <th>Vicaria/Pertenece</th>
-                        <th>Eliminar</th>
-                        <th>Actualizar</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    <tr th:each="Parroquia:${listaParroquias}">
-                        <td th:text="${Parroquia.id}"></td>
-                        <td th:text="${Parroquia.nombre}"></td>
-                        <td th:text="${Parroquia.direccion}"></td>
-                        <td th:text="${Parroquia.ciudad}"></td>
-                        <td th:text="${Parroquia.telefono}"></td>
-                        <td th:text="${Parroquia.Email}"></td>
-                        <td th:text="${Parroquia.vicaria.nombreVicaria}"></td>
-                        <td>
-                            <a th:href="@{/parroquias/eliminarParroquia/{id}(id=${Parroquia.id})}">
-                                <button type="button" class="btn btn-outline-danger" >ELIMINAR</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a
-                                th:href="@{/parroquias/formularioActualizarParroquia/{id}(id=${Parroquia.id})}">
-                                <button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-                            </a>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
     </div>
 
 

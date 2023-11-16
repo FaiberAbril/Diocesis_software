@@ -25,7 +25,7 @@
 			<H1 class="text-center mb-3">REGISTRO CURIA</H1>
 			<form th:action="@{/curia/guardarCuria}" method="post" th:object="${objCuria}">
 				<br>
-				<div class="container">
+				<div>
 
 					<div class="row text-center">
 						<div class="col-4">
@@ -61,22 +61,14 @@
 								required>
 						</div>
 					</div>
-
+					<div class="text-center mt-5">
+						<button class="btn btn-primary " type="submit">Guardar</button>
+					</div>
 				</div>
-				<br>
-				<br>
-				<div class="text-center">
-					<button class="btn btn-primary " type="submit">Guardar</button>
-				</div>
-
-
 			</form>
 		</div>
 	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
-
-
 </Body>
-
 </html>

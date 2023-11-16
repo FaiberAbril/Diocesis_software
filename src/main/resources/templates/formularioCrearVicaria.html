@@ -25,7 +25,7 @@
 			<H1 class="text-center mb-3">REGISTRO VICARIAS</H1>
 			<form th:action="@{/vicaria/guardarVicaria}" method="post" th:object="${objVicaria}">
 				<br>
-				<div class="container">
+				<div>
 
 					<div class="row text-center">
 						<div class="col-4">
@@ -45,16 +45,11 @@
 
 
 					</div>
-					<br>
+					<div class="text-center mt-5">
+						<button class="btn btn-primary " type="submit">Guardar</button>
+					</div>
 				</div>
-				<br>
-				<br>
-				<div class="text-center">
-					<button class="btn btn-primary " type="submit">Guardar</button>
-				</div>
-
-
-			</form>
+				</form>
 		</div>
 	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>

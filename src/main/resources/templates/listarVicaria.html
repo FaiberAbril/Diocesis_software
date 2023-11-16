@@ -28,44 +28,40 @@
 			<a th:href="@{/vicaria/formularioCrearVicarias}">
 				<button class="btn btn-primary" type="submit">Nueva Vicaria</button>
 			</a>
-		</div>
-
-
-		<br>
-		<br>
-		<div class="container text-center">
-			<table class="table table-bordered">
-
-				<thead>
-					<tr>
-						<th>Id Vicaria</th>
-						<th>Nombre </th>
-						<th>Curia</th>
-						<th>Eliminar</th>
-						<th>Actualizar</th>
-					</tr>
-
-				</thead>
-				<tbody>
-					<tr th:each="Vicaria:${listaVicarias}">
-						<td th:text="${Vicaria.idVicaria}"></td>
-						<td th:text="${Vicaria.nombreVicaria}"></td>
-						<td th:text="${Vicaria.curia.nombre}"></td>
-						<td>
-							<a th:href="@{/vicaria/eliminarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
-								<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
-							</a>
-						</td>
-						<td>
-							<a
-								th:href="@{/vicaria/formularioActualizarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
-								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-							</a>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
+			<div class="text-center mt-5">
+				<table class="table table-bordered">
+	
+					<thead>
+						<tr>
+							<th>Id Vicaria</th>
+							<th>Nombre </th>
+							<th>Curia</th>
+							<th>Eliminar</th>
+							<th>Actualizar</th>
+						</tr>
+	
+					</thead>
+					<tbody>
+						<tr th:each="Vicaria:${listaVicarias}">
+							<td th:text="${Vicaria.idVicaria}"></td>
+							<td th:text="${Vicaria.nombreVicaria}"></td>
+							<td th:text="${Vicaria.curia.nombre}"></td>
+							<td>
+								<a th:href="@{/vicaria/eliminarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
+									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+								</a>
+							</td>
+							<td>
+								<a
+									th:href="@{/vicaria/formularioActualizarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
+									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+								</a>
+							</td>
+	
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

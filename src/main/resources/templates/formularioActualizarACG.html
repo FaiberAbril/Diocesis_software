@@ -4,7 +4,7 @@
 <head th:insert="~{layout/layoutNavegacion :: head}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
     <title>FORMULARIO ACTUALIZAR ARCHIVOS GENERALES</title>
 </head>
 
@@ -28,7 +28,7 @@
                 <input type="hidden" th:field="*{idACG}" id="idACG" name="idACG" required>
                 <br>
                 <br>
-                <div class="container ">
+                <div>
 
                     <div class="row text-center">
                         <div class="col-6">
@@ -44,11 +44,9 @@
 							</select>
 						</div>
                     </div>
-                <br>
-                <div class="text-center">
+                <div class="text-center mt-5">
                     <button class="btn btn-primary " type="submit">Guardar</button>
                 </div>
-
             </form>
         </div>
     </div>    

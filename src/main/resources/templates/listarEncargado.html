@@ -28,53 +28,49 @@
 			<a th:href="@{/encargado/formularioCrearEncargado}">
 				<button class="btn btn-primary" type="submit">Nuevo Encargado</button>
 			</a>
-		</div>
-
-
-		<br>
-		<br>
-		<div class="container text-center">
-			<table class="table table-bordered">
-
-				<thead>
-					<tr>
-						<th>Id Encargado</th>
-						<th>Nombre</th>
-						<th>Apellido</th>
-						<th>Cedula</th>
-						<th>Telefono</th>
-						<th>Email</th>
-						<th>Curia</th>
-						<th>Eliminar</th>
-						<th>Actualizar</th>
-					</tr>
-
-				</thead>
-				<tbody>
-					<tr th:each="Encargado:${listaEncargados}">
-						<td th:text="${Encargado.id}"></td>
-						<td th:text="${Encargado.nombre}"></td>
-						<td th:text="${Encargado.apellido}"></td>
-						<td th:text="${Encargado.cedula}"></td>
-						<td th:text="${Encargado.telefono}"></td>
-						<td th:text="${Encargado.email}"></td>
-						<td th:text="${Encargado.curia.nombre}"></td>
-						<td>
-							<a
-								th:href="@{/encargado/eliminarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
-								<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
-							</a>
-						</td>
-						<td>
-							<a
-								th:href="@{/encargado/formularioActualizarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
-								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-							</a>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
+			<div class="text-center mt-5">
+				<table class="table table-bordered">
+	
+					<thead>
+						<tr>
+							<th>Id Encargado</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Cedula</th>
+							<th>Telefono</th>
+							<th>Email</th>
+							<th>Curia</th>
+							<th>Eliminar</th>
+							<th>Actualizar</th>
+						</tr>
+	
+					</thead>
+					<tbody>
+						<tr th:each="Encargado:${listaEncargados}">
+							<td th:text="${Encargado.id}"></td>
+							<td th:text="${Encargado.nombre}"></td>
+							<td th:text="${Encargado.apellido}"></td>
+							<td th:text="${Encargado.cedula}"></td>
+							<td th:text="${Encargado.telefono}"></td>
+							<td th:text="${Encargado.email}"></td>
+							<td th:text="${Encargado.curia.nombre}"></td>
+							<td>
+								<a
+									th:href="@{/encargado/eliminarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
+									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+								</a>
+							</td>
+							<td>
+								<a
+									th:href="@{/encargado/formularioActualizarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
+									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+								</a>
+							</td>
+	
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

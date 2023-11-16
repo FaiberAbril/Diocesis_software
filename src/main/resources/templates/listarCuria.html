@@ -28,49 +28,45 @@
 			<a th:href="@{/curia/formularioCrearCuria}">
 				<button class="btn btn-primary" type="submit">Nueva Curia</button>
 			</a>
-		</div>
+			<div class="mt-5">
+				<table class="table table-bordered">
 
-
-		<br>
-		<br>
-		<div class="container text-center">
-			<table class="table table-bordered">
-
-				<thead>
-					<tr>
-						<th>Id Curia</th>
-						<th>Nombre </th>
-						<th>Direccion</th>
-						<th>Telefono</th>
-						<th>Ciudad</th>
-						<th>Email</th>
-						<th>Eliminar</th>
-						<th>Actualizar</th>
-					</tr>
-
-				</thead>
-				<tbody>
-					<tr th:each="Curia:${listaCurias}">
-						<td th:text="${Curia.id}"></td>
-						<td th:text="${Curia.nombre}"></td>
-						<td th:text="${Curia.direccion}"></td>
-						<td th:text="${Curia.telefono}"></td>
-						<td th:text="${Curia.ciudad}"></td>
-						<td th:text="${Curia.Email}"></td>
-						<td>
-							<a th:href="@{/curia/eliminarCuria/{id}(id=${Curia.id})}">
-								<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
-							</a>
-						</td>
-						<td>
-							<a th:href="@{/curia/formularioActualizarCuria/{id}(id=${Curia.id})}">
-								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-							</a>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
+					<thead>
+						<tr>
+							<th>Id Curia</th>
+							<th>Nombre </th>
+							<th>Direccion</th>
+							<th>Telefono</th>
+							<th>Ciudad</th>
+							<th>Email</th>
+							<th>Eliminar</th>
+							<th>Actualizar</th>
+						</tr>
+	
+					</thead>
+					<tbody>
+						<tr th:each="Curia:${listaCurias}">
+							<td th:text="${Curia.id}"></td>
+							<td th:text="${Curia.nombre}"></td>
+							<td th:text="${Curia.direccion}"></td>
+							<td th:text="${Curia.telefono}"></td>
+							<td th:text="${Curia.ciudad}"></td>
+							<td th:text="${Curia.Email}"></td>
+							<td>
+								<a th:href="@{/curia/eliminarCuria/{id}(id=${Curia.id})}">
+									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+								</a>
+							</td>
+							<td>
+								<a th:href="@{/curia/formularioActualizarCuria/{id}(id=${Curia.id})}">
+									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+								</a>
+							</td>
+	
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

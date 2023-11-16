@@ -28,43 +28,39 @@
 			<a th:href="@{/acg/formularioCrearACG}">
 				<button class="btn btn-primary" type="submit">Nuevo Archivo</button>
 			</a>
-		</div>
-
-
-		<br>
-		<br>
-		<div class="container text-center">
-			<table class="table table-bordered">
-
-				<thead>
-					<tr>
-						<th>IdACG</th>
-						<th>NombreACG </th>
-						<th>Parroquia</th>
-						<th>Eliminar</th>
-						<th>Actualizar</th>
-					</tr>
-
-				</thead>
-				<tbody>
-					<tr th:each="ACG:${listaACG}">
-						<td th:text="${ACG.idACG}"></td>
-						<td th:text="${ACG.nombreACG}"></td>
-						<td th:text="${ACG.parroquia.nombre}"></td>
-						<td>
-							<a th:href="@{/acg/eliminarACG/{idACG}(idACG=${ACG.idACG})}">
-								<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
-							</a>
-						</td>
-						<td>
-							<a th:href="@{/acg/formularioActualizarACG/{idACG}(idACG=${ACG.idACG})}">
-								<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-							</a>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
+			<div class="text-center mt-5">
+				<table class="table table-bordered">
+	
+					<thead>
+						<tr>
+							<th>IdACG</th>
+							<th>NombreACG </th>
+							<th>Parroquia</th>
+							<th>Eliminar</th>
+							<th>Actualizar</th>
+						</tr>
+	
+					</thead>
+					<tbody>
+						<tr th:each="ACG:${listaACG}">
+							<td th:text="${ACG.idACG}"></td>
+							<td th:text="${ACG.nombreACG}"></td>
+							<td th:text="${ACG.parroquia.nombre}"></td>
+							<td>
+								<a th:href="@{/acg/eliminarACG/{idACG}(idACG=${ACG.idACG})}">
+									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+								</a>
+							</td>
+							<td>
+								<a th:href="@{/acg/formularioActualizarACG/{idACG}(idACG=${ACG.idACG})}">
+									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+								</a>
+							</td>
+	
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

@@ -26,7 +26,7 @@
             <br>
             <form class="" th:action="@{/vicaria/actualizarVicaria}" method="post" th:object="${objVicaria}">
                 <input type="hidden" th:field="*{idVicaria}" id="idVicaria" name="idVicaria" required>
-                <div class="container">
+                <div>
                     <div class="row text-center">
                         <div class="col-4">
                             <label for="nombreVicaria" class="form-label">Nombre Vicaria </label>
@@ -41,13 +41,10 @@
                             </select>
                         </div>
                     </div>
+                    <div class="text-center mt-5">
+                        <button class="btn btn-primary " type="submit">Guardar</button>
+                    </div>
                 </div>
-                <br>
-                <br>
-                <div class="text-center">
-                    <button class="btn btn-primary " type="submit">Guardar</button>
-                </div>
-
             </form>
         </div>
     </div>

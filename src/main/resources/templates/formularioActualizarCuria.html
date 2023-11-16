@@ -19,7 +19,7 @@
     </aside>
 
     <div class="content-wrapper">
-		<div class="container text-center">
+        <div class="container text-center">
             <!--<a th:href="@{/curia/}" href="">
                 <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
             </a>-->
@@ -28,21 +28,23 @@
                 <input type="hidden" th:field="*{id}" id="id" name="id" required>
                 <br>
                 <br>
-                <div class="container ">
+                <div>
 
                     <div class="row text-center">
                         <div class="col-4">
                             <label for="nombre" class="form-label">Nombre Curia: </label>
-                            <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="col-4">
-                            <label for="direccion" class="form-label">Direccion</label>
-                            <input class="form-control" type="text" th:field="*{direccion}" id="direccion" name="direccion"
+                            <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre"
                                 required>
                         </div>
                         <div class="col-4">
+                            <label for="direccion" class="form-label">Direccion</label>
+                            <input class="form-control" type="text" th:field="*{direccion}" id="direccion"
+                                name="direccion" required>
+                        </div>
+                        <div class="col-4">
                             <label for="ciudad" class="form-label"> Ciudad</label>
-                            <input class="form-control" type="text" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
+                            <input class="form-control" type="text" th:field="*{ciudad}" id="ciudad" name="ciudad"
+                                required>
                         </div>
                     </div>
                     <br>
@@ -54,24 +56,20 @@
                         </div>
                         <div class="col-4">
                             <label for="email" class="form-label"> Email</label>
-                            <input class="form-control" type="email" th:field="*{email}" id="email" name="email" required>
+                            <input class="form-control" type="email" th:field="*{email}" id="email" name="email"
+                                required>
                         </div>
                     </div>
+                    <div class="text-center mt-5">
+                        <button class="btn btn-primary " type="submit">Guardar</button>
+                    </div>
                 </div>
-                <br>
-                <br>
-                <div class="text-center">
-                    <button class="btn btn-primary " type="submit">Guardar</button>
-                </div>
-
             </form>
         </div>
-    </div>    
+    </div>
     <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
     <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
 
 </body>
-
-
 
 </html>

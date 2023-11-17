@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-	<title>FORMULARIO CREAR PARROQUIAS</title>
+	<title>FORMULARIO ACTUALIZAR ENCARGADO</title>
 
 </head>
 
@@ -22,63 +22,66 @@
         </a>-->
 
 	<div class="content-wrapper">
-		<div class="container text-center">
-			<H1 class="text-center mb-3">REGISTRO ENCARGADO</H1>
-			<form th:action="@{/encargado/actualizarEncargado}" method="post" th:object="${ObjEncargado}">
-				<input type="hidden" th:field="*{id}" id="id" name="id" required>
-				<br>
-				<div>
-
-					<div class="row text-center">
-						
-						<div class="col-4">
-							<label for="nombre" class="form-label"> Nombre Encargado</label>
-							<input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre"
-								required>
-						</div>
-
-						<div class="col-4">
-							<label for="apellido" class="form-label"> Apellido del Encargado</label>
-							<input type="text" class="form-control" th:field="*{apellido}" id="apellido" name="apellido"
-								required>
-						</div>
-
-						<div class="col-4">
-							<label for="cedula" class="form-label"> Cedula del Encargado</label>
-							<input type="text" class="form-control" th:field="*{cedula}" id="cedula" name="cedula"
-								required>
-						</div>
-
-						<div class="col-4">
-							<label for="telefono" class="form-label"> Telefono</label>
-							<input type="text" class="form-control" th:field="*{telefono}" id="telefono" name="telefono"
-								required>
-						</div>
-
-						<div class="col-4">
-							<label for="email" class="form-label"> Email</label>
-							<input type="email" class="form-control" th:field="*{email}" id="email" name="email"
-								required>
-						</div>
-						
-						<div class="col-4">
-							<label for="vicaria" class="form-label"> Curia/Pertenece</label>
-							<!--<input type="text" class="form-control" th:field="*{vicaria}" id="vicaria"
-                            name="vicaria" required>-->
-							<select class="form-control" name="select" th:field="*{curia}">
-								<option th:each="Curias:${listaCurias}" th:value="${Curias.id}"
-									th:text="${Curias.nombre}">
-								</option>
-							</select>
-
-						</div>
-
-					</div>
-					<div class="text-center mt-5">
-						<button class="btn btn-primary " type="submit">Guardar</button>
+		<div class="container-fluid text-center" style="padding-left: 25%;">
+			<div class="col-lg-8 d-flex aling-items-stretch">
+				<div class="card w-100 mt-5">
+					<div class="card-header fw-semibold mb-4">Formulario Actualizar Encargado</div>
+					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
+						<form th:action="@{/encargado/actualizarEncargado}" method="post" th:object="${ObjEncargado}">
+							<input type="hidden" th:field="*{id}" id="id" name="id" required>
+							<div>		
+								<div class="row text-center">
+									<div>
+										<label for="nombre" class="form-label"> Nombre Encargado</label>
+										<input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre"
+											required>
+									</div>
+			
+									<div>
+										<label for="apellido" class="form-label"> Apellido del Encargado</label>
+										<input type="text" class="form-control" th:field="*{apellido}" id="apellido" name="apellido"
+											required>
+									</div>
+			
+									<div>
+										<label for="cedula" class="form-label"> Cedula del Encargado</label>
+										<input type="text" class="form-control" th:field="*{cedula}" id="cedula" name="cedula"
+											required>
+									</div>
+			
+									<div>
+										<label for="telefono" class="form-label"> Telefono</label>
+										<input type="text" class="form-control" th:field="*{telefono}" id="telefono" name="telefono"
+											required>
+									</div>
+			
+									<div>
+										<label for="email" class="form-label"> Email</label>
+										<input type="email" class="form-control" th:field="*{email}" id="email" name="email"
+											required>
+									</div>
+									
+									<div>
+										<label for="vicaria" class="form-label"> Curia/Pertenece</label>
+										<!--<input type="text" class="form-control" th:field="*{vicaria}" id="vicaria"
+										name="vicaria" required>-->
+										<select class="form-control" name="select" th:field="*{curia}">
+											<option th:each="Curias:${listaCurias}" th:value="${Curias.id}"
+												th:text="${Curias.nombre}">
+											</option>
+										</select>
+			
+									</div>
+			
+								</div>
+								<div class="text-center mt-5">
+									<button class="btn btn-primary " type="submit">Guardar</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
 
 	</div>

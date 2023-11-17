@@ -10,76 +10,66 @@
 
 <body>
     <nav th:insert="~{layout/layoutNavegacion :: navbar}">
-
     </nav>
-
     <aside th:insert="~{layout/layoutNavegacion :: aside}">
-
     </aside>
     <div class="content-wrapper">
-		<div class="container text-center">
-            <!--<a th:href="@{/curia/}" href="">
-                <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
-            </a>-->
-            <h1 class="text-center">Formulario Actualizar Usuario</h1>
-            <form th:action="@{/usuario/actualizarUsuario}" method="post" th:object="${objUsuario}">
-                <input type="hidden" th:field="*{id}" id="id" name="id" required>
-                <br>
-                <br>
-                <div>
-
-                    <div class="row text-center">
-                        <div class="col-4">
-                            <label for="nombre" class="form-label">Nombre Usuario: </label>
-                            <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="col-4">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input class="form-control" type="text" th:field="*{apellido}" id="apellido" name="apellido"
-                                required>
-                        </div>
-                        <div class="col-4">
-                            <label for="cedula" class="form-label"> Cedula</label>
-                            <input class="form-control" type="text" th:field="*{cedula}" id="cedula" name="cedula" required>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row text-center">
-                        <div class="col-4">
-                            <label for="telefono" class="form-label"> Telefono</label>
-                            <input class="form-control" type="text" th:field="*{telefono}" id="telefono" name="telefono"
-                                required>
-                        </div>
-                        <div class="col-4">
-                            <label for="email" class="form-label"> Email</label>
-                            <input class="form-control" type="email" th:field="*{email}" id="email" name="email" required>
-                        </div>
-                        <div class="col-4">
-                            <label for="rol" class="form-label"> Rol Usuario</label>
-                            <select class="form-control" name="select" th:field="*{rolUsuario}">
-                                <option th:each="RolUsuario:${listaRol}" th:value="${RolUsuario}" th:text="${RolUsuario}">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row text-center">
-                        <div class="col-4">
-                            <label for="parroquia" class="form-label"> Parroquia/Pertenece</label>
-                            <select class="form-control" name="select" th:field="*{parroquia}">
-                                <option th:each="Parroquia:${listaParroquias}" th:value="${Parroquia.id}"
-                                    th:text="${Parroquia.nombre}">
-                                </option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="text-center mt-5">
-                        <button class="btn btn-primary " type="submit">Guardar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+		<div class="container-fluid text-center" style="padding-left: 25%;">
+			<div class="col-lg-8 d-flex aling-items-stretch">
+				<div class="card w-100 mt-5">
+					<div class="card-header fw-semibold mb-4">Formulario Actualizar Usuarios</div>
+					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
+						<form th:action="@{/usuario/actualizarUsuario}" method="post" th:object="${objUsuario}">
+                            <input type="hidden" th:field="*{id}" id="id" name="id" required>
+                            <div>
+                                <div class="row text-center">
+                                    <div>
+                                        <label for="nombre" class="form-label">Nombre Usuario: </label>
+                                        <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div>
+                                        <label for="apellido" class="form-label">Apellido</label>
+                                        <input class="form-control" type="text" th:field="*{apellido}" id="apellido" name="apellido"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="cedula" class="form-label"> Cedula</label>
+                                        <input class="form-control" type="text" th:field="*{cedula}" id="cedula" name="cedula" required>
+                                    </div>
+                                    <div>
+                                        <label for="telefono" class="form-label"> Telefono</label>
+                                        <input class="form-control" type="text" th:field="*{telefono}" id="telefono" name="telefono"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="email" class="form-label"> Email</label>
+                                        <input class="form-control" type="email" th:field="*{email}" id="email" name="email" required>
+                                    </div>
+                                    <div>
+                                        <label for="rol" class="form-label"> Rol Usuario</label>
+                                        <select class="form-control" name="select" th:field="*{rolUsuario}">
+                                            <option th:each="RolUsuario:${listaRol}" th:value="${RolUsuario}" th:text="${RolUsuario}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="parroquia" class="form-label"> Parroquia/Pertenece</label>
+                                        <select class="form-control" name="select" th:field="*{parroquia}">
+                                            <option th:each="Parroquia:${listaParroquias}" th:value="${Parroquia.id}"
+                                                th:text="${Parroquia.nombre}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-5">
+                                    <button class="btn btn-primary " type="submit">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
     <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
     <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>

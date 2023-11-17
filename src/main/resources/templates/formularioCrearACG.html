@@ -20,35 +20,35 @@
 	<!--<a th:href="@{/parroquias/}">
             <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
         </a>-->
-	<div class="content-wrapper">
-		<div class="container text-center">
-			<H1 class="text-center mb-3">REGISTROS GENERALES</H1>
-			<form th:action="@{/acg/guardarACG}" method="post" th:object="${objACG}">
-				<br>
-				<div>
-
-					<div class="row text-center">
-						<div class="col-6">
-							<label for="nombre" class="form-label"> Nombre Archivo</label>
-							<input type="text" class="form-control" th:field="*{nombreACG}" id="nombreACG" name="nombreACG"
-								required>
-						</div>
-
-
-						<div class="col-6">
-							<label for="parroquia" class="form-label"> Parroquia</label>
-							<select class="form-control" name="select" th:field="*{parroquia}">
-								<option th:each="Parroquia:${listaParroquias}" th:value="${Parroquia.id}"
-									th:text="${Parroquia.nombre}">
-								</option>
-							</select>
-						</div>
-
-					</div>
-				<div class="text-center mt-5">
-					<button class="btn btn-primary " type="submit">Guardar</button>
+	<div class="container-fluid text-center" style="padding-left: 30%;">
+		<div class="col-lg-8 d-flex aling-items-stretch ">
+			<div class="card w-100 mt-5 bg-light">
+				<div class="card-header fw-semibold mb-4">Registro ACG</div>
+				<div class="card-body p-4 " style="margin-left: 15%; margin-right: 15%;">
+					<form th:action="@{/acg/guardarACG}" method="post" th:object="${objACG}">
+						<div>
+							<div>
+								<div>
+									<label for="nombre" class="form-label"> Nombre Archivo</label>
+									<input type="text" class="form-control" th:field="*{nombreACG}" id="nombreACG"
+										name="nombreACG" required>
+								</div>
+								<div>
+									<label for="parroquia" class="form-label"> Parroquia</label>
+									<select class="form-control" name="select" th:field="*{parroquia}">
+										<option th:each="Parroquia:${listaParroquias}" th:value="${Parroquia.id}"
+											th:text="${Parroquia.nombre}">
+										</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="text-center mt-5">
+								<button class="btn btn-primary " type="submit">Guardar</button>
+							</div>
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>

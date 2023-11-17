@@ -18,57 +18,58 @@
     </aside>
 
     <div class="content-wrapper">
-		<div class="container text-center">
-            <!--<a th:href="@{/curia/}" href="">
-                <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
-            </a>-->
-            <h1 class="text-center">Formulario Actualizar Parroquia</h1>
-            <form th:action="@{/parroquias/actualizarParroquia}" method="post" th:object="${objParroquia}">
-                <input type="hidden" th:field="*{id}" id="id" name="id" required>
-                <br>
-                <br>
-                <div>
-
-                    <div class="row text-center">
-                        <div class="col-4">
-                            <label for="nombre" class="form-label">Nombre Parroquia: </label>
-                            <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="col-4">
-                            <label for="direccion" class="form-label">Direccion</label>
-                            <input class="form-control" type="text" th:field="*{direccion}" id="direccion" name="direccion"
-                                required>
-                        </div>
-                        <div class="col-4">
-                            <label for="ciudad" class="form-label"> Ciudad</label>
-                            <input class="form-control" type="text" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row text-center">
-                        <div class="col-4">
-                            <label for="telefono" class="form-label"> Telefono</label>
-                            <input class="form-control" type="text" th:field="*{telefono}" id="telefono" name="telefono"
-                                required>
-                        </div>
-                        <div class="col-4">
-                            <label for="email" class="form-label"> Email</label>
-                            <input class="form-control" type="email" th:field="*{email}" id="email" name="email" required>
-                        </div>
-                        <div class="col-4">
-                            <label for="vicaria" class="form-label"> Vicaria/Pertenece</label>
-                            <select class="form-control" name="select" th:field="*{vicaria}">
-                                <option th:each="Vicaria:${listaVicarias}" th:value="${Vicaria.idVicaria}"
-                                    th:text="${Vicaria.nombreVicaria}">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5">
-                        <button class="btn btn-primary " type="submit">Guardar</button>
-                    </div>
-                </div>
-            </form>
+		<div class="container-fluid text-center" style="padding-left: 25%;">
+			<div class="col-lg-8 d-flex aling-items-stretch">
+				<div class="card w-100 mt-5">
+					<div class="card-header fw-semibold mb-4">Formulario Actualizar Parroquias</div>
+					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
+						<form th:action="@{/parroquias/actualizarParroquia}" method="post" th:object="${objParroquia}">
+                            <input type="hidden" th:field="*{id}" id="id" name="id" required>
+                            <div>
+            
+                                <div class="row text-center">
+                                    <div>
+                                        <label for="nombre" class="form-label">Nombre Parroquia: </label>
+                                        <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div>
+                                        <label for="direccion" class="form-label">Direccion</label>
+                                        <input class="form-control" type="text" th:field="*{direccion}" id="direccion" name="direccion"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="ciudad" class="form-label"> Ciudad</label>
+                                        <input class="form-control" type="text" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div>
+                                        <label for="telefono" class="form-label"> Telefono</label>
+                                        <input class="form-control" type="text" th:field="*{telefono}" id="telefono" name="telefono"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label for="email" class="form-label"> Email</label>
+                                        <input class="form-control" type="email" th:field="*{email}" id="email" name="email" required>
+                                    </div>
+                                    <div>
+                                        <label for="vicaria" class="form-label"> Vicaria/Pertenece</label>
+                                        <select class="form-control" name="select" th:field="*{vicaria}">
+                                            <option th:each="Vicaria:${listaVicarias}" th:value="${Vicaria.idVicaria}"
+                                                th:text="${Vicaria.nombreVicaria}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-5">
+                                    <button class="btn btn-primary " type="submit">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
         </div>
     </div>
     <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>

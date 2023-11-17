@@ -11,45 +11,46 @@
 
 <Body>
 	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
-
 	</nav>
-
 	<aside th:insert="~{layout/layoutNavegacion :: aside}">
-
 	</aside>
 	<!--<a th:href="@{/parroquias/}">
             <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
         </a>-->
 	<div class="content-wrapper">
-		<div class="container text-center">
-			<H1 class="text-center mb-3">REGISTRO VICARIAS</H1>
-			<form th:action="@{/vicaria/guardarVicaria}" method="post" th:object="${objVicaria}">
-				<br>
-				<div>
-
-					<div class="row text-center">
-						<div class="col-4">
-							<label for="nombreVicaria" class="form-label"> Nombre Vicaria</label>
-							<input type="text" class="form-control" th:field="*{nombreVicaria}" id="nombreVicaria" name="nombreVicaria" required>
-						</div>
-
-						<div class="col-4">
-							<label for="curia" class="form-label"> Curia</label>
-							<!--<input type="text" class="form-control" th:field="*{curia}" id="vicaria"
-									name="vicaria" required>-->
-							<select class="form-control" name="select" th:field="*{curia}">
-								<option th:each="Curia:${listaCurias}" th:value="${Curia.id}" th:text="${Curia.nombre}">
-								</option>
-							</select>
-						</div>
-
-
-					</div>
-					<div class="text-center mt-5">
-						<button class="btn btn-primary " type="submit">Guardar</button>
+		<div class="container-fluid text-center" style="padding-left: 25%;">
+			<div class="col-lg-8 d-flex aling-items-stretch">
+				<div class="card w-100 mt-2">
+					<div class="card-header fw-semibold mb-4">REGISTRO VICARIA</div>
+					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
+						<form th:action="@{/vicaria/guardarVicaria}" method="post" th:object="${objVicaria}">
+							<div>
+								<div>
+									<div>
+										<label for="nombreVicaria" class="form-label"> Nombre Vicaria</label>
+										<input type="text" class="form-control" th:field="*{nombreVicaria}" id="nombreVicaria" name="nombreVicaria" required>
+									</div>
+			
+									<div>
+										<label for="curia" class="form-label"> Curia</label>
+										<!--<input type="text" class="form-control" th:field="*{curia}" id="vicaria"
+												name="vicaria" required>-->
+										<select class="form-control" name="select" th:field="*{curia}">
+											<option th:each="Curia:${listaCurias}" th:value="${Curia.id}" th:text="${Curia.nombre}">
+											</option>
+										</select>
+									</div>
+			
+			
+								</div>
+								<div class="text-center mt-5">
+									<button class="btn btn-primary " type="submit">Guardar</button>
+								</div>
+							</div>
+							</form>
 					</div>
 				</div>
-				</form>
+			</div>
 		</div>
 	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>

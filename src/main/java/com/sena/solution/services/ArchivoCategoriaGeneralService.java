@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.ArchivoCategoriaGeneral;
-import com.sena.solution.models.Parroquia;
 import com.sena.solution.repositories.ArchivoCategoriaGeneralRepository;
 
 @Service
@@ -36,7 +35,7 @@ public class ArchivoCategoriaGeneralService {
 		return aCGRepository.findById(id).get();
 	}
 	
-	public List<ArchivoCategoriaGeneral> buscarPorParroquia(Parroquia parroquia){
+	/*public List<ArchivoCategoriaGeneral> buscarPorParroquia(Parroquia parroquia){
 		return aCGRepository.findByParroquia(parroquia);
-	}
+	}*/
 }

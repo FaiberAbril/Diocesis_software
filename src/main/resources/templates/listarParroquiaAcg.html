@@ -8,7 +8,7 @@
       href=""
       th:href="@{/css/bootstrap/bootstrap.min.css}"
     />
-    <title>LISTA DE ARCHIVOS GENERALES</title>
+    <title>LISTA DE PARROQUIAS ACG</title>
   </head>
 
   <body>
@@ -20,44 +20,40 @@
 		</a>-->
     <div class="content-wrapper" layout:fragment="page-content">
       <div class="container text-center">
-        <h1>Lista de Archivos Generales</h1>
-        <br />
-        <h2>Crear</h2>
-        <br />
-        <a th:href="@{/acg/formularioCrearACG}">
-          <button class="btn btn-primary" type="submit">Nuevo Archivo</button>
+        <h1>Lista de parroquias y acg</h1>
+        <a th:href="@{/parroquiaAcg/formularioCrearParroquiaAcg}">
+          <button class="btn btn-primary" type="submit">Nueva Relacion</button>
         </a>
         <div class="text-center mt-5">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>IdACG</th>
-                <th>NombreACG</th>
-                <!--th>Parroquia</th-->
-                <th>Eliminar</th>
-                <th>Actualizar</th>
+                <th>Parroquia</th>
+                <th>Archivo Categoria General</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="ACG:${listaACG}">
-                <td th:text="${ACG.idACG}"></td>
-                <td th:text="${ACG.nombreACG}"></td>
-                <!--td th:text="${ACG.parroquia.nombre}"></td-->
+              <tr th:each="parroquiaAcg:${listaParroquiaAcg}">
+                <td th:text="${parroquiaAcg.parroquia.nombre}"></td>
+                <td th:text="${parroquiaAcg.acg.nombreACG}"></td>
+
                 <td>
-                  <a th:href="@{/acg/eliminarACG/{idACG}(idACG=${ACG.idACG})}">
+                  <a
+                    th:href="@{/parroquiaAcg/eliminarParroquiaAcg/{idParroquia}/acg/{idAcg}(idParroquia=${parroquiaAcg.parroquia.id}, idAcg=${parroquiaAcg.acg.idACG})}"
+                  >
                     <button type="button" class="btn btn-outline-danger">
                       ELIMINAR
                     </button>
                   </a>
-                </td>
-                <td>
-                  <a
-                    th:href="@{/acg/formularioActualizarACG/{idACG}(idACG=${ACG.idACG})}"
+                  <!--a
+                    th:href="@{/parroquiaAcg/formularioActualizarParroquiaAcg/{idParroquia}/acg/{idAcg}(idParroquia=${parroquiaAcg.parroquia.id}, idAcg=${parroquiaAcg.acg.idACG})}"
+                    
                   >
-                    <button type="button" class="btn btn-outline-info">
+                    <button type="button" class="btn btn-outline-info" disabled>
                       ACTUALIZAR
                     </button>
-                  </a>
+                  </a-->
                 </td>
               </tr>
             </tbody>

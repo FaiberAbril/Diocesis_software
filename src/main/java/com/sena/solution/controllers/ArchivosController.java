@@ -6,14 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.sena.solution.controllers.views.ArchivoView;
-import com.sena.solution.models.Usuario;
-import com.sena.solution.services.ArchivoCategoriaGeneralService;
+import com.sena.solution.models.Parroquia;
+import com.sena.solution.services.ParroquiaAcgService;
+import com.sena.solution.services.ParroquiaService;
 import com.sena.solution.services.UsuarioService;
 
-import jakarta.websocket.server.PathParam;
 
 
 @Controller
@@ -21,10 +19,13 @@ import jakarta.websocket.server.PathParam;
 public class ArchivosController {
 	
 	@Autowired
-	private ArchivoCategoriaGeneralService aCGService;
+	private ParroquiaAcgService parroquiaAcgService;
 	
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private ParroquiaService parroquiaService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -32,18 +33,18 @@ public class ArchivosController {
 	}
 
 
-	@GetMapping("/archivosACG/{idUsuario}")
-	public ModelAndView mostrarACG(@PathVariable("idUsuario")Long idUsuario){
+	@GetMapping("/parroquiaAcg/{idParroquia}")
+	public ModelAndView mostrarACG(@PathVariable("idParroquia")Long idParroquia){
 		
 		ModelAndView modelAndView = new ModelAndView(ArchivoView.HOME);
-		Usuario usuario = usuarioService.buscarPorIdUsuario(idUsuario);
-		modelAndView.addObject("listaACG", aCGService.buscarPorParroquia(usuario.getParroquia()));
+		Parroquia parroquia = parroquiaService.buscarPorIdParroquia(idParroquia);
+		modelAndView.addObject("listaParroquiaACG", parroquiaAcgService.buscarPorParroquia(parroquia));
 		
 		return modelAndView;
 	}
 	
 	
-	@GetMapping("/crearArchivo/{idParroquia}/{idACG}")
+	@GetMapping("/listar")
 	public ModelAndView crearArchivoACG(){
 		ModelAndView modelAndView = new ModelAndView("listarArchivos");
 		

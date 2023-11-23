@@ -1,47 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+  <head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href=""
+      th:href="@{/css/bootstrap/bootstrap.min.css}"
+    />
+    <title>Manejo archivos</title>
+  </head>
 
-<head th:insert="~{layout/layoutNavegacion :: head}">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-  <title>Manejo archivos</title>
-</head>
+  <body>
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
 
-<body>
+    <aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
 
-  <nav th:insert="~{layout/layoutNavegacion :: navbar}">
-
-  </nav>
-
-  <aside th:insert="~{layout/layoutNavegacion :: aside}">
-    
-  </aside>
-
-  <div class="content-wrapper ">
-    <div class="text-center container" >
-      <!--<a th:href="@{/curia/}" href="">
+    <div class="content-wrapper">
+      <div class="text-center container">
+        <!--<a th:href="@{/curia/}" href="">
                 <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
             </a>-->
-      <h1 class="text-center">MANEJO DE ARCHIVOS</h1>
-      <div class="card" th:each="ACG : ${listaACG}">
-        
+        <h1 class="text-center">MANEJO DE ARCHIVOS</h1>
+        <div class="card" th:each="parroquiaAcg : ${listaParroquiaACG}">
           <div class="card-body">
             <a th:href="@{/a/listar}">
-              <h2  th:text="${ACG.nombreACG}"></h2>
+              <h2 th:text="${parroquiaAcg.acg.nombreACG}"></h2>
             </a>
-           
-            <p class="card-text" th:text="${ACG.parroquia.nombre}"></p>
+
+            <p class="card-text" th:text="${parroquiaAcg.parroquia.nombre}"></p>
           </div>
+        </div>
       </div>
-
     </div>
-  </div>
-  <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-  <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
-
-</body>
-
-
-
+    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+  </body>
 </html>

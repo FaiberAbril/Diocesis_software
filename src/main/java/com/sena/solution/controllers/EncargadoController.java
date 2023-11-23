@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.sena.solution.controllers.views.EncargadoView;
 import com.sena.solution.models.Encargado;
 import com.sena.solution.services.CuriaService;

@@ -1,9 +1,9 @@
 package com.sena.solution.models;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -16,8 +16,9 @@ public class Parroquia extends Entidades{
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_vicaria")
 	private Vicaria vicaria;
-	
+
 	public Parroquia() {
 		// TODO Auto-generated constructor stub
 	}
@@ -32,17 +33,12 @@ public class Parroquia extends Entidades{
 		this.vicaria = vicaria;
 	}
 
-
-
 	public Vicaria getVicaria() {
 		return vicaria;
 	}
-
-
 
 	public void setVicaria(Vicaria vicaria) {
 		this.vicaria = vicaria;
 	}
 
-	
 }

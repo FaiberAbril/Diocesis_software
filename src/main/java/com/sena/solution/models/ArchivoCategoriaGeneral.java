@@ -1,12 +1,13 @@
 package com.sena.solution.models;
 
-import jakarta.persistence.CascadeType;
+import java.util.Set;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -16,24 +17,21 @@ public class ArchivoCategoriaGeneral{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_acg")
 	private Long idACG;
 	
-	@NotBlank(message ="El nombre es obligatorio")
+	@NotBlank(message = "El nombre es obligatorio")
+	@Column(name = "nombre_acg")
 	private String nombreACG;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Parroquia parroquia;
 	
 	public ArchivoCategoriaGeneral() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArchivoCategoriaGeneral(Long idACG, @NotBlank(message = "El nombre es obligatorio") String nombreACG,
-			Parroquia parroquia) {
-		super();
+	public ArchivoCategoriaGeneral(Long idACG, @NotBlank(message = "El nombre es obligatorio") String nombreACG
+			) {
 		this.idACG = idACG;
 		this.nombreACG = nombreACG;
-		this.parroquia = parroquia;
 	}
 
 	public Long getIdACG() {
@@ -50,14 +48,6 @@ public class ArchivoCategoriaGeneral{
 
 	public void setNombreACG(String nombreACG) {
 		this.nombreACG = nombreACG;
-	}
-
-	public Parroquia getParroquia() {
-		return parroquia;
-	}
-
-	public void setParroquia(Parroquia parroquia) {
-		this.parroquia = parroquia;
 	}
 
 }

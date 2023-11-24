@@ -21,7 +21,7 @@ public class Documento {
 	private String nombreDocumento;
 	private String path;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumns( {
     @JoinColumn(name="id_parroquia", referencedColumnName="id_parroquia"),
     @JoinColumn(name="id_acg", referencedColumnName="id_acg")

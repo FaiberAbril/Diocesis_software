@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.sena.solution.models.Parroquia;
 import com.sena.solution.repositories.ParroquiaRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class ParroquiaService {
 	@Autowired

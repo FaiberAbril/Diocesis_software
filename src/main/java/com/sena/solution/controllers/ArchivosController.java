@@ -34,7 +34,7 @@ public class ArchivosController {
 
 
 	@GetMapping("/parroquiaAcg/{idParroquia}")
-	public ModelAndView mostrarACG(@PathVariable("idParroquia")Long idParroquia){
+	public ModelAndView mostrarParroquiaACG(@PathVariable("idParroquia")Long idParroquia){
 		
 		ModelAndView modelAndView = new ModelAndView(ArchivoView.HOME);
 		Parroquia parroquia = parroquiaService.buscarPorIdParroquia(idParroquia);

@@ -1,86 +1,160 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+  <head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href=""
+      th:href="@{/css/bootstrap/bootstrap.min.css}"
+    />
+    <title>FORMULARIO CREAR PARROQUIAS</title>
+  </head>
 
-<head th:insert="~{layout/layoutNavegacion :: head}">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-	<title>FORMULARIO CREAR PARROQUIAS</title>
+  <body>
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
 
-</head>
-
-<Body>
-	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
-
-	</nav>
-
-	<aside th:insert="~{layout/layoutNavegacion :: aside}">
-
-	</aside>
-	<!--<a th:href="@{/parroquias/}">
+    <aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
+    <!--<a th:href="@{/parroquias/}">
             <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
         </a>-->
 
-	<div class="content-wrapper">
-		<div class="container-fluid text-center" style="padding-left: 25%;">
-			<div class="col-lg-8 d-flex aling-items-stretch">
-				<div class="card w-100 mt-5">
-					<div class="card-header fw-semibold mb-4">REGISTRO PARROQUIAS</div>
-					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
-						<form th:action="@{/parroquias/guardarParroquia}" method="post" th:object="${objParroquia}">
-							<div>
-								<div class="row text-center">
-									<div>
-										<label for="nombre" class="form-label"> Nombre Parroquia</label>
-										<input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" required>
-									</div>
-									<div>
-										<label for="direccion" class="form-label"> Direccion</label>
-										<input type="text" class="form-control" th:field="*{direccion}" id="direccion" name="direccion"
-											required>
-									</div>
-									<div>
-										<label for="telefono" class="form-label"> Telefono</label>
-										<input type="text" class="form-control" th:field="*{telefono}" id="telefono" name="telefono"
-											required>
-									</div>
-								</div>
-								<div class="row text-center">
-									<div>
-										<label for="ciudad" class="form-label"> Ciudad</label>
-										<input type="text" class="form-control" th:field="*{ciudad}" id="ciudad" name="ciudad" required>
-									</div>
-			
-									<div>
-										<label for="email" class="form-label"> Email</label>
-										<input type="email" class="form-control" th:field="*{email}" id="email" name="email" required>
-									</div>
-									<div>
-										<label for="vicaria" class="form-label"> Vicaria/Pertenece</label>
-										<!--<input type="text" class="form-control" th:field="*{vicaria}" id="vicaria"
+    <div class="content-wrapper">
+      <div class="container-fluid text-center" style="padding-left: 25%">
+        <div class="col-lg-8 d-flex aling-items-stretch">
+          <div class="card w-100 mt-5">
+            <div class="card-header fw-semibold mb-4">REGISTRO PARROQUIAS</div>
+            <div
+              class="card-body p-4"
+              style="margin-left: 15%; margin-right: 15%"
+            >
+              <form
+                th:action="@{/parroquias/guardarParroquia}"
+                method="post"
+                th:object="${objParroquia}"
+              >
+                <div>
+                  <div class="row text-center">
+                    <div>
+                      <label for="nombre" class="form-label">
+                        Nombre Parroquia</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{nombre}"
+                        id="nombre"
+                        name="nombre"
+                        
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('nombre')}"
+                        th:errors="*{nombre}"
+                      ></div>
+                    </div>
+                    <div>
+                      <label for="direccion" class="form-label">
+                        Direccion</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{direccion}"
+                        id="direccion"
+                        name="direccion"
+                        
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('direccion')}"
+                        th:errors="*{direccion}"
+                      ></div>
+                    </div>
+
+                    <div>
+                      <label for="telefono" class="form-label"> Telefono</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{telefono}"
+                        id="telefono"
+                        name="telefono"
+                        
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('telefono')}"
+                        th:errors="*{telefono}"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="row text-center">
+                    <div>
+                      <label for="ciudad" class="form-label"> Ciudad</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{ciudad}"
+                        id="ciudad"
+                        name="ciudad"
+                        
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('ciudad')}"
+                        th:errors="*{ciudad}"
+                      ></div>
+                    </div>
+
+                    <div>
+                      <label for="email" class="form-label"> Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        th:field="*{email}"
+                        id="email"
+                        name="email"
+                        
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('email')}"
+                        th:errors="*{email}"
+                      ></div>
+                    </div>
+                    <div>
+                      <label for="vicaria" class="form-label">
+                        Vicaria/Pertenece</label
+                      >
+                      <!--<input type="text" class="form-control" th:field="*{vicaria}" id="vicaria"
 												name="vicaria" required>-->
-										<select class="form-control" name="select" th:field="*{vicaria}">
-											<option th:each="Vicaria:${listaVicarias}" th:value="${Vicaria.idVicaria}"
-												th:text="${Vicaria.nombreVicaria}">
-											</option>
-										</select>
-			
-									</div>
-								</div>
-								<div class="text-center mt-5">
-									<button class="btn btn-primary " type="submit">Guardar</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
-
-
-</Body>
-
+                      <select
+                        class="form-control"
+                        name="select"
+                        th:field="*{vicaria}"
+                      >
+                        <option
+                          th:each="Vicaria:${listaVicarias}"
+                          th:value="${Vicaria.idVicaria}"
+                          th:text="${Vicaria.nombreVicaria}"
+                        ></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="text-center mt-5">
+                    <button class="btn btn-primary" type="submit">
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+  </body>
 </html>

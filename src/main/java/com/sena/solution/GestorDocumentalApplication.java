@@ -1,12 +1,11 @@
 package com.sena.solution;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import com.sena.solution.models.ArchivoCategoriaGeneral;
 import com.sena.solution.models.Curia;
 import com.sena.solution.models.Parroquia;
@@ -22,7 +21,6 @@ import com.sena.solution.repositories.VicariaRepository;
 @SpringBootApplication
 public class GestorDocumentalApplication {
 	
-	@Autowired
 	private static CuriaRepository curiaRepository;
 	
 	private static VicariaRepository vicariaRepository;
@@ -32,8 +30,22 @@ public class GestorDocumentalApplication {
 	private static ArchivoCategoriaGeneralRepository aCGRepository;
 
 	private static ParroquiaAcgRepository parroquiaAcgRepository;
-	
-	
+
+	@Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:validationMessages");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
+    @Bean
+		public LocalValidatorFactoryBean validator() {
+			LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+			bean.setValidationMessageSource(messageSource());
+			return bean;
+		}
+		
     public  GestorDocumentalApplication(CuriaRepository curiaRepository, VicariaRepository vicariaRepository, ParroquiaRepository parroquiaRepository, ArchivoCategoriaGeneralRepository aCGRepository, ParroquiaAcgRepository parroquiaAcgRepository) {
         GestorDocumentalApplication.curiaRepository = curiaRepository;
         GestorDocumentalApplication.vicariaRepository = vicariaRepository;

@@ -15,38 +15,37 @@ public class Entidades {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message ="El nombre es obligatorio")
+	@NotBlank(message ="{NotBlank.Entidades.Nombre}")
 	private String nombre;
 	
 
-	@NotBlank(message ="La direccion es obligatorio")
+	@NotBlank(message ="{NotBlank.Entidades.Direccion}")
 	private String direccion;
 	
 
-	@NotBlank(message ="La ciudad es obligatorio")
+	@NotBlank(message = "{NotBlank.Entidades.Ciudad}")
 	private String ciudad;
 	
 	
-	@NotBlank(message ="El Telefono es obligatorio")
+	@NotBlank(message = "{NotBlank.Entidades.Telefono}")
 	private String telefono;
 	
 	
-	@Email(message = "El email no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-	@NotEmpty(message = "El email no puede estar vacio")
+	@Email(message = "{Email.Entidades.Email}", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+	@NotEmpty(message = "{NotEmpty.Entidades.Email}")
 	private String email;
 	
 	public Entidades() {
-		// TODO Auto-generated constructor stub
 	}
-
+	
 	
 
-	public Entidades(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
-			@NotBlank(message = "La direccion es obligatorio") String direccion,
-			@NotBlank(message = "La ciudad es obligatorio") String ciudad,
-			@NotBlank(message = "El Telefono es obligatorio") String telefono,
-			@Email(message = "El email no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "El email no puede estar vacio") String email) {
-		super();
+
+	public Entidades(Long id, @NotBlank(message = "{NotBlank.Entidades.Nombre}") String nombre,
+			@NotBlank(message = "{NotBlank.Entidades.Direccion}") String direccion,
+			@NotBlank(message = "{NotBlank.Entidades.Direccion}") String ciudad,
+			@NotBlank(message = "{NotBlank.Entidades.Telefono}") String telefono,
+			@Email(message = "{Email.Entidades.Email}", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "{NotEmpty.Entidades.Email}") String email) {
 		this.id = id;
 		this.nombre = nombre;
 		this.direccion = direccion;
@@ -54,7 +53,6 @@ public class Entidades {
 		this.telefono = telefono;
 		this.email = email;
 	}
-
 
 	public Long getId() {
 		return id;

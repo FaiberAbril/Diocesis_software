@@ -10,7 +10,7 @@ public class Curia extends Entidades{
 	
 	
 	public Curia() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 

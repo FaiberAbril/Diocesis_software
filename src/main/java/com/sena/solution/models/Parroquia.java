@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Parroquias")
+
 public class Parroquia extends Entidades{
 	
 	
@@ -20,14 +21,14 @@ public class Parroquia extends Entidades{
 	private Vicaria vicaria;
 
 	public Parroquia() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
-	public Parroquia(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
-			@NotBlank(message = "La direccion es obligatorio") String direccion,
-			@NotBlank(message = "La ciudad es obligatorio") String ciudad,
-			@NotBlank(message = "El Telefono es obligatorio") String telefono,
-			@Email(message = "El email no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") @NotEmpty(message = "El email no puede estar vacio") String email,
+	public Parroquia(Long id, @NotBlank( ) String nombre,
+			@NotBlank() String direccion,
+			@NotBlank() String ciudad,
+			@NotBlank() String telefono,
+			@Email() String email,
 			Vicaria vicaria) {
 		super(id, nombre, direccion, ciudad, telefono, email);
 		this.vicaria = vicaria;

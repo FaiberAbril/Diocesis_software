@@ -2,6 +2,9 @@ package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,8 @@ import com.sena.solution.controllers.views.ParroquiaView;
 import com.sena.solution.models.Parroquia;
 import com.sena.solution.services.ParroquiaService;
 import com.sena.solution.services.VicariaService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/parroquias")
@@ -45,7 +50,12 @@ public class ParroquiaController {
 	}
 
 	@PostMapping("/guardarParroquia")
-	public String guardarParroquia(@ModelAttribute("objParroquia") Parroquia nuevaParroquia) {
+	public String guardarParroquia(@Valid @ModelAttribute("objParroquia") Parroquia nuevaParroquia, BindingResult br, Model model) {
+		if (br.hasErrors()) {
+			model.addAttribute("listaVicarias", vicariaService.listarVicarias());
+			
+			return ParroquiaView.FORMP;
+		}
 		parroquiaService.guardarParroquia(nuevaParroquia);
 		return "redirect:/parroquias/listar";
 	}

@@ -20,6 +20,7 @@ public class Documento {
 
 	private String nombreDocumento;
 	private String path;
+	private String tipo;
 
 	@ManyToOne(optional = true)
 	@JoinColumns( {
@@ -29,5 +30,67 @@ public class Documento {
 	private ParroquiaAcg parroquiaAcg;
 
 
+	public Documento() {
+	}
+
+
+	public Documento(Long idDocumento, String nombreDocumento, String path, String tipo, ParroquiaAcg parroquiaAcg) {
+		this.idDocumento = idDocumento;
+		this.nombreDocumento = nombreDocumento;
+		this.path = path;
+		this.tipo = tipo;
+		this.parroquiaAcg = parroquiaAcg;
+	}
+
+
+	public Long getIdDocumento() {
+		return idDocumento;
+	}
+
+
+	public void setIdDocumento(Long idDocumento) {
+		this.idDocumento = idDocumento;
+	}
+
+
+	public String getNombreDocumento() {
+		return nombreDocumento;
+	}
+
+
+	public void setNombreDocumento(String nombreDocumento) {
+		this.nombreDocumento = nombreDocumento;
+	}
+
+
+	public String getPath() {
+		return path;
+	}
+
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public ParroquiaAcg getParroquiaAcg() {
+		return parroquiaAcg;
+	}
+
+
+	public void setParroquiaAcg(ParroquiaAcg parroquiaAcg) {
+		this.parroquiaAcg = parroquiaAcg;
+	}
+	
 	
 }

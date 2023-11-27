@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sena.solution.controllers.views.ArchivoView;
 import com.sena.solution.controllers.views.ParroquiaAcgView;
+import com.sena.solution.models.Parroquia;
 import com.sena.solution.models.ParroquiaAcg;
 import com.sena.solution.models.ParroquiaAcgPK;
 import com.sena.solution.services.ArchivoCategoriaGeneralService;
@@ -89,6 +92,17 @@ public class ParroquiaAcgController {
 		
 		parroquiaAcgService.eliminarParroquiaAcg(parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idparroquia, idAcg)));
 		return "redirect:/parroquiaAcg/listar";
+	}
+
+
+	@GetMapping("/{idParroquia}")
+	public ModelAndView mostrarParroquiaACG(@PathVariable("idParroquia")Long idParroquia){
+		
+		ModelAndView modelAndView = new ModelAndView(ArchivoView.HOME);
+		Parroquia parroquia = parroquiaService.buscarPorIdParroquia(idParroquia);
+		modelAndView.addObject("listaParroquiaACG", parroquiaAcgService.buscarPorParroquia(parroquia));
+		
+		return modelAndView;
 	}
 	
 }

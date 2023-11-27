@@ -24,7 +24,9 @@
         <h1 class="text-center">MANEJO DE ARCHIVOS</h1>
         <div class="card" th:each="parroquiaAcg : ${listaParroquiaACG}">
           <div class="card-body">
-            <a th:href="@{/a/listar}">
+            <a
+              th:href="@{/documento/listar/{idParroquia}/{idAcg}(idParroquia=${parroquiaAcg.parroquia.id}, idAcg=${parroquiaAcg.acg.idACG})}"
+            >
               <h2 th:text="${parroquiaAcg.acg.nombreACG}"></h2>
             </a>
 

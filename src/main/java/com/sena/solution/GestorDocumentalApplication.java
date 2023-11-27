@@ -1,5 +1,11 @@
 package com.sena.solution;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
@@ -57,7 +63,7 @@ public class GestorDocumentalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GestorDocumentalApplication.class, args);
 		
-	    
+	    //crearDirectorio();
 	    Curia curia1 = new Curia();
 	    if(!curiaRepository.existsById(Long.valueOf(1))) {
 	    	curia1.setId(1L);
@@ -96,5 +102,19 @@ public class GestorDocumentalApplication {
 	    
 	    
 	}	
+
+	/*public static void crearDirectorio() {
+		Logger logger = LoggerFactory.getLogger(GestorDocumentalApplication.class);
+		final String dir = "src/main/resources/archivos";
+			
+		try {
+			Path path = Paths.get(dir);
+			Files.createDirectories(path);
+			logger.info("el directorio ha sido creado");
+		} catch (Exception e) {
+			logger.info("el directorio a: "+ e.getMessage());
+		}
+
+	}*/
 
 }

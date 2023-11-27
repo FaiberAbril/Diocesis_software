@@ -21,10 +21,12 @@ public class AlmacenamientoService {
   private DocumentoRepository documentoRepository;
 
   //"src/main/resources/archivos"
-  private final String CARPETA_PATH = System.getProperty("user.dir") + "/archivos";
+  private final String CARPETA_PATH = System.getProperty("user.dir") + "/src/main/resources/archivos/";
 
   public void guardarDocumento(MultipartFile file, ParroquiaAcg parroquiaAcg) throws IllegalStateException, IOException {
+	  
     String archivo_path = CARPETA_PATH + file.getOriginalFilename();
+    
     Documento documento = new Documento();
     documento.setNombreDocumento(file.getOriginalFilename());
     documento.setTipo(file.getContentType());

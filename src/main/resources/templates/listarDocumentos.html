@@ -26,7 +26,7 @@
 			<br>
 			<H2>Agregar más Documentos</H2>
 			<br>
-			<a th:href="@{/documento/formularioAgregar}">
+			<a th:href="@{/documento/formularioAgregar/{idParroquia}/{idAcg}(idParroquia=${parroquia.id},idAcg=${acg.idACG})}">
 				<button class="btn btn-primary" type="submit">Agregar</button>
 			</a>
 			<div class="text-center mt-5">

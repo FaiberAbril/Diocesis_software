@@ -22,7 +22,7 @@ public class Documento {
 	private String path;
 	private String tipo;
 
-	@ManyToOne(optional = true)
+	@ManyToOne
 	@JoinColumns( {
     @JoinColumn(name="id_parroquia", referencedColumnName="id_parroquia"),
     @JoinColumn(name="id_acg", referencedColumnName="id_acg")

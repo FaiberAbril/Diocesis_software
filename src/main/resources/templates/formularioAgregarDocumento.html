@@ -28,7 +28,7 @@
           <p th:text="${parroquia.nombre}"></p>
         </div>
 				<div class="card-body p-4 " style="margin-left: 15%; margin-right: 15%;">
-					<form th:action="@{/documento/agregar}" method="post" enctype="multipart/form-data">
+					<form th:action="@{/documento/agregar/{idParroquia}/{idAcg}(idParroquia=${parroquia.id},idAcg=${acg.idACG})}" method="post" enctype="multipart/form-data">
 						<div>
 							<div>
 								<div>

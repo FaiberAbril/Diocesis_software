@@ -40,16 +40,13 @@ public class DocumentoController {
   @Autowired
   private AlmacenamientoService almacenamientoService;
 
-  private Long idParroquia;
-  private Long idAcg;
+  
   
 
   @GetMapping("/listar/{idParroquia}/{idAcg}")
   public ModelAndView listarDocumentos(@PathVariable("idParroquia") Long idParroquia,
       @PathVariable("idAcg") Long idAcg) {
 
-    this.idParroquia = idParroquia;
-    this.idAcg = idAcg;
     ModelAndView modelAndView = new ModelAndView(DocumentoView.LISTD);
     ParroquiaAcg parroquiaAcg = parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg));
     modelAndView.addObject("ListaDocumentos", documentoService.encontrarDocumentosPorParroquiaAcg(parroquiaAcg));
@@ -59,8 +56,9 @@ public class DocumentoController {
     return modelAndView;
   }
 
-  @GetMapping("/formularioAgregar")
-  public ModelAndView formularioAgregarDocumento() {
+  @GetMapping("/formularioAgregar/{idParroquia}/{idAcg}")
+  public ModelAndView formularioAgregarDocumento(@PathVariable("idParroquia") Long idParroquia,
+	      @PathVariable("idAcg") Long idAcg) {
 
     ModelAndView modelAndView = new ModelAndView(DocumentoView.FORMD);
     modelAndView.addObject("parroquia", parroquiaService.buscarPorIdParroquia(idParroquia));
@@ -69,8 +67,9 @@ public class DocumentoController {
     return modelAndView;
   }
 
-  @PostMapping("/agregar")
-  public String agregarDocumento(@ModelAttribute("file")MultipartFile file){
+  @PostMapping("/agregar/{idParroquia}/{idAcg}")
+  public String agregarDocumento(@ModelAttribute("file")MultipartFile file,@PathVariable("idParroquia") Long idParroquia,
+	      @PathVariable("idAcg") Long idAcg){
     ParroquiaAcg parroquiaAcg = parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg));
     try{
       almacenamientoService.guardarDocumento(file,parroquiaAcg);

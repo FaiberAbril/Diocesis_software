@@ -1,6 +1,7 @@
 package com.sena.solution.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,8 @@ public class DocumentoService {
   public List<Documento> encontrarDocumentosPorParroquiaAcg(ParroquiaAcg parroquiaAcg) {
     return documentoRepository.findByParroquiaAcg(parroquiaAcg);
   } 
+  
+  public Optional<Documento> encontrarPorNombre(String fileName){
+	  return documentoRepository.findByNombreDocumento(fileName);
+  }
 }

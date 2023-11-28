@@ -1,14 +1,20 @@
 package com.sena.solution.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +26,8 @@ import com.sena.solution.services.ArchivoCategoriaGeneralService;
 import com.sena.solution.services.DocumentoService;
 import com.sena.solution.services.ParroquiaAcgService;
 import com.sena.solution.services.ParroquiaService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/documento")
@@ -80,5 +88,21 @@ public class DocumentoController {
     return null;
 
   }
+
+  @GetMapping("/descargar/{fileName}")
+  @ResponseBody
+  public void descargarDocumento(@PathVariable("fileName") String fileName, 
+      HttpServletResponse response) throws IOException {
+    
+
+    InputStream in = new ByteArrayInputStream(almacenamientoService.descargarDocumento(fileName));
+    response.addHeader("Content-disposition", "attachment;filename=" + fileName);
+    response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+    IOUtils.copy(in, response.getOutputStream());
+    response.flushBuffer();
+    
+    
+  }
+
   
 }

@@ -19,6 +19,7 @@ public class DocumentoService {
 
   public List<Documento> encontrarDocumentosPorParroquiaAcg(ParroquiaAcg parroquiaAcg) {
     return documentoRepository.findByParroquiaAcg(parroquiaAcg);
+<<<<<<< HEAD
   }  
   
   public Optional<Documento> encontrarDocumentoPorNombre(String nombreDocumento){
@@ -30,5 +31,11 @@ public class DocumentoService {
   
   public void guardarDocumento(Documento documento) {
 	  documentoRepository.save(documento);
+=======
+  } 
+  
+  public Optional<Documento> encontrarPorNombre(String fileName){
+	  return documentoRepository.findByNombreDocumento(fileName);
+>>>>>>> f88844abd9c6f4770abde2aa486abf392a75e2c6
   }
 }

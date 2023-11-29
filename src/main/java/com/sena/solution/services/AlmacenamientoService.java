@@ -6,12 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.sena.solution.configBeans.BeansArchivos;
 import com.sena.solution.models.Documento;
 import com.sena.solution.models.ParroquiaAcg;
 import com.sena.solution.repositories.DocumentoRepository;
@@ -27,10 +24,23 @@ public class AlmacenamientoService {
   private final String CARPETA_PATH = System.getProperty("user.dir") + "/src/main/resources/archivos/";
   
 
-  public void guardarDocumento(MultipartFile file, ParroquiaAcg parroquiaAcg) throws IllegalStateException, IOException {
+  public boolean guardarDocumento(MultipartFile file, ParroquiaAcg parroquiaAcg) throws IllegalStateException, IOException {
 	  
     String archivo_path = CARPETA_PATH + file.getOriginalFilename();
+    if(!documentoRepository.existsByNombreDocumento(file.getOriginalFilename())){
+      Documento documento = new Documento();
+      documento.setNombreDocumento(file.getOriginalFilename());
+      documento.setTipo(file.getContentType());
+      documento.setPath(archivo_path);
+      documento.setParroquiaAcg(parroquiaAcg);
+      documentoRepository.save(documento);
+      file.transferTo(new File(archivo_path));
+      return true;
+    }else{
+      return false;
+    }
     
+<<<<<<< HEAD
     Documento documento = new Documento();
     documento.setNombreDocumento(file.getOriginalFilename());
     documento.setTipo(file.getContentType());
@@ -39,6 +49,8 @@ public class AlmacenamientoService {
     documentoService.guardarDocumento(documento);
     
     file.transferTo(new File(archivo_path));
+=======
+>>>>>>> f88844abd9c6f4770abde2aa486abf392a75e2c6
 
   }
 

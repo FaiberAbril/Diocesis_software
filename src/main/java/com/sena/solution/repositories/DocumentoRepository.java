@@ -14,4 +14,6 @@ public interface DocumentoRepository extends JpaRepository<Documento, Long>{
   Optional<Documento> findByNombreDocumento(String nombre);
 
   List<Documento> findByParroquiaAcg(ParroquiaAcg parroquiaAcg);
+  
+  //void DeleteByNombreDocumento(String nombreDocumento);
 }

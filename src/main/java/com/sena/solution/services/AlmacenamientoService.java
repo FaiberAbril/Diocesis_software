@@ -3,6 +3,8 @@ package com.sena.solution.services;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,13 @@ import com.sena.solution.repositories.DocumentoRepository;
 @Service
 public class AlmacenamientoService {
   
+ 
   @Autowired
-  private DocumentoRepository documentoRepository;
+  private DocumentoService documentoService;
 
   //"src/main/resources/archivos"
   private final String CARPETA_PATH = System.getProperty("user.dir") + "/src/main/resources/archivos/";
+  
 
   public void guardarDocumento(MultipartFile file, ParroquiaAcg parroquiaAcg) throws IllegalStateException, IOException {
 	  
@@ -32,20 +36,35 @@ public class AlmacenamientoService {
     documento.setTipo(file.getContentType());
     documento.setPath(archivo_path);
     documento.setParroquiaAcg(parroquiaAcg);
-    documentoRepository.save(documento);
+    documentoService.guardarDocumento(documento);
+    
     file.transferTo(new File(archivo_path));
 
   }
 
   public byte[] descargarDocumento(String fileNombre) throws IOException {
-    Optional<Documento> opDocumento = documentoRepository.findByNombreDocumento(fileNombre);
+    Optional<Documento> opDocumento = documentoService.encontrarDocumentoPorNombre(fileNombre);
     if (opDocumento.isPresent()) {
       String filePath = opDocumento.get().getPath();
       byte[] file = Files.readAllBytes(new File(filePath).toPath());
       return file;
     }
-
-    return null;
+    
+       return null;
+  }
+  
+  public boolean eliminarDocumento(String filename, Long idDocumento) {
+	  Path root = Paths.get(CARPETA_PATH);
+	  try{
+		Path file = root.resolve(filename);
+		documentoService.eliminarDocumento(idDocumento);
+		return Files.deleteIfExists(file);
+		 }catch (IOException e) {
+			 throw new RuntimeException("Error: El archivo no existe" + e.getMessage());
+			 
+		 }
+	  
+	  
   }
 
 }

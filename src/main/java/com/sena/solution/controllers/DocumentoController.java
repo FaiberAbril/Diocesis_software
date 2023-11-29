@@ -3,16 +3,23 @@ package com.sena.solution.controllers;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sena.message.ResponseMessage;
 import com.sena.solution.controllers.views.DocumentoView;
+import com.sena.solution.models.Documento;
 import com.sena.solution.models.ParroquiaAcg;
 import com.sena.solution.models.ParroquiaAcgPK;
 import com.sena.solution.services.AlmacenamientoService;
@@ -40,19 +47,18 @@ public class DocumentoController {
   @Autowired
   private AlmacenamientoService almacenamientoService;
 
-  
-  
+  private String msg = null;
 
   @GetMapping("/listar/{idParroquia}/{idAcg}")
   public ModelAndView listarDocumentos(@PathVariable("idParroquia") Long idParroquia,
-      @PathVariable("idAcg") Long idAcg) {
-
+      @PathVariable("idAcg") Long idAcg,@RequestParam(name="msg",required = false) String msg) { 
     ModelAndView modelAndView = new ModelAndView(DocumentoView.LISTD);
     ParroquiaAcg parroquiaAcg = parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg));
     modelAndView.addObject("ListaDocumentos", documentoService.encontrarDocumentosPorParroquiaAcg(parroquiaAcg));
 
     modelAndView.addObject("parroquia", parroquiaService.buscarPorIdParroquia(idParroquia));
     modelAndView.addObject("acg", acgService.buscarPorIdACG(idAcg));
+    modelAndView.addObject("msg", msg);
     return modelAndView;
   }
 
@@ -81,4 +87,25 @@ public class DocumentoController {
 
   }
   
-}
+  @GetMapping("/eliminar/{fileName}/{idDocumento}")
+  public String eliminarDocumento(@PathVariable String fileName, @PathVariable Long idDocumento){
+	  String message = "";
+	  Documento documento = documentoService.encontrarDocumentoPorNombre(fileName).orElse(null);
+	  
+	  try {
+		  boolean existed = almacenamientoService.eliminarDocumento(fileName,idDocumento);
+		  
+		  if (existed) {
+			  message = "El archivo fue eliminado correctamente: " + fileName + idDocumento;
+			  return"redirect:/documento/listar/" + String.valueOf(documento.getParroquiaAcg().getParroquia().getId())+"/"+ String.valueOf(documento.getParroquiaAcg().getAcg().getIdACG())+"?msg="+message;
+			  
+		  }
+		     message = "El documento no existe!";
+		     return"redirect:/documento/listar/" + String.valueOf(documento.getParroquiaAcg().getParroquia().getId())+"/"+ String.valueOf(documento.getParroquiaAcg().getAcg().getIdACG())+"?msg="+message;
+		    } catch (Exception e) {
+		    	message = e.getMessage();
+		    	return"redirect:/documento/listar/" + String.valueOf(documento.getParroquiaAcg().getParroquia().getId())+"/"+ String.valueOf(documento.getParroquiaAcg().getAcg().getIdACG())+"?msg="+message;
+		    }
+	  }
+  }
+

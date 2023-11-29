@@ -29,6 +29,8 @@
 			<a th:href="@{/documento/formularioAgregar/{idParroquia}/{idAcg}(idParroquia=${parroquia.id},idAcg=${acg.idACG})}">
 				<button class="btn btn-primary" type="submit">Agregar</button>
 			</a>
+			
+			
 			<div class="text-center mt-5">
 				<table class="table table-bordered">
 	
@@ -45,7 +47,7 @@
 							<td th:text="${documento.nombreDocumento}"></td>
 							
 							<td>
-								<a th:href="@{/}">
+								<a th:href="@{/documento/eliminar/{fileName}/{idDocumento}(fileName=${documento.nombreDocumento}, idDocumento=${documento.idDocumento})}">
 									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
 								</a>
 								<a
@@ -57,9 +59,18 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="alert alert-info" role="alert" th:if="${!#strings.isEmpty(msg)}" th:text="${msg}">
+				A simple primary alert—check it out!
+				 </div>
+				
+				
 			</div>
+			
 		</div>
+		
 	</div>
+	
 
 
 </body>

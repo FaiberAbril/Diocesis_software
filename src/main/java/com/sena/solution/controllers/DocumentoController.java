@@ -7,16 +7,13 @@ import java.util.Optional;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,7 +57,7 @@ public class DocumentoController {
 
   @GetMapping("/listar/{idParroquia}/{idAcg}")
   public ModelAndView listarDocumentos(@PathVariable("idParroquia") Long idParroquia,
-      @PathVariable("idAcg") Long idAcg) {
+      @PathVariable("idAcg") Long idAcg,@RequestParam(name = "msg",required = false)String msg) {
 
     ModelAndView modelAndView = new ModelAndView(DocumentoView.LISTD);
     ParroquiaAcg parroquiaAcg = parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg));
@@ -68,6 +65,7 @@ public class DocumentoController {
 
     modelAndView.addObject("parroquia", parroquiaService.buscarPorIdParroquia(idParroquia));
     modelAndView.addObject("acg", acgService.buscarPorIdACG(idAcg));
+    modelAndView.addObject("msg", msg);
     return modelAndView;
   }
 
@@ -86,13 +84,47 @@ public class DocumentoController {
   public String agregarDocumento(@ModelAttribute("file")MultipartFile file,@PathVariable("idParroquia") Long idParroquia,
 	      @PathVariable("idAcg") Long idAcg){
     ParroquiaAcg parroquiaAcg = parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg));
+    String nombreDocumento = file.getOriginalFilename();
+    String message = "";
     try{
-      almacenamientoService.guardarDocumento(file,parroquiaAcg);
-      return "redirect:/documento/listar/" + String.valueOf(idParroquia) + "/" + String.valueOf(idAcg) ;
+      boolean check = almacenamientoService.guardarDocumento(file, parroquiaAcg);
+      if (check) {
+        return "redirect:/documento/listar/" + String.valueOf(idParroquia) + "/" + String.valueOf(idAcg);
+      }
+      message = "el archivo ya existe: " + nombreDocumento;
+      return "redirect:/documento/listar/" + String.valueOf(idParroquia) + "/" + String.valueOf(idAcg)+"?msg=" + message;
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
     return null;
+
+  }
+
+  @GetMapping("/vistaPrevia/{fileName}")
+  @ResponseBody
+  //HttpEntity<byte[]>
+  public void  vistaPreviaDocumento(@PathVariable("fileName") String fileName, 
+      HttpServletResponse response) throws IOException {
+    
+	Optional<Documento> opDocumento = documentoService.encontrarPorNombre(fileName);
+	String contentType = "";
+	if(opDocumento.isPresent()) {
+		contentType = opDocumento.get().getTipo();
+	}
+	
+	/*byte[] documento = almacenamientoService.descargarDocumento(fileName);
+	
+	HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+    headers.setContentLength(documento.length);
+
+    return new HttpEntity<byte[]>(documento, headers);*/
+
+    InputStream in = new ByteArrayInputStream(almacenamientoService.descargarDocumento(fileName));
+    //response.addHeader("Content-disposition", "attachment;filename=" + fileName);
+    response.setContentType(contentType);//MediaType.APPLICATION_OCTET_STREAM_VALUE
+    IOUtils.copy(in, response.getOutputStream());
+    response.flushBuffer();
 
   }
 
@@ -115,15 +147,13 @@ public class DocumentoController {
     headers.setContentLength(documento.length);
 
     return new HttpEntity<byte[]>(documento, headers);*/
-	
-	
+
     InputStream in = new ByteArrayInputStream(almacenamientoService.descargarDocumento(fileName));
-    //response.addHeader("Content-disposition", "attachment;filename=" + fileName);
+    response.addHeader("Content-disposition", "attachment;filename=" + fileName);
     response.setContentType(contentType);//MediaType.APPLICATION_OCTET_STREAM_VALUE
     IOUtils.copy(in, response.getOutputStream());
     response.flushBuffer();
-    
-    
+
   }
 
   

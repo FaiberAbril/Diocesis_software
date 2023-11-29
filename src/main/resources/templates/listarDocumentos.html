@@ -27,6 +27,7 @@
         <br />
         <h2>Agregar más Documentos</h2>
         <br />
+        
         <a
           th:href="@{/documento/formularioAgregar/{idParroquia}/{idAcg}(idParroquia=${parroquia.id},idAcg=${acg.idACG})}"
         >
@@ -42,12 +43,20 @@
             </thead>
             <tbody>
               <tr th:each="documento :${ListaDocumentos}">
-                <td>
+                <td
+                  th:if="${documento.tipo} == 'application/pdf' or ${#strings.contains(documento.tipo,'image/')}"
+                >
                   <a
-                    th:href="@{/documento/descargar/{fileName}(fileName=${documento.nombreDocumento})}"
-										target="_blank"
+                    th:href="@{/documento/vistaPrevia/{fileName}(fileName=${documento.nombreDocumento})}"
+                    target="_blank"
                     ><span th:text="${documento.nombreDocumento}"></span
                   ></a>
+                </td>
+
+                <td
+                  th:unless="${documento.tipo} == 'application/pdf' or ${#strings.contains(documento.tipo,'image/')}"
+                >
+                  <span th:text="${documento.nombreDocumento}"></span>
                 </td>
 
                 <td>
@@ -56,9 +65,12 @@
                       ELIMINAR
                     </button>
                   </a>
-                  <a th:href="@{/}">
+                  <a
+                    th:href="@{/documento/descargar/{fileName}(fileName=${documento.nombreDocumento})}"
+                    target="_blank"
+                  >
                     <button type="button" class="btn btn-outline-info">
-                      ACTUALIZAR
+                      DESCARGAR
                     </button>
                   </a>
                 </td>
@@ -68,6 +80,18 @@
         </div>
       </div>
     </div>
+		<div
+					id="toast-container"
+          class="toast-top-right"
+          th:if="${msg}!=null or ${msg}!=''"
+          
+        >
+					<div class="toast toast-success show" >
+						<div class="toast-message" th:text="${msg}">
+
+						</div>
+					</div>
+				</div>
   </body>
   <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
   <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>

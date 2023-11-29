@@ -11,7 +11,7 @@ import com.sena.solution.models.ParroquiaAcg;
 
 @Repository
 public interface DocumentoRepository extends JpaRepository<Documento, Long>{
-  Optional<Documento> findByNombreDocumento(String nombre);
-
+  Optional<Documento> findByNombreDocumento(String nombreDocumento);
+  boolean existsByNombreDocumento(String nombreDocumento);
   List<Documento> findByParroquiaAcg(ParroquiaAcg parroquiaAcg);
 }

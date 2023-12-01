@@ -7,11 +7,7 @@ import java.util.Optional;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sena.message.ResponseMessage;
 import com.sena.solution.controllers.views.DocumentoView;
 import com.sena.solution.models.Documento;
 import com.sena.solution.models.ParroquiaAcg;
@@ -33,7 +27,7 @@ import com.sena.solution.services.DocumentoService;
 import com.sena.solution.services.ParroquiaAcgService;
 import com.sena.solution.services.ParroquiaService;
 
-import ch.qos.logback.classic.Logger;
+
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
@@ -109,7 +103,7 @@ public class DocumentoController {
   public void  vistaPreviaDocumento(@PathVariable("fileName") String fileName, 
       HttpServletResponse response) throws IOException {
     
-	Optional<Documento> opDocumento = documentoService.encontrarPorNombre(fileName);
+	Optional<Documento> opDocumento = documentoService.encontrarDocumentoPorNombre(fileName);
 	String contentType = "";
 	if(opDocumento.isPresent()) {
 		contentType = opDocumento.get().getTipo();
@@ -137,19 +131,12 @@ public class DocumentoController {
   public void  descargarDocumento(@PathVariable("fileName") String fileName, 
       HttpServletResponse response) throws IOException {
     
-	Optional<Documento> opDocumento = documentoService.encontrarPorNombre(fileName);
+	Optional<Documento> opDocumento = documentoService.encontrarDocumentoPorNombre(fileName);
 	String contentType = "";
 	if(opDocumento.isPresent()) {
 		contentType = opDocumento.get().getTipo();
 	}
 	
-	/*byte[] documento = almacenamientoService.descargarDocumento(fileName);
-	
-	HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-    headers.setContentLength(documento.length);
-
-    return new HttpEntity<byte[]>(documento, headers);*/
 
     InputStream in = new ByteArrayInputStream(almacenamientoService.descargarDocumento(fileName));
     response.addHeader("Content-disposition", "attachment;filename=" + fileName);

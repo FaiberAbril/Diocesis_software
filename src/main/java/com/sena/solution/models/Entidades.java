@@ -7,6 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 @MappedSuperclass
 public class Entidades {
@@ -16,10 +17,12 @@ public class Entidades {
 	private Long id;
 	
 	@NotBlank(message ="{NotBlank.Entidades.Nombre}")
+	@Pattern(regexp = "^([a-zA-Z\\s]+)$", message = "No a ingresado un nombre correctamente")
 	private String nombre;
 	
 
 	@NotBlank(message ="{NotBlank.Entidades.Direccion}")
+	@Pattern(regexp = "^(Calle|Carrera|Diagonal)\\s\\d{2}\\s#\\d{2}-\\d{2}\\s[a-zA-Z\\s]+$",message = "Direccion no especificada correctamente")//Calle 00 #00-00 Barrio
 	private String direccion;
 	
 

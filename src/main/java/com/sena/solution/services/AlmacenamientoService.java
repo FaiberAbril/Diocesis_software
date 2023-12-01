@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.sena.solution.models.Documento;
 import com.sena.solution.models.ParroquiaAcg;
-import com.sena.solution.repositories.DocumentoRepository;
 
 @Service
 public class AlmacenamientoService {
@@ -27,30 +26,19 @@ public class AlmacenamientoService {
   public boolean guardarDocumento(MultipartFile file, ParroquiaAcg parroquiaAcg) throws IllegalStateException, IOException {
 	  
     String archivo_path = CARPETA_PATH + file.getOriginalFilename();
-    if(!documentoRepository.existsByNombreDocumento(file.getOriginalFilename())){
+    if(!documentoService.existeDocumentoPorNombre(file.getOriginalFilename())){
       Documento documento = new Documento();
       documento.setNombreDocumento(file.getOriginalFilename());
       documento.setTipo(file.getContentType());
       documento.setPath(archivo_path);
       documento.setParroquiaAcg(parroquiaAcg);
-      documentoRepository.save(documento);
+      documentoService.guardarDocumento(documento);
       file.transferTo(new File(archivo_path));
       return true;
     }else{
       return false;
     }
     
-<<<<<<< HEAD
-    Documento documento = new Documento();
-    documento.setNombreDocumento(file.getOriginalFilename());
-    documento.setTipo(file.getContentType());
-    documento.setPath(archivo_path);
-    documento.setParroquiaAcg(parroquiaAcg);
-    documentoService.guardarDocumento(documento);
-    
-    file.transferTo(new File(archivo_path));
-=======
->>>>>>> f88844abd9c6f4770abde2aa486abf392a75e2c6
 
   }
 

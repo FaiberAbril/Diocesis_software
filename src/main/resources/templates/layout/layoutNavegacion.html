@@ -9,7 +9,10 @@
 
 
     <!-- css -->
+	
     <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -205,15 +208,15 @@
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="main-sidebar sidebar-blue-primary elevation-4" th:fragment="aside">
+		<aside class="aside-conf main-sidebar sidebar-blue-primary elevation-4 " th:fragment="aside">
 			<!-- Brand Logo -->
 			
 			<!-- Sidebar -->
 			<div class="sidebar">
 				<!-- Sidebar user panel (optional) -->
-				<div class="user-panel img-fluid mt-3 pb-3 mb-3 d-flex">
+				<div class=" img-fluid mt-3 pb-3 mb-3 d-flex">
 					<div class="image" >
-						<img  th:src="@{/img/LOGO_JJ_COLOR_H.png}"  class="img-fluid" alt="User Image">
+						<img  th:src="@{/img/LOGO_JJ_COLOR_H.png}"  class="img-fluid logo-img" alt="User Image">
 					</div>
 					<div class="info">
 						<a href="#" class="d-block"></a>
@@ -877,8 +880,8 @@
 			<!-- /.sidebar -->
 		</aside>
 
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" layout:fragment="page-content">
+		<!-- Content Wrapper. Contains page content content-wrapper -->
+		<div class="fondo " layout:fragment="page-content">
 			
 		</div>
 		<!-- /.content-wrapper -->

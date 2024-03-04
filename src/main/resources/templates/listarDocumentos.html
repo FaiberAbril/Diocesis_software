@@ -8,14 +8,14 @@
 	<title>LISTA DE DOCUMENTOS</title>
 </head>
 
-<body>
+<body class="sidebar-mini layout-fixed">
 	<nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
 
 	<aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
 	<!--<a th:href="@{/principal/}">
 		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
 		</a>-->
-	<div class="content-wrapper" layout:fragment="page-content">
+	<div class="content-wrapper" id="fondo" layout:fragment="page-content">
 		<div class="container text-center">
 			<h1 th:text="'Lista de documentos ' + ${acg.nombreACG}">
 				Lista de Documentos

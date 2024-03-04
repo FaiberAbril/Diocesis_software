@@ -36,7 +36,7 @@
 	<link rel="stylesheet" th:href="@{/plugins/summernote/summernote-bs4.min.css}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" th:fragment="body">
 	<div class="wrapper" >
 
 		<!-- link dash  https://adminlte.io/themes/v3/index.html  -->
@@ -208,7 +208,7 @@
 		<!-- /.navbar -->
 
 		<!-- Main Sidebar Container -->
-		<aside class="aside-conf main-sidebar sidebar-blue-primary elevation-4 " th:fragment="aside">
+		<aside class="aside-conf main-sidebar sidebar-blue-primary elevation-4" th:fragment="aside">
 			<!-- Brand Logo -->
 			
 			<!-- Sidebar -->
@@ -881,7 +881,7 @@
 		</aside>
 
 		<!-- Content Wrapper. Contains page content content-wrapper -->
-		<div class="fondo " layout:fragment="page-content">
+		<div class="content-wrappe" id="fondo" layout:fragment="page-content">
 			
 		</div>
 		<!-- /.content-wrapper -->

@@ -11,12 +11,12 @@
     <title>FORMULARIO CREAR PARROQUIAS</title>
   </head>
 
-  <body>
+  <body class="sidebar-mini layout-fixed">
     <nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
 
     <aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
     	
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="fondo">
 		<a th:href="@{/parroquias/listar}">
             <button class="btn btn-primary" type="submit" >Volver listar parroquias</button><!--$theme-colors="success"-->
         </a>

@@ -17,7 +17,7 @@ public class Entidades {
 	private Long id;
 	
 	@NotBlank(message ="{NotBlank.Entidades.Nombre}")
-	@Pattern(regexp = "^([a-zA-Z\\s]+)$", message = "No a ingresado un nombre correctamente")
+	@Pattern(regexp = "^[a-zA-Z\\s]*$", message = "No ha ingresado un nombre correctamente")
 	private String nombre;
 	
 

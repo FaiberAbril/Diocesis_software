@@ -1,15 +1,18 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.CuriaView;
 import com.sena.solution.models.Curia;
+import com.sena.solution.repositories.CuriaRepository;
 import com.sena.solution.services.CuriaService;
 
 @Controller
@@ -20,17 +23,22 @@ public class CuriaController {
 	@Autowired
 	private CuriaService curiaService;
 	
+	@Autowired
+	private CuriaRepository c;
+	
 	@GetMapping("/home")
 	public String index() {
 		return CuriaView.HOME;
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaCurias() {
+	public ModelAndView listaCurias(@RequestParam(defaultValue = "0")int page) {
+		
 		
 		ModelAndView modelAndView = new ModelAndView(CuriaView.LISTC);
 		modelAndView.addObject("listaCurias", curiaService.listarCurias());
-		
+		modelAndView.addObject("data", c.findAll(PageRequest.of(page, 2)));
+
 		return modelAndView;
 		
 	}

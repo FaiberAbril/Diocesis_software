@@ -30,7 +30,7 @@
 			</a>
 			<div class="text-center mt-5">
 				<table class="table table-bordered">
-	
+
 					<thead>
 						<tr>
 							<th>Id Vicaria</th>
@@ -39,10 +39,10 @@
 							<th>Eliminar</th>
 							<th>Actualizar</th>
 						</tr>
-	
+
 					</thead>
 					<tbody>
-						<tr th:each="Vicaria:${listaVicarias}">
+						<tr th:each="Vicaria:${listaVicariasPaginas.getContent}">
 							<td th:text="${Vicaria.idVicaria}"></td>
 							<td th:text="${Vicaria.nombreVicaria}"></td>
 							<td th:text="${Vicaria.curia.nombre}"></td>
@@ -57,12 +57,24 @@
 									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
 								</a>
 							</td>
-	
+
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		<div class="d-flex justify-content-center" >
+			<nav aria-label="...">
+				<ul class="pagination pagination-lg ">
+					<li class="page-item" aria-current="page"
+						th:each="i: ${#numbers.sequence(0,listaVicariasPaginas.getTotalPages-1)}">
+						<a th:href="@{/vicaria/listar(page=${i})}" th:text="${i}" class="page-link"
+							th:classappend="${currentPage}==${i}?'active':''"></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
 	</div>
 
 

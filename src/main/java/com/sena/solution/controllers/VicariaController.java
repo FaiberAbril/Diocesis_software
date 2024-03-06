@@ -1,12 +1,14 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.VicariaView;
 import com.sena.solution.models.Vicaria;
@@ -21,6 +23,7 @@ public class VicariaController {
 	@Autowired
 	private VicariaService vicariaService;
 	
+
 	@Autowired
 	private CuriaService curiaService;
 	
@@ -30,15 +33,15 @@ public class VicariaController {
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaVicaria() {
-		
+	public ModelAndView listaVicaria(@RequestParam(defaultValue = "0")int page) {
 		ModelAndView modelAndView = new ModelAndView(VicariaView.LISTV);
 		modelAndView.addObject("listaVicarias", vicariaService.listarVicarias());
-		
+		modelAndView.addObject("listaVicariasPaginas", vicariaService.encontrarPaginas(PageRequest.of(page, 4)) );
+		modelAndView.addObject("currentPage", page);
 		return modelAndView;
 		
 	}
-	
+	 
 	@GetMapping("/formularioCrearVicarias")
 	public ModelAndView formularioCrearVicarias() {
 		

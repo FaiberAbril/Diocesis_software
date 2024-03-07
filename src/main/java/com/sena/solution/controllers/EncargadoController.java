@@ -1,6 +1,8 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.EncargadoView;
 import com.sena.solution.models.Encargado;
@@ -36,15 +39,17 @@ public class EncargadoController {
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaEncargados(@Param("palabra")String palabra) {
+	public ModelAndView listaEncargados(@RequestParam(defaultValue = "0")int page, @Param("palabra")String palabra) {
 		
 		ModelAndView modelAndView = new ModelAndView(EncargadoView.LISTE);
 		modelAndView.addObject("url", DIRRECCION);
-		
+		modelAndView.addObject("palabra", palabra);
+		modelAndView.addObject("currentPage", page);
+		Pageable pg = PageRequest.of(page, 4);
 		if(palabra != null) {
-			modelAndView.addObject("listaEncargados", encargadoService.encontrarEncargadoEspecifico(palabra));
+			modelAndView.addObject("listaEncargados", encargadoService.encontrarEncargadoEspecifico(palabra,pg));
 		} else {
-			modelAndView.addObject("listaEncargados", encargadoService.listarEncargados());
+			modelAndView.addObject("listaEncargados", encargadoService.listarEncargados(pg));
 		}
 		
 		

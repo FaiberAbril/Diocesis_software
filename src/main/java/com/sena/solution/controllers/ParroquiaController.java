@@ -1,6 +1,8 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.ParroquiaView;
 import com.sena.solution.models.Parroquia;
@@ -36,13 +39,16 @@ public class ParroquiaController {
 	}
 
 	@GetMapping("/listar")
-	public ModelAndView listarParroquias(@Param("palabra")String palabra) {
+	public ModelAndView listarParroquias(@RequestParam(defaultValue = "0")int page, @Param("palabra")String palabra) {
 		ModelAndView modelandview = new ModelAndView(ParroquiaView.LISTP);
 		modelandview.addObject("url", DIRRECCION);
+		modelandview.addObject("palabra", palabra);
+		modelandview.addObject("currentPage", page);
+		Pageable pg = PageRequest.of(page, 4);
 		if(palabra != null) {
-			modelandview.addObject("listaParroquias", parroquiaService.encontrarParroquiaEspecifica(palabra));
+			modelandview.addObject("listaParroquias", parroquiaService.encontrarParroquiaEspecifica(palabra,pg));
 		} else {
-			modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
+			modelandview.addObject("listaParroquias", parroquiaService.listarParroquias(pg));
 		}
 		
 		//modelandview.addObject("palabra", palabra);

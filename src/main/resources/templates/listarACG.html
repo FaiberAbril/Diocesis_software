@@ -28,7 +28,7 @@
           <button class="btn btn-primary" type="submit">Nuevo Archivo</button>
         </a>
         
-        <div  th:insert="~{layout/layoutNavegacion :: buscador}"></div>
+	         <div  th:insert="~{layout/layoutNavegacion :: buscador}"></div>
         <div class="text-center mt-5">
           <table class="table table-bordered">
             <thead>
@@ -41,12 +41,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="ACG:${listaACG}">
-                <td th:text="${ACG.idACG}"></td>
-                <td th:text="${ACG.nombreACG}"></td>
+              <tr th:each="aCG:${listaACG.getContent}">
+                <td th:text="${aCG.idACG}"></td>
+                <td th:text="${aCG.nombreACG}"></td>
                 <!--td th:text="${ACG.parroquia.nombre}"></td-->
                 <td>
-                  <a th:href="@{/acg/eliminarACG/{idACG}(idACG=${ACG.idACG})}">
+                  <a th:href="@{/acg/eliminarACG/{idACG}(idACG=${aCG.idACG})}">
                     <button type="button" class="btn btn-outline-danger">
                       ELIMINAR
                     </button>
@@ -54,7 +54,7 @@
                 </td>
                 <td>
                   <a
-                    th:href="@{/acg/formularioActualizarACG/{idACG}(idACG=${ACG.idACG})}"
+                    th:href="@{/acg/formularioActualizarACG/{idACG}(idACG=${aCG.idACG})}"
                   >
                     <button type="button" class="btn btn-outline-info">
                       ACTUALIZAR
@@ -66,6 +66,17 @@
           </table>
         </div>
       </div>
+      <div class="d-flex justify-content-center sm" >
+			<nav aria-label="...">
+				<ul class="pagination pagination-lg">
+					<li class="page-item " aria-current="page" th:each="i: ${#numbers.sequence(0,listaACG.getTotalPages-1)}">
+						<a th:href="@{/acg/listar(palabra=${palabra},page=${i})}" th:text="${i}" class="page-link"
+							th:classappend="${currentPage}==${i}?'active':''"></a>
+					</li>
+				</ul>
+			</nav>
+			
+		</div>
     </div>
     <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>

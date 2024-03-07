@@ -3,6 +3,8 @@ package com.sena.solution.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.ArchivoCategoriaGeneral;
@@ -27,6 +29,10 @@ public class ArchivoCategoriaGeneralService {
 		return aCGRepository.findAll();
 	}
 	
+	public Page<ArchivoCategoriaGeneral> listarACG(Pageable pageable){
+		return aCGRepository.findAll(pageable);
+	}
+	
 	public void eliminarACG(ArchivoCategoriaGeneral ACG) {
 		aCGRepository.delete(ACG);
 	}
@@ -35,8 +41,8 @@ public class ArchivoCategoriaGeneralService {
 		return aCGRepository.findById(id).get();
 	}
 	
-	public List<ArchivoCategoriaGeneral> encontrarACG(String palabra){
-		return aCGRepository.findSpecific(palabra);
+	public Page<ArchivoCategoriaGeneral> encontrarACG(String palabra, Pageable pageable){
+		return aCGRepository.findSpecific(palabra,pageable);
 	}
 	
 	/*public List<ArchivoCategoriaGeneral> buscarPorParroquia(Parroquia parroquia){

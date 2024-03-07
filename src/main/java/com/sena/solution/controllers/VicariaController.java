@@ -2,6 +2,8 @@ package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.VicariaView;
 import com.sena.solution.models.Vicaria;
@@ -26,6 +29,7 @@ public class VicariaController {
 	@Autowired
 	private VicariaService vicariaService;
 	
+
 	@Autowired
 	private CuriaService curiaService;
 	
@@ -37,22 +41,25 @@ public class VicariaController {
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaVicaria(@Param("palabra")String palabra ) {
-		
+	public ModelAndView listaVicaria(@RequestParam(defaultValue = "0")int page,@Param("palabra")String palabra ) {
 		ModelAndView modelAndView = new ModelAndView(VicariaView.LISTV);
 		modelAndView.addObject("url", DIRECCION);
+		modelAndView.addObject("palabra", palabra);
+		modelAndView.addObject("currentPage", page);
+		Pageable pg = PageRequest.of(page, 4);
 		if(palabra != null) {
-			modelAndView.addObject("listaVicarias", vicariaService.encontrarVicariaEspecifica(palabra));
+			modelAndView.addObject("listaVicarias", vicariaService.encontrarVicariaEspecifica(palabra,pg));
 		} else {
-			modelAndView.addObject("listaVicarias", vicariaService.listarVicarias());
+			modelAndView.addObject("listaVicarias", vicariaService.listarVicarias(pg));
 		}
 		
 		
+		//modelAndView.addObject("listaVicariasPaginas", vicariaService.encontrarPaginas(PageRequest.of(page, 4)) );
 		
 		return modelAndView;
 		
 	}
-	
+	 
 	@GetMapping("/formularioCrearVicarias")
 	public ModelAndView formularioCrearVicarias() {
 		

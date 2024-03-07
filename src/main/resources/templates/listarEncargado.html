@@ -49,23 +49,23 @@
 	
 					</thead>
 					<tbody>
-						<tr th:each="Encargado:${listaEncargados}">
-							<td th:text="${Encargado.id}"></td>
-							<td th:text="${Encargado.nombre}"></td>
-							<td th:text="${Encargado.apellido}"></td>
-							<td th:text="${Encargado.cedula}"></td>
-							<td th:text="${Encargado.telefono}"></td>
-							<td th:text="${Encargado.email}"></td>
-							<td th:text="${Encargado.curia.nombre}"></td>
+						<tr th:each="encargado:${listaEncargados.getContent}">
+							<td th:text="${encargado.id}"></td>
+							<td th:text="${encargado.nombre}"></td>
+							<td th:text="${encargado.apellido}"></td>
+							<td th:text="${encargado.cedula}"></td>
+							<td th:text="${encargado.telefono}"></td>
+							<td th:text="${encargado.email}"></td>
+							<td th:text="${encargado.curia.nombre}"></td>
 							<td>
 								<a
-									th:href="@{/encargado/eliminarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
+									th:href="@{/encargado/eliminarEncargado/{idEncargado}(idEncargado=${encargado.id})}">
 									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
 								</a>
 							</td>
 							<td>
 								<a
-									th:href="@{/encargado/formularioActualizarEncargado/{idEncargado}(idEncargado=${Encargado.id})}">
+									th:href="@{/encargado/formularioActualizarEncargado/{idEncargado}(idEncargado=${encargado.id})}">
 									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
 								</a>
 							</td>
@@ -74,6 +74,17 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+		<div class="d-flex justify-content-center sm" >
+			<nav aria-label="...">
+				<ul class="pagination pagination-lg">
+					<li class="page-item " aria-current="page" th:each="i: ${#numbers.sequence(0,listaEncargados.getTotalPages-1)}">
+						<a th:href="@{/encargado/listar(palabra=${palabra},page=${i})}" th:text="${i}" class="page-link"
+							th:classappend="${currentPage}==${i}?'active':''"></a>
+					</li>
+				</ul>
+			</nav>
+			
 		</div>
 	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>

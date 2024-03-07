@@ -1,6 +1,8 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.ArchivoCategoriaGeneralView;
 import com.sena.solution.models.ArchivoCategoriaGeneral;
@@ -31,14 +34,17 @@ public class ArchivoCategoriaGeneralController {
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaACG(@Param("palabra")String palabra) {
+	public ModelAndView listaACG(@RequestParam(defaultValue = "0")int page, @Param("palabra")String palabra) {
 		
 		ModelAndView modelAndView = new ModelAndView(ArchivoCategoriaGeneralView.LISTC);
 		modelAndView.addObject("url", DIRECCION);
+		modelAndView.addObject("palabra", palabra);
+		modelAndView.addObject("currentPage", page);
+		Pageable pg = PageRequest.of(page, 1);
 		if (palabra != null) {
-			modelAndView.addObject("listaACG", aCGService.encontrarACG(palabra));
+			modelAndView.addObject("listaACG", aCGService.encontrarACG(palabra, pg));
 		} else {
-			modelAndView.addObject("listaACG", aCGService.listarACG());
+			modelAndView.addObject("listaACG", aCGService.listarACG(pg));
 		}
 
 		return modelAndView;

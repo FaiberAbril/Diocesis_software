@@ -3,6 +3,8 @@ package com.sena.solution.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.Parroquia;
@@ -26,6 +28,10 @@ public class ParroquiaService {
 	public List<Parroquia> listarParroquias() {
 		return parroquiarepository.findAll();
 	}
+	
+	public Page<Parroquia> listarParroquias(Pageable pageable) {
+		return parroquiarepository.findAll(pageable);
+	}
 
 	public void eliminarParroquia(Parroquia parroquia) {
 		parroquiarepository.delete(parroquia);
@@ -35,8 +41,8 @@ public class ParroquiaService {
 		return parroquiarepository.findById(idParroquia).get();
 	}
 	
-	public List<Parroquia> encontrarParroquiaEspecifica(String palabra){
-		return parroquiarepository.findEspecific(palabra);
+	public Page<Parroquia> encontrarParroquiaEspecifica(String palabra,Pageable pageable){
+		return parroquiarepository.findEspecific(palabra, pageable);
 	}
 
 }

@@ -69,7 +69,7 @@ public class GestorDocumentalApplication {
 	    	curia1.setId(1L);
 		    curia1.setNombre("Málaga-Soata");
 		    curia1.setCiudad("Málaga");
-		    curia1.setDireccion("cra");
+		    curia1.setDireccion("Calle 00 #00-00 Barrio");
 		    curia1.setEmail("curia@gmail.com");
 		    curia1.setTelefono("32222121");
 		    
@@ -86,7 +86,7 @@ public class GestorDocumentalApplication {
 			aCGRepository.save(acg1);
 			aCGRepository.save(acg2);
 
-	    Parroquia parroquia1 = new Parroquia(1L, "Santisima Trinidad", "cra", "Málaga", "3324324324", "parroquia@gmail.com", vicariaRepository.getById(1L));
+	    Parroquia parroquia1 = new Parroquia(1L, "Santisima Trinidad", "Calle 00 #00-00 Barrio", "Málaga", "3324324324", "parroquia@gmail.com", vicariaRepository.getById(1L));
 			if (!parroquiaRepository.existsByNombre("Santisima Trinidad")) {
 				parroquiaRepository.save(parroquia1);
 			}

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.RolUsuario;
@@ -28,6 +30,10 @@ public class UsuarioService {
 	public List<Usuario> listarUsuarios() {
 		return usuariorepository.findAll();
 	}
+	
+	public Page<Usuario> listarUsuarios(Pageable pageable) {
+		return usuariorepository.findAll(pageable);
+	}
 
 	public void eliminarUsuario(Usuario usuario) {
 		usuariorepository.delete(usuario);
@@ -41,8 +47,8 @@ public class UsuarioService {
 		return Arrays.asList(RolUsuario.values());	   
 	}
 	
-	public List<Usuario> encontrarUsuario(String palabra){
-		return usuariorepository.findSpecific(palabra);
+	public Page<Usuario> encontrarUsuario(String palabra, Pageable pageable){
+		return usuariorepository.findSpecific(palabra, pageable);
 	}
 
 }

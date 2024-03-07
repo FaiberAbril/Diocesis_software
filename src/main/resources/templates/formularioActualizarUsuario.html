@@ -26,24 +26,27 @@
                                     <div>
                                         <label for="nombre" class="form-label">Nombre Usuario: </label>
                                         <input class="form-control" type="text" th:field="*{nombre}" id="nombre" name="nombre" required>
+                                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nombre')} "th:errors="*{nombre}"></div>
                                     </div>
                                     <div>
                                         <label for="apellido" class="form-label">Apellido</label>
-                                        <input class="form-control" type="text" th:field="*{apellido}" id="apellido" name="apellido"
-                                            required>
+                                        <input class="form-control" type="text" th:field="*{apellido}" id="apellido" name="apellido" required>
+                                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('apellido')} "th:errors="*{apellido}"></div>
                                     </div>
                                     <div>
                                         <label for="cedula" class="form-label"> Cedula</label>
                                         <input class="form-control" type="text" th:field="*{cedula}" id="cedula" name="cedula" required>
+                                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('cedula')}"th:errors="*{cedula}"></div>
                                     </div>
                                     <div>
                                         <label for="telefono" class="form-label"> Telefono</label>
-                                        <input class="form-control" type="text" th:field="*{telefono}" id="telefono" name="telefono"
-                                            required>
+                                        <input class="form-control" type="tel" th:field="*{telefono}" id="telefono" name="telefono" required>
+                                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('telefono')}"th:errors="*{telefono}"></div>
                                     </div>
                                     <div>
                                         <label for="email" class="form-label"> Email</label>
                                         <input class="form-control" type="email" th:field="*{email}" id="email" name="email" required>
+                                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('email')}"th:errors="*{email}"></div>
                                     </div>
                                     <div>
                                         <label for="rol" class="form-label"> Rol Usuario</label>

@@ -34,5 +34,9 @@ public class ParroquiaService {
 	public Parroquia buscarPorIdParroquia(Long idParroquia) {
 		return parroquiarepository.findById(idParroquia).get();
 	}
+	
+	public List<Parroquia> encontrarParroquiaEspecifica(String palabra){
+		return parroquiarepository.findEspecific(palabra);
+	}
 
 }

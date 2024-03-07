@@ -33,4 +33,8 @@ public class CuriaService {
 	public Curia buscarPorIdCuria(Long id) {
 		return curiaRepository.findById(id).get();
 	}
+	
+	public List<Curia> encontrarCuriaEspecifica(String palabra){
+		return curiaRepository.findSpecific(palabra);
+	}
 }

@@ -38,8 +38,11 @@ public class UsuarioService {
 	}
 	
 	public List<RolUsuario> listarRoles(){
-		return Arrays.asList(RolUsuario.values());
-		   
+		return Arrays.asList(RolUsuario.values());	   
+	}
+	
+	public List<Usuario> encontrarUsuario(String palabra){
+		return usuariorepository.findSpecific(palabra);
 	}
 
 }

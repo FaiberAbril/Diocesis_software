@@ -1,7 +1,10 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,8 @@ import com.sena.solution.controllers.views.VicariaView;
 import com.sena.solution.models.Vicaria;
 import com.sena.solution.services.CuriaService;
 import com.sena.solution.services.VicariaService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/vicaria")
@@ -24,16 +29,25 @@ public class VicariaController {
 	@Autowired
 	private CuriaService curiaService;
 	
+	private static final String DIRECCION = "/vicaria/listar"; 
+	
 	@GetMapping("/home")
 	public String index() {
 		return VicariaView.HOME;
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaVicaria() {
+	public ModelAndView listaVicaria(@Param("palabra")String palabra ) {
 		
 		ModelAndView modelAndView = new ModelAndView(VicariaView.LISTV);
-		modelAndView.addObject("listaVicarias", vicariaService.listarVicarias());
+		modelAndView.addObject("url", DIRECCION);
+		if(palabra != null) {
+			modelAndView.addObject("listaVicarias", vicariaService.encontrarVicariaEspecifica(palabra));
+		} else {
+			modelAndView.addObject("listaVicarias", vicariaService.listarVicarias());
+		}
+		
+		
 		
 		return modelAndView;
 		
@@ -50,8 +64,13 @@ public class VicariaController {
 	}
 	
 	@PostMapping("/guardarVicaria")
-	public String guardarVicaria(@ModelAttribute("vicaria")Vicaria vicaria) {
+	public String guardarVicaria(@Valid @ModelAttribute("objVicaria")Vicaria vicaria, BindingResult br ,Model model) {
 		
+		if (br.hasErrors()) {
+			model.addAttribute("listaCurias", curiaService.listarCurias());
+			
+			return VicariaView.FORMV;
+		}
 		vicariaService.guardarVicaria(vicaria);
 		
 		return "redirect:/vicaria/listar";
@@ -69,7 +88,12 @@ public class VicariaController {
 	}
 		
 	@PostMapping("/actualizarVicaria")
-	public String actualizarVicaria(@ModelAttribute("vicaria") Vicaria vicaria) {
+	public String actualizarVicaria(@Valid @ModelAttribute("objVicaria") Vicaria vicaria, BindingResult br, Model model) {
+		if (br.hasErrors()) {
+			model.addAttribute("listaCurias", curiaService.listarCurias());
+			
+			return VicariaView.FORMUPV;
+		}
 		
 		vicariaService.actualizarVicaria(vicaria);
 		

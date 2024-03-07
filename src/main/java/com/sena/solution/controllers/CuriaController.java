@@ -1,7 +1,10 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,8 @@ import com.sena.solution.controllers.views.CuriaView;
 import com.sena.solution.models.Curia;
 import com.sena.solution.services.CuriaService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/curia")
 public class CuriaController {
@@ -20,16 +25,24 @@ public class CuriaController {
 	@Autowired
 	private CuriaService curiaService;
 	
+	private static final String DIRECCION = "/curia/listar"; 
+	
 	@GetMapping("/home")
 	public String index() {
 		return CuriaView.HOME;
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaCurias() {
+	public ModelAndView listaCurias(@Param("palabra")String palabra) {
 		
 		ModelAndView modelAndView = new ModelAndView(CuriaView.LISTC);
-		modelAndView.addObject("listaCurias", curiaService.listarCurias());
+		modelAndView.addObject("url", DIRECCION);
+		if(palabra != null) {
+			modelAndView.addObject("listaCurias", curiaService.encontrarCuriaEspecifica(palabra));
+		} else {
+			modelAndView.addObject("listaCurias", curiaService.listarCurias());
+		}
+		//modelAndView.addObject("palabra", palabra);
 		
 		return modelAndView;
 		
@@ -45,7 +58,10 @@ public class CuriaController {
 	}
 	
 	@PostMapping("/guardarCuria")
-	public String guardarCuria(@ModelAttribute("curia") Curia curia) {
+	public String guardarCuria(@Valid @ModelAttribute("objCuria") Curia curia, BindingResult br,Model model) {
+		if(br.hasErrors()) {
+			return CuriaView.FORMC;
+		}
 		
 		curiaService.guardarCuria(curia);
 		
@@ -62,7 +78,10 @@ public class CuriaController {
 	}
 		
 	@PostMapping("/actualizarCuria")
-	public String actualizarCuria(@ModelAttribute("curia") Curia curia) {
+	public String actualizarCuria(@Valid @ModelAttribute("objCuria") Curia curia,BindingResult br, Model model) {
+		if (br.hasErrors()) {
+			return CuriaView.FORMUPC;
+		}
 		
 		curiaService.actualizarCuria(curia);
 		

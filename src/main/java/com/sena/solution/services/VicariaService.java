@@ -32,4 +32,8 @@ public class VicariaService {
 	public Vicaria buscarPorIdVicaria(Long id) {
 		return vicariaRepository.findById(id).get();
 	}
+	
+	public List<Vicaria> encontrarVicariaEspecifica(String palabra){
+		return vicariaRepository.findSpecific(palabra);
+	}
 }

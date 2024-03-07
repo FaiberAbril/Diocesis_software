@@ -882,7 +882,27 @@
 
 		<!-- Content Wrapper. Contains page content content-wrapper -->
 		<div class="content-wrappe" id="fondo" layout:fragment="page-content">
-			
+		<div class="container text-center" th:fragment="buscador">
+				<form class="form-inline mt-3 " th:action="@{${url}}">
+					<div class="form-group mb-2" >
+						<label for="palabra">Filtrar: </label>
+					</div>
+					<div class="form-group mx-sm-3 mb-2">
+						<input type="text" 
+						name="palabra" 
+						id="palabra" 
+						class="form-control" 
+						th:value="${palabra}"
+						placeholder="Digite valor a buscar" >
+
+					</div>
+					<input type="submit" value="Buscar" class="btn btn-info mb-2">
+					&nbsp;&nbsp;
+					<input type="button" value="Limpiar" id="limpiar" class="btn btn-secondary mb-2" th:onclick="limpiarCampos('[(${url})]')">
+					<p></p>
+				</form>
+
+			</div>	
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
@@ -938,10 +958,13 @@
 	<script th:src="@{/dist/js/demo.js}"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script th:src="@{/dist/js/pages/dashboard.js}"></script>
+	
+	<!-- scrip propio -->
+	
 
     <!--- Implementar otros scripts-->
     <th:block layout:fragment="page-scripts">
-
+		<script th:src="@{/js/page.js}"></script>
     </th:block>
 </body>
 

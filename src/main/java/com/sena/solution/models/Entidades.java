@@ -17,12 +17,12 @@ public class Entidades {
 	private Long id;
 	
 	@NotBlank(message ="{NotBlank.Entidades.Nombre}")
-	@Pattern(regexp = "^([a-zA-Z\\s]+)$", message = "No a ingresado un nombre correctamente")
+	@Pattern(regexp = "^[a-zA-ZáéñíóúüÁÉÑÓÚÜ -]*$", message = "No ha ingresado un nombre correctamente")
 	private String nombre;
 	
 
 	@NotBlank(message ="{NotBlank.Entidades.Direccion}")
-	@Pattern(regexp = "^(Calle|Carrera|Diagonal)\\s\\d{2}\\s#\\d{2}-\\d{2}\\s[a-zA-Z\\s]+$",message = "Direccion no especificada correctamente")//Calle 00 #00-00 Barrio
+	@Pattern(regexp = "^(Calle|Carrera|Diagonal)\\s\\d{2}\\s#\\d{2}-\\d{2}\\s[a-zA-Z\\s]*$",message = "Direccion no especificada correctamente")//Calle 00 #00-00 Barrio
 	private String direccion;
 	
 
@@ -31,6 +31,7 @@ public class Entidades {
 	
 	
 	@NotBlank(message = "{NotBlank.Entidades.Telefono}")
+	@Pattern(regexp = "^[0-9]{10}+$", message = "No ha ingresado un número de telefono correctamente")
 	private String telefono;
 	
 	

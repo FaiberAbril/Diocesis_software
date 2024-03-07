@@ -7,6 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 @MappedSuperclass
 public class Persona {
@@ -16,15 +17,19 @@ public class Persona {
 	private Long id;
 	
 	@NotBlank(message = "El nombre es obligatorio")
+	@Pattern(regexp = "^[a-zA-ZáéñíóúüÁÉÑÓÚÜ -]*$", message = "No ha ingresado un nombre correctamente")
 	private String nombre;
 	
 	@NotBlank(message = "El apellido es obligatorio")
+	@Pattern(regexp = "^[a-zA-ZáéñíóúüÁÉÑÓÚÜ -]*$", message = "No ha ingresado un apellido correctamente")
 	private String apellido;
 	
 	@NotBlank(message = "La cedula es obligatorio")
+	@Pattern(regexp = "^[0-9]+$", message = "No ha ingresado un número de cedula correctamente, solo números")
 	private String cedula;
 	
 	@NotBlank(message = "El telefono es obligatorio")
+	@Pattern(regexp = "^[0-9]{10}+$", message = "No ha ingresado un número de telefono correctamente")
 	private String telefono;
 	
 	@Email(message = "El correo no es correcto", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")

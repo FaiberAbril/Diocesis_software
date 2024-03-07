@@ -28,6 +28,8 @@
             <a th:href="@{/parroquias/formularioParroquias}">
                 <button class="btn btn-primary" type="submit">Nueva Parroquia</button>
             </a>
+            
+            <div  th:insert="~{layout/layoutNavegacion :: buscador}"></div>
             <div class="text-center mt-5">
                 <table class="table table-bordered">
     
@@ -72,11 +74,11 @@
             </div>
         </div>
     </div>
-
-
-
+	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+	<script th:src="@{/js/page.js}"></script>
+	
 </body>
-<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
 
 </html>

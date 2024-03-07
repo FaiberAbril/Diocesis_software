@@ -1,6 +1,7 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,8 @@ public class ParroquiaController {
 	
 	@Autowired
 	private VicariaService vicariaService;
+	
+	private static final String DIRRECCION = "/parroquias/listar";
 
 	@GetMapping("/home")
 	public String index() {
@@ -33,9 +36,17 @@ public class ParroquiaController {
 	}
 
 	@GetMapping("/listar")
-	public ModelAndView listarParroquias() {
+	public ModelAndView listarParroquias(@Param("palabra")String palabra) {
 		ModelAndView modelandview = new ModelAndView(ParroquiaView.LISTP);
-		modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
+		modelandview.addObject("url", DIRRECCION);
+		if(palabra != null) {
+			modelandview.addObject("listaParroquias", parroquiaService.encontrarParroquiaEspecifica(palabra));
+		} else {
+			modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
+		}
+		
+		//modelandview.addObject("palabra", palabra);
+		
 		return modelandview;
 	}
 
@@ -68,7 +79,12 @@ public class ParroquiaController {
 	}
 
 	@PostMapping("/actualizarParroquia")
-	public String actualizarParroquia(@ModelAttribute("objParroquia") Parroquia parroquia) {
+	public String actualizarParroquia(@Valid @ModelAttribute("objParroquia") Parroquia parroquia, BindingResult br, Model model) {
+		if (br.hasErrors()) {
+			model.addAttribute("listaVicarias", vicariaService.listarVicarias());
+			
+			return ParroquiaView.FORMUPP;
+		}
 		parroquiaService.actualizarParroquia(parroquia);
 		return "redirect:/parroquias/listar";
 	}

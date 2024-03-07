@@ -1,7 +1,10 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,8 @@ import com.sena.solution.models.Usuario;
 import com.sena.solution.services.ParroquiaService;
 import com.sena.solution.services.UsuarioService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -22,6 +27,7 @@ public class UsuarioController {
 	@Autowired
 	private ParroquiaService parroquiaService;
 	
+	private static final String DIRRECCION = "/usuario/listar";
 
 	@GetMapping("/home")
 	public String index() {
@@ -29,9 +35,17 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/listar")
-	public ModelAndView listarUsuarios() {
+	public ModelAndView listarUsuarios(@Param("palabra")String palabra) {
 		ModelAndView modelandview = new ModelAndView(UsuarioView.LISTU);
-		modelandview.addObject("listaUsuarios", usuarioService.listarUsuarios());
+		modelandview.addObject("url", DIRRECCION);
+		if(palabra != null) {
+			modelandview.addObject("listaUsuarios", usuarioService.encontrarUsuario(palabra));
+		} else {
+			modelandview.addObject("listaUsuarios", usuarioService.listarUsuarios());
+		}
+		
+		
+		
 		return modelandview;
 	}
 
@@ -46,7 +60,15 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/guardarUsuario")
-	public String guardarUsuario(@ModelAttribute("objUsuario") Usuario nuevoUsuario) {
+	public String guardarUsuario(@Valid @ModelAttribute("objUsuario") Usuario nuevoUsuario, BindingResult br, Model model) {
+		
+		if (br.hasErrors()) {
+			model.addAttribute("listaParroquias", parroquiaService.listarParroquias());
+			model.addAttribute("listaRol", usuarioService.listarRoles());
+			
+			return UsuarioView.FORMU;
+		}
+		
 		usuarioService.guardarUsuario(nuevoUsuario);
 		return "redirect:/usuario/listar";
 	}
@@ -61,7 +83,15 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/actualizarUsuario")
-	public String actualizarUsuario(@ModelAttribute("objUsuario") Usuario usuario) {
+	public String actualizarUsuario(@Valid @ModelAttribute("objUsuario") Usuario usuario, BindingResult br, Model model) {
+		
+		if (br.hasErrors()) {
+			model.addAttribute("listaParroquias", parroquiaService.listarParroquias());
+			model.addAttribute("listaRol", usuarioService.listarRoles());
+			
+			return UsuarioView.FORMUPU;
+		}
+		
 		usuarioService.actualizarUsuario(usuario);
 		return "redirect:/usuario/listar";
 	}

@@ -30,6 +30,7 @@
                                         <label for="nombreVicaria" class="form-label">Nombre Vicaria </label>
                                         <input class="form-control" type="text" th:field="*{nombreVicaria}" id="nombreVicaria"
                                             name="nombreVicaria" required>
+                                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nombreVicaria')}" th:errors="*{nombreVicaria}" </div>
                                     </div>
                                     <div>
                                         <label for="curia" class="form-label"> Curia</label>

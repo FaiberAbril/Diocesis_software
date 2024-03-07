@@ -34,6 +34,9 @@ public class EncargadoService {
 		return encargadoRepository.findById(id).get();
 	}
 	
+	public List<Encargado> encontrarEncargadoEspecifico(String palabra){
+		return encargadoRepository.findEspecific(palabra);
+	}
 	
 	
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "vicarias")
@@ -19,6 +20,7 @@ public class Vicaria{
 	 private Long idVicaria;
 	
 	@NotBlank(message ="El nombre es obligatorio")
+	@Pattern(regexp = "^[a-zA-ZáéñíóúüÁÉÑÓÚÜ -]*$", message = "No ha ingresado un nombre de vicaria correctamente")
 	 private String nombreVicaria;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

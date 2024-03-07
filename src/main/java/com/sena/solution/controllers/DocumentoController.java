@@ -4,9 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,17 +51,30 @@ public class DocumentoController {
   @Autowired
   private AlmacenamientoService almacenamientoService;
   
+  
+  private static final String DIRECCION = "/documento/listar/";
 
 
   private String msg = null;
 
   @GetMapping("/listar/{idParroquia}/{idAcg}")
   public ModelAndView listarDocumentos(@PathVariable("idParroquia") Long idParroquia,
-      @PathVariable("idAcg") Long idAcg,@RequestParam(name="msg",required = false) String msg) { 
+      @PathVariable("idAcg") Long idAcg,@RequestParam(name="msg",required = false) String msg,@Param("palabra")String palabra) { 
     ModelAndView modelAndView = new ModelAndView(DocumentoView.LISTD);
     ParroquiaAcg parroquiaAcg = parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg));
-    modelAndView.addObject("ListaDocumentos", documentoService.encontrarDocumentosPorParroquiaAcg(parroquiaAcg));
-
+    modelAndView.addObject("url", DIRECCION+idParroquia+"/"+idAcg);
+    Stream<Documento> streamDocumentos = documentoService.encontrarDocumentosPorParroquiaAcg(parroquiaAcg).stream();
+    
+    if(palabra != null) {
+    	
+    	modelAndView.addObject("ListaDocumentos", streamDocumentos.filter(d -> d.getNombreDocumento().contains(palabra)).toList());
+    	
+    }else {
+    	modelAndView.addObject("ListaDocumentos", streamDocumentos.toList());
+    }
+    
+    
+    
     modelAndView.addObject("parroquia", parroquiaService.buscarPorIdParroquia(idParroquia));
     modelAndView.addObject("acg", acgService.buscarPorIdACG(idAcg));
     modelAndView.addObject("msg", msg);

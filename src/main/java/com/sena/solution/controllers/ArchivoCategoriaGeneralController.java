@@ -1,6 +1,7 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,17 +23,24 @@ public class ArchivoCategoriaGeneralController {
 	@Autowired
 	private ParroquiaService parroquiaService;
 	
+	private static final String DIRECCION = "/acg/listar";
+	
 	@GetMapping("/home")
 	public String index() {
 		return ArchivoCategoriaGeneralView.HOME;
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaACG() {
+	public ModelAndView listaACG(@Param("palabra")String palabra) {
 		
 		ModelAndView modelAndView = new ModelAndView(ArchivoCategoriaGeneralView.LISTC);
-		modelAndView.addObject("listaACG", aCGService.listarACG());
-		
+		modelAndView.addObject("url", DIRECCION);
+		if (palabra != null) {
+			modelAndView.addObject("listaACG", aCGService.encontrarACG(palabra));
+		} else {
+			modelAndView.addObject("listaACG", aCGService.listarACG());
+		}
+
 		return modelAndView;
 		
 	}

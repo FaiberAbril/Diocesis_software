@@ -35,6 +35,10 @@ public class ArchivoCategoriaGeneralService {
 		return aCGRepository.findById(id).get();
 	}
 	
+	public List<ArchivoCategoriaGeneral> encontrarACG(String palabra){
+		return aCGRepository.findSpecific(palabra);
+	}
+	
 	/*public List<ArchivoCategoriaGeneral> buscarPorParroquia(Parroquia parroquia){
 		return aCGRepository.findByParroquia(parroquia);
 	}*/

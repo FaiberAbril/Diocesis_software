@@ -1,7 +1,10 @@
 package com.sena.solution.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +16,8 @@ import com.sena.solution.models.Encargado;
 import com.sena.solution.services.CuriaService;
 import com.sena.solution.services.EncargadoService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/encargado")
 public class EncargadoController {
@@ -23,16 +28,26 @@ public class EncargadoController {
 	@Autowired
 	private CuriaService curiaService;
 	
+	private static final String DIRRECCION = "/encargado/listar";
+	
 	@GetMapping("/home")
 	public String index() {
 		return EncargadoView.HOME;
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaEncargados() {
+	public ModelAndView listaEncargados(@Param("palabra")String palabra) {
 		
 		ModelAndView modelAndView = new ModelAndView(EncargadoView.LISTE);
-		modelAndView.addObject("listaEncargados", encargadoService.listarEncargados());
+		modelAndView.addObject("url", DIRRECCION);
+		
+		if(palabra != null) {
+			modelAndView.addObject("listaEncargados", encargadoService.encontrarEncargadoEspecifico(palabra));
+		} else {
+			modelAndView.addObject("listaEncargados", encargadoService.listarEncargados());
+		}
+		
+		
 		
 		return modelAndView;
 		
@@ -49,7 +64,13 @@ public class EncargadoController {
 	}
 	
 	@PostMapping("/guardarEncargado")
-	public String guardarEncargado(@ModelAttribute("encargado") Encargado encargado) {
+	public String guardarEncargado(@Valid @ModelAttribute("ObjEncargado") Encargado encargado, BindingResult br, Model model) {
+		
+		if (br.hasErrors()) {
+			model.addAttribute("listaCurias", curiaService.listarCurias());
+			
+			return EncargadoView.FORME;
+		}
 		
 		encargadoService.guardarEncargado(encargado);
 		
@@ -68,8 +89,13 @@ public class EncargadoController {
 	}
 		
 	@PostMapping("/actualizarEncargado")
-	public String actualizarEncargado(@ModelAttribute("encargado") Encargado encargado) {
+	public String actualizarEncargado(@Valid @ModelAttribute("ObjEncargado") Encargado encargado, BindingResult br, Model model) {
 		
+		if (br.hasErrors()) {
+			model.addAttribute("listaCurias", curiaService.listarCurias());
+			
+			return EncargadoView.FORMUPE;
+		}
 		encargadoService.actualizarEncargado(encargado);
 		
 		return "redirect:/encargado/listar";

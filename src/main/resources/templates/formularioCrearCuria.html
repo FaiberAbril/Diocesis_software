@@ -32,26 +32,32 @@
 									<label for="nombre" class="form-label"> Nombre Curia</label>
 									<input type="text" class="form-control" th:field="*{nombre}" id="nombre"
 										name="nombre" required>
+									<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 								</div>
 								<div>
 									<label for="direccion" class="form-label"> Direccion</label>
-									<input type="text" class="form-control" th:field="*{direccion}" id="direccion"
+									<input type="text" class="form-control" th:field="*{direccion}" id="direccion" placeholder="(Calle|Carrera|Diagonal) Calle 00 #00-00 NombreBarrio"
 										name="direccion" required>
+									<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+									
 								</div>
 								<div>
 									<label for="telefono" class="form-label"> Telefono</label>
-									<input type="text" class="form-control" th:field="*{telefono}" id="telefono"
+									<input type="tel" class="form-control" th:field="*{telefono}" id="telefono"
 										name="telefono" required>
+									<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
 								</div>
 								<div>
 									<label for="ciudad" class="form-label"> Ciudad</label>
 									<input type="text" class="form-control" th:field="*{ciudad}" id="ciudad"
 										name="ciudad" required>
+									<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}"></div>
 								</div>
 								<div class="">
 									<label for="email" class="form-label"> Email</label>
 									<input type="email" class="form-control" th:field="*{email}" id="email" name="email"
 										required>
+									<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 								</div>
 							</div>
 							<div class="text-center mt-5">

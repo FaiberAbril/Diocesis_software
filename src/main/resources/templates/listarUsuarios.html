@@ -79,7 +79,7 @@
 				</table>
 			</div>
 		</div>
-		<div class="d-flex justify-content-center sm" >
+		<div class="d-flex justify-content-center sm" th:if="${not #lists.isEmpty(listaUsuarios.getContent)}" >
 			<nav aria-label="...">
 				<ul class="pagination pagination-lg">
 					<li class="page-item " aria-current="page" th:each="i: ${#numbers.sequence(0,listaUsuarios.getTotalPages-1)}">

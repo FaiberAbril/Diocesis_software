@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.Documento;
@@ -34,5 +37,13 @@ public class DocumentoService {
 
   public boolean existeDocumentoPorNombre(String nombreDocumento){
     return documentoRepository.existsByNombreDocumento(nombreDocumento);
+  }
+  
+  public Page<Documento> paginacionDocumento(List<Documento> list, Pageable pageable){
+	  int start = (int) pageable.getOffset();
+	  int end = Math.min((start + pageable.getPageSize()), list.size());
+	
+	  List<Documento> pageContent = list.subList(start, end);
+	  return new PageImpl<Documento>(pageContent,pageable,list.size());
   }
 }

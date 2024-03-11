@@ -104,7 +104,7 @@ public class UsuarioController {
 	@GetMapping("/eliminarUsuario/{idUsuario}")
 	public String eliminarUsuario(@PathVariable("idUsuario") Long idUsuario) {
 		usuarioService.eliminarUsuario(usuarioService.buscarPorIdUsuario(idUsuario));
-		return "redirect:/usuario/";
+		return "redirect:/usuario/listar";
 	}
 	
 }

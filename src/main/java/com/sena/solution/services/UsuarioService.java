@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.sena.solution.models.Parroquia;
 import com.sena.solution.models.RolUsuario;
 import com.sena.solution.models.Usuario;
 import com.sena.solution.repositories.UsuarioRepository;
@@ -49,6 +50,10 @@ public class UsuarioService {
 	
 	public Page<Usuario> encontrarUsuario(String palabra, Pageable pageable){
 		return usuariorepository.findSpecific(palabra, pageable);
+	}
+	
+	public List<Usuario> buscarPorParroquia(Parroquia parroquia){
+		return usuariorepository.findByParroquia(parroquia);
 	}
 
 }

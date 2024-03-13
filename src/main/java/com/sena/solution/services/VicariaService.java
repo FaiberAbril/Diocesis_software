@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.sena.solution.models.Curia;
 import com.sena.solution.models.Vicaria;
 import com.sena.solution.repositories.VicariaRepository;
 
@@ -20,6 +22,7 @@ public class VicariaService {
 	}
 	
 	public void actualizarVicaria(Vicaria vicaria) {
+		
 		vicariaRepository.save(vicaria);
 	}
 	
@@ -33,7 +36,7 @@ public class VicariaService {
 	}
 	
 	
-	public void eliminarCuria(Vicaria vicaria) {
+	public void eliminarVicaria(Vicaria vicaria) {
 		vicariaRepository.delete(vicaria);
 	}
 	
@@ -43,5 +46,9 @@ public class VicariaService {
 	
 	public Page<Vicaria> encontrarVicariaEspecifica(String palabra,Pageable pg){
 		return vicariaRepository.findSpecific(palabra,pg);
+	}
+	
+	public List<Vicaria> buscarPorCuria(Curia curia){
+		return vicariaRepository.findByCuria(curia);
 	}
 }

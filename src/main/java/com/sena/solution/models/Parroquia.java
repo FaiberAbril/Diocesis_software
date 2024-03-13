@@ -1,5 +1,6 @@
 package com.sena.solution.models;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,11 +12,11 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Parroquias")
-
 public class Parroquia extends Entidades{
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Nullable
 	@JoinColumn(name = "id_vicaria")
 	private Vicaria vicaria;
 

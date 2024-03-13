@@ -1,4 +1,7 @@
-package com.sena.solution.controllers;
+	package com.sena.solution.controllers;
+
+import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.VicariaView;
+import com.sena.solution.models.Parroquia;
 import com.sena.solution.models.Vicaria;
 import com.sena.solution.services.CuriaService;
+import com.sena.solution.services.ParroquiaService;
 import com.sena.solution.services.VicariaService;
 
 import jakarta.validation.Valid;
@@ -28,6 +33,9 @@ public class VicariaController {
 	
 	@Autowired
 	private VicariaService vicariaService;
+	
+	@Autowired
+	private ParroquiaService parroquiaService;
 	
 
 	@Autowired
@@ -102,6 +110,13 @@ public class VicariaController {
 			return VicariaView.FORMUPV;
 		}
 		
+		List<Parroquia> parroquias = vicariaService.buscarPorIdVicaria(vicaria.getIdVicaria()).getParroquias();
+		for (Iterator<Parroquia> iterator = parroquias.iterator(); iterator.hasNext();) {
+	        Parroquia parroquia = iterator.next();
+	        parroquia.setVicaria(vicaria);
+	        //iterator.remove(); //remove the child first
+		}
+		vicaria.setParroquias(parroquias);
 		vicariaService.actualizarVicaria(vicaria);
 		
 		return "redirect:/vicaria/listar";
@@ -111,7 +126,20 @@ public class VicariaController {
 	@GetMapping("/eliminarVicaria/{idVicaria}")
 	public String eliminarVicaria(@PathVariable("idVicaria")Long idVicaria) {
 		
-		vicariaService.eliminarCuria(vicariaService.buscarPorIdVicaria(idVicaria));
+		List<Parroquia> parroquias = vicariaService.buscarPorIdVicaria(idVicaria).getParroquias();
+		
+		Iterator<Parroquia> iterator = parroquias.iterator();
+		while (iterator.hasNext()) {
+			
+            Parroquia parroquia = iterator.next();
+            parroquia.setVicaria(null);
+            parroquiaService.actualizarParroquia(parroquia);
+
+        }
+		
+		vicariaService.eliminarVicaria(vicariaService.buscarPorIdVicaria(idVicaria));
+		
+		
 		
 		return "redirect:/vicaria/listar";
 	}

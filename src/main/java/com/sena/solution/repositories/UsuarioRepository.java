@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.sena.solution.models.Parroquia;
 import com.sena.solution.models.Usuario; 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
@@ -20,4 +21,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 					+ " LIKE %?1%"
 			)
 	public Page<Usuario> findSpecific(String palabra,Pageable pageable);
+	
+	
+	public List<Usuario> findByParroquia(Parroquia parroquia);
 }

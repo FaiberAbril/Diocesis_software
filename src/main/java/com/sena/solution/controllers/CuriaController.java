@@ -1,5 +1,8 @@
 package com.sena.solution.controllers;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.PageRequest;
@@ -16,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.CuriaView;
 import com.sena.solution.models.Curia;
+import com.sena.solution.models.Encargado;
+import com.sena.solution.models.Vicaria;
 import com.sena.solution.repositories.CuriaRepository;
 import com.sena.solution.services.CuriaService;
+import com.sena.solution.services.EncargadoService;
+import com.sena.solution.services.VicariaService;
 
 import jakarta.validation.Valid;
 
@@ -30,7 +37,10 @@ public class CuriaController {
 	private CuriaService curiaService;
 	
 	@Autowired
-	private CuriaRepository c;
+	private VicariaService vicariaService;
+	
+	@Autowired
+	private EncargadoService encargadoService;
 	
 	private static final String DIRECCION = "/curia/listar"; 
 	
@@ -103,8 +113,35 @@ public class CuriaController {
 	@GetMapping("/eliminarCuria/{idCuria}")
 	public String eliminarCuria(@PathVariable("idCuria")Long idCuria) {
 		
+		
+		List<Vicaria> listaVicaria = vicariaService.buscarPorCuria(curiaService.buscarPorIdCuria(idCuria));
+		List<Encargado> listaEncargado = encargadoService.buscarPorCuria(curiaService.buscarPorIdCuria(idCuria));
+		
+		
+		
+		if(!listaVicaria.isEmpty()) {
+			Iterator<Vicaria> iteVicaria = listaVicaria.iterator();
+			
+			while(iteVicaria.hasNext()) {
+				Vicaria vicaria = iteVicaria.next();
+				vicaria.setCuria(null);
+				vicariaService.actualizarVicaria(vicaria);
+			}
+		}
+		
+		if(!listaEncargado.isEmpty()) {
+			Iterator<Encargado> iteEncargado = listaEncargado.iterator();
+			
+			while(iteEncargado.hasNext()) {
+				Encargado encargado = iteEncargado.next();
+				encargado.setCuria(null);
+				encargadoService.actualizarEncargado(encargado);
+			}
+		}
+		
 		curiaService.eliminarCuria(curiaService.buscarPorIdCuria(idCuria));
 		
 		return "redirect:/curia/listar";
 	}
+	
 }

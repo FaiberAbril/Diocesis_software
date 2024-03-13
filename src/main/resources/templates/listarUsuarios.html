@@ -58,7 +58,7 @@
 							<td th:text="${usuario.telefono}"></td>
 							<td th:text="${usuario.email}"></td>
 							<td th:text="${usuario.rolUsuario}"></td>
-							<td th:text="${usuario.parroquia.nombre}"></td>
+							<td th:text="${usuario.parroquia != null} ? ${usuario.parroquia.nombre} : 'sin parroquia'"></td>
 							<td>
 								<a th:href="@{/usuario/eliminarUsuario/{idUsuario}(idUsuario=${usuario.id})}">
 									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>

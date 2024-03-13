@@ -51,7 +51,7 @@
 						<tr th:each="Vicaria:${listaVicarias.getContent}">
 							<td th:text="${Vicaria.idVicaria}"></td>
 							<td th:text="${Vicaria.nombreVicaria}"></td>
-							<td th:text="${Vicaria.curia.nombre}"></td>
+							<td th:text="${Vicaria.curia != null} ? ${Vicaria.curia.nombre} : 'sin curia'"></td>
 							<td>
 								<a th:href="@{/vicaria/eliminarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
 									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>

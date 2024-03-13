@@ -1,5 +1,8 @@
 package com.sena.solution.controllers;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.ParroquiaView;
 import com.sena.solution.models.Parroquia;
+import com.sena.solution.models.ParroquiaAcg;
+import com.sena.solution.models.Usuario;
+import com.sena.solution.services.ParroquiaAcgService;
 import com.sena.solution.services.ParroquiaService;
+import com.sena.solution.services.UsuarioService;
 import com.sena.solution.services.VicariaService;
 
 import jakarta.validation.Valid;
@@ -29,7 +36,13 @@ public class ParroquiaController {
 	private ParroquiaService parroquiaService;
 	
 	@Autowired
+    private ParroquiaAcgService parroquiaAcgService;
+	
+	@Autowired
 	private VicariaService vicariaService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	private static final String DIRRECCION = "/parroquias/listar";
 
@@ -97,8 +110,39 @@ public class ParroquiaController {
 	
 	@GetMapping("/eliminarParroquia/{idParroquia}")
 	public String eliminarParroquia(@PathVariable("idParroquia") Long idParroquia) {
+		
+		List<ParroquiaAcg> listaParroquiaACG = parroquiaAcgService.buscarPorParroquia(parroquiaService.buscarPorIdParroquia(idParroquia));
+		List<Usuario>  listaUsuario = usuarioService.buscarPorParroquia(parroquiaService.buscarPorIdParroquia(idParroquia));
+		
+		
+		if(!listaParroquiaACG.isEmpty()) {
+			eliminarParroquiasAcg(listaParroquiaACG);
+		}
+		
+		if(!listaUsuario.isEmpty()) {
+			quitarReferenciaUsuarios(listaUsuario);
+		}
+		
 		parroquiaService.eliminarParroquia(parroquiaService.buscarPorIdParroquia(idParroquia));
 		return "redirect:/parroquias/listar";
+	}
+	
+	
+	private void eliminarParroquiasAcg(List<ParroquiaAcg> listaParroquiaAcg) {
+		Iterator<ParroquiaAcg> iteParroquiaACG= listaParroquiaAcg.iterator();
+		while(iteParroquiaACG.hasNext()) {
+			ParroquiaAcg parroquiaAcg = iteParroquiaACG.next();
+			parroquiaAcgService.eliminarParroquiaAcg(parroquiaAcg);				
+		}
+	}
+	
+	private void quitarReferenciaUsuarios(List<Usuario> listaUsuarios) {
+		Iterator<Usuario> iteUsuario= listaUsuarios.iterator();
+		while(iteUsuario.hasNext()) {
+			Usuario usuario = iteUsuario.next();
+			usuario.setParroquia(null);
+			usuarioService.guardarUsuario(usuario);
+		}
 	}
 
 }

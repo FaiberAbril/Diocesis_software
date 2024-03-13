@@ -56,7 +56,7 @@
 							<td th:text="${encargado.cedula}"></td>
 							<td th:text="${encargado.telefono}"></td>
 							<td th:text="${encargado.email}"></td>
-							<td th:text="${encargado.curia.nombre}"></td>
+							<td th:text="${encargado.curia != null} ? ${encargado.curia.nombre} : 'sin curia'"></td>
 							<td>
 								<a
 									th:href="@{/encargado/eliminarEncargado/{idEncargado}(idEncargado=${encargado.id})}">

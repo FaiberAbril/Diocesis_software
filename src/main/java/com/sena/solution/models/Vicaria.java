@@ -1,5 +1,8 @@
 package com.sena.solution.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -7,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -25,6 +29,9 @@ public class Vicaria{
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Curia curia;
+	
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.EAGER, mappedBy = "vicaria", orphanRemoval = true)
+	private List<Parroquia> parroquias = new ArrayList<>();
 
 	public Vicaria() {
 		// TODO Auto-generated constructor stub
@@ -67,7 +74,19 @@ public class Vicaria{
 	public void setCuria(Curia curia) {
 		this.curia = curia;
 	}
+
+
+	public List<Parroquia> getParroquias() {
+		return parroquias;
+	}
+
+
+	public void setParroquias(List<Parroquia> parroquias) {
+		this.parroquias = parroquias;
+	}
 	
+	
+
 	
 	
 }

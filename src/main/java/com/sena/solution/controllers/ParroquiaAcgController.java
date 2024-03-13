@@ -1,5 +1,8 @@
 package com.sena.solution.controllers;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +28,11 @@ public class ParroquiaAcgController {
 	@Autowired
     private ParroquiaAcgService parroquiaAcgService;
   
-  @Autowired
-  private ParroquiaService parroquiaService;
+	@Autowired
+	private ParroquiaService parroquiaService;
 
-  @Autowired
-  private ArchivoCategoriaGeneralService acgService;
+	@Autowired
+	private ArchivoCategoriaGeneralService acgService;
 
 	
 	@GetMapping("/home")
@@ -88,9 +91,9 @@ public class ParroquiaAcgController {
 	}
 	
     @GetMapping("/eliminarParroquiaAcg/{idParroquia}/acg/{idAcg}")
-	public String eliminarEncargado(@PathVariable("idParroquia")Long idparroquia,@PathVariable("idAcg")Long idAcg) {
+	public String eliminarEncargado(@PathVariable("idParroquia")Long idParroquia,@PathVariable("idAcg")Long idAcg) {
 		
-		parroquiaAcgService.eliminarParroquiaAcg(parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idparroquia, idAcg)));
+		parroquiaAcgService.eliminarParroquiaAcg(parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idParroquia, idAcg)));
 		return "redirect:/parroquiaAcg/listar";
 	}
 

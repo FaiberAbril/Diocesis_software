@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.sena.solution.models.Curia;
 import com.sena.solution.models.Encargado;
 
 @Repository
@@ -17,4 +18,6 @@ public interface EncargadoRepository extends JpaRepository<Encargado, Long>{
 			countQuery = "SELECT count(e) FROM Encargado e WHERE e.nombre Like %?1%")
 	public Page<Encargado> findEspecific(String palabra, Pageable pageable);
 	
+	
+	public List<Encargado> findByCuria(Curia curia);
 }

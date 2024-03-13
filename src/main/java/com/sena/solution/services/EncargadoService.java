@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.sena.solution.models.Curia;
 import com.sena.solution.models.Encargado;
 import com.sena.solution.repositories.EncargadoRepository;
 
@@ -44,5 +45,8 @@ public class EncargadoService {
 		return encargadoRepository.findEspecific(palabra,pageable);
 	}
 	
+	public List<Encargado> buscarPorCuria(Curia curia){
+		return encargadoRepository.findByCuria(curia);
+	}
 	
 }

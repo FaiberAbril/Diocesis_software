@@ -64,14 +64,14 @@ public class GestorDocumentalApplication {
 		SpringApplication.run(GestorDocumentalApplication.class, args);
 		
 	    //crearDirectorio();
-	    Curia curia1 = new Curia();
+	   /* Curia curia1 = new Curia();
 	    if(!curiaRepository.existsById(Long.valueOf(1))) {
 	    	curia1.setId(1L);
 		    curia1.setNombre("Málaga-Soata");
 		    curia1.setCiudad("Málaga");
 		    curia1.setDireccion("Calle 00 #00-00 Barrio");
 		    curia1.setEmail("curia@gmail.com");
-		    curia1.setTelefono("32222121");
+		    curia1.setTelefono("3222212144");
 		    
 		    curiaRepository.save(curia1);
 	    }
@@ -98,7 +98,7 @@ public class GestorDocumentalApplication {
 
 
 			parroquiaAcgRepository.save(parroquiaAcg);
-			parroquiaAcgRepository.save(parroquiaAcg2);
+			parroquiaAcgRepository.save(parroquiaAcg2);*/
 	    
 	    
 	}	

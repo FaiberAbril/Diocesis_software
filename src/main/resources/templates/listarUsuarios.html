@@ -57,7 +57,9 @@
 							<td th:text="${usuario.cedula}"></td>
 							<td th:text="${usuario.telefono}"></td>
 							<td th:text="${usuario.email}"></td>
-							<td th:text="${usuario.rolUsuario}"></td>
+							<!--${#strings.arrayJoin(members_array.![nickname], ',')}-->
+							<!--td th:each="rol:${usuario.roles}" th:text="${rol.rolEnum}"></td-->
+							<td  th:text="${#strings.arrayJoin(usuario.roles.![rolEnum],'<br><br/>')}"></td>
 							<td th:text="${usuario.parroquia != null} ? ${usuario.parroquia.nombre} : 'sin parroquia'"></td>
 							<td>
 								<a th:href="@{/usuario/eliminarUsuario/{idUsuario}(idUsuario=${usuario.id})}">

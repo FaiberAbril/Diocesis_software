@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sena.solution.models.Parroquia;
-import com.sena.solution.models.RolUsuario;
+import com.sena.solution.models.RolEntity;
+import com.sena.solution.models.RolEnum;
 import com.sena.solution.models.Usuario;
+import com.sena.solution.repositories.RolRepository;
 import com.sena.solution.repositories.UsuarioRepository;
 
 
@@ -19,6 +21,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuariorepository;
+	
+	@Autowired
+	private RolRepository rolRepository;
 
 	public void guardarUsuario(Usuario usuario) {
 		usuariorepository.save(usuario);
@@ -44,8 +49,8 @@ public class UsuarioService {
 		return usuariorepository.findById(idUsuario).get();
 	}
 	
-	public List<RolUsuario> listarRoles(){
-		return Arrays.asList(RolUsuario.values());	   
+	public List<RolEntity> listarRoles(){
+		return rolRepository.findAll();	   
 	}
 	
 	public Page<Usuario> encontrarUsuario(String palabra, Pageable pageable){
@@ -54,6 +59,10 @@ public class UsuarioService {
 	
 	public List<Usuario> buscarPorParroquia(Parroquia parroquia){
 		return usuariorepository.findByParroquia(parroquia);
+	}
+	
+	public boolean existeUsuario(String username) {
+		return usuariorepository.existsByUsername(username);
 	}
 
 }

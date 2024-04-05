@@ -66,14 +66,21 @@ public class UsuarioController {
 
 	@PostMapping("/guardarUsuario")
 	public String guardarUsuario(@Valid @ModelAttribute("objUsuario") Usuario nuevoUsuario, BindingResult br, Model model) {
-		
-		if (br.hasErrors()) {
+		String message = "";
+		if (usuarioService.existeUsuario(nuevoUsuario.getUsername())) {
+			message = "El usuario ya existe";
+		}
+		if (br.hasErrors() || !message.isEmpty()) {
 			model.addAttribute("listaParroquias", parroquiaService.listarParroquias());
 			model.addAttribute("listaRol", usuarioService.listarRoles());
-			
+			model.addAttribute("messageErrorUsername", message);
 			return UsuarioView.FORMU;
 		}
 		
+		nuevoUsuario.setEnabled(true);
+		nuevoUsuario.setAccountNoExpired(true);
+		nuevoUsuario.setAccountNoLocked(true);
+		nuevoUsuario.setCredentialNoExpired(true);
 		usuarioService.guardarUsuario(nuevoUsuario);
 		return "redirect:/usuario/listar";
 	}

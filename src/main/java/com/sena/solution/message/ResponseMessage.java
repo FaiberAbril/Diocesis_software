@@ -1,4 +1,4 @@
-package com.sena.message;
+package com.sena.solution.message;
 
 public class ResponseMessage {
 	private String message;

@@ -1,27 +1,29 @@
 package com.sena.solution;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import com.sena.solution.models.ArchivoCategoriaGeneral;
+
 import com.sena.solution.models.Curia;
 import com.sena.solution.models.Parroquia;
-import com.sena.solution.models.ParroquiaAcg;
-import com.sena.solution.models.ParroquiaAcgPK;
+import com.sena.solution.models.RolEntity;
+import com.sena.solution.models.RolEnum;
+import com.sena.solution.models.Usuario;
 import com.sena.solution.models.Vicaria;
 import com.sena.solution.repositories.ArchivoCategoriaGeneralRepository;
 import com.sena.solution.repositories.CuriaRepository;
 import com.sena.solution.repositories.ParroquiaAcgRepository;
 import com.sena.solution.repositories.ParroquiaRepository;
+import com.sena.solution.repositories.RolRepository;
+import com.sena.solution.repositories.UsuarioRepository;
 import com.sena.solution.repositories.VicariaRepository;
 
 @SpringBootApplication
@@ -116,5 +118,36 @@ public class GestorDocumentalApplication {
 		}
 
 	}*/
+	
+	@Bean
+	CommandLineRunner init(RolRepository rolRepository,
+			CuriaRepository curiaRepository, 
+			VicariaRepository vicariaRepository, 
+			ParroquiaRepository parroquiaRepository,
+			UsuarioRepository usuarioRepository) {
+		return arg ->{
+			RolEntity rolAdmin = new RolEntity(1L, RolEnum.ADMIN);
+			RolEntity rolParroco = new RolEntity(2L, RolEnum.PARROCO);
+			RolEntity rolSecretaria = new RolEntity(3L, RolEnum.SECRETARIA);
+			RolEntity rolContador = new RolEntity(4L, RolEnum.CONTADOR);
+			
+			rolRepository.saveAll(List.of(rolAdmin,rolParroco,rolSecretaria,rolContador));
+			
+			Curia curiaPrueba = new Curia(1L, "curiaPrueba", "Calle 00 #00-00 Barrio", "Malaga", "3123453654", "curiaPrueba@gmail.com");
+			curiaRepository.save(curiaPrueba);
+			
+			Vicaria vicariaPrueba = new Vicaria(1L, "vicariaPrueba", curiaPrueba);
+			vicariaRepository.save(vicariaPrueba);
+			
+			Parroquia parroquiaPrueba = new Parroquia(1L, "parroquiaPrueba", "Calle 00 #00-00 Barrio", "cuidadPrueba", "3123456879", "parroquiaPrueba@gmail.com", vicariaPrueba);
+			parroquiaRepository.save(parroquiaPrueba);
+			
+			Set<RolEntity> roles = Set.of(rolAdmin,rolParroco);
+			Usuario usuarioPrueba = new Usuario(1L, "nombrePrueba", "apellidoPrueba", "23243734", "3125569747", "usuarioPrueba@gmail.com", roles, parroquiaPrueba);
+			usuarioPrueba.setUsername("iwi");
+			usuarioPrueba.setPassword("Aa*4245sd");
+			usuarioRepository.save(usuarioPrueba);
+		};
+	}
 
 }

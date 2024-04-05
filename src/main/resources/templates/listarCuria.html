@@ -61,7 +61,7 @@
 							<td th:text="${Curia.Email}"></td>
 							<td>
 								<a th:href="@{/curia/eliminarCuria/{id}(id=${Curia.id})}">
-									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+									<button type="button" class="btn btn-outline-danger" onclick="eliminarCuria()">ELIMINAR</button>
 								</a>
 							</td>
 							<td>
@@ -89,7 +89,8 @@
 	</div>
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
-	
+	<script th:src="@{/js/sweetalert2/sweetalert2.all.min.js}"></script>
+	<script th:src="@{/js/alertas.js}"></script>
 	<script th:src="@{/js/page.js}"></script>
 
 </body>

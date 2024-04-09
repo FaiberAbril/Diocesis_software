@@ -32,9 +32,10 @@ public class SecurityConfig {
 				.httpBasic(Customizer.withDefaults())
 				.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(http -> {
-					http.requestMatchers("/curia/**").hasRole("ADMIN");
+					http.requestMatchers("");
+					http.requestMatchers("/curia/**").authenticated().anyRequest();
 				})
-				.formLogin(form->form.loginPage("/login").permitAll())
+				.formLogin(form->form.loginPage("/login").defaultSuccessUrl("/curia/listar").permitAll())
 				.build();
 	}
 	

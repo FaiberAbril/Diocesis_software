@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/curia")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 public class CuriaController {
 	
 	

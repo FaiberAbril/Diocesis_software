@@ -66,11 +66,16 @@
 									</div>
 									<div>
 										<label for="rol" class="form-label"> Rol Usuario</label>
-										<select class="form-control" name="select" th:field="*{roles}">
+										<br><br/>
+										<th:block th:each="rolUsuario : ${listaRol}">
+                			<input type="checkbox" name="rolesArreglo" th:field="*{roles}" th:value="${rolUsuario.id}"/>
+                 			<label th:text="${rolUsuario.rolEnum}" th:for="${#ids.prev('roles')}"></label>
+               			</th:block>
+										<!--select class="form-control" name="select" th:field="*{roles}">
 											<option th:each="RolUsuario:${listaRol}" th:value="${RolUsuario.id}"
 												th:text="${RolUsuario.rolEnum}">
 											</option>
-										</select>
+										</select-->
 									</div>
 
 									<div>
@@ -88,7 +93,7 @@
 											name="username" required>
 										<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('username')} "
 											th:errors="*{username}"></div>
-										<div class="invalid-feedback d-block" th:if="${messageErrorUsername != ''}" tabindex="${messageErrorUsername}"></div>
+										<div class="invalid-feedback d-block" th:if="${messageErrorUsername != ''}" th:text="${messageErrorUsername}"></div>
 									</div>
 
 

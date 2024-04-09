@@ -143,9 +143,11 @@ public class GestorDocumentalApplication {
 			parroquiaRepository.save(parroquiaPrueba);
 			
 			Set<RolEntity> roles = Set.of(rolAdmin,rolParroco);
-			Usuario usuarioPrueba = new Usuario(1L, "nombrePrueba", "apellidoPrueba", "23243734", "3125569747", "usuarioPrueba@gmail.com", roles, parroquiaPrueba);
-			usuarioPrueba.setUsername("iwi");
-			usuarioPrueba.setPassword("Aa*4245sd");
+			Usuario usuarioPrueba = new Usuario(1L, "nombrePrueba", "apellidoPrueba", "23243734", "3125569747", "usuarioPrueba@gmail.com","iwi","Aa*4245sd", roles, parroquiaPrueba);
+			usuarioPrueba.setEnabled(true);
+			usuarioPrueba.setAccountNoExpired(true);
+			usuarioPrueba.setAccountNoLocked(true);
+			usuarioPrueba.setCredentialNoExpired(true);
 			usuarioRepository.save(usuarioPrueba);
 		};
 	}

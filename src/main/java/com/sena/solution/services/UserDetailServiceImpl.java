@@ -30,21 +30,22 @@ public class UserDetailServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		if(usuarioRepository.existsByUsername(username)) {
+		if(!usuarioRepository.existsByUsername(username)) {
 			throw new UsernameNotFoundException(String.format("El nombre de usuario: %s ya existe", username));
 		}
+		
 			
 		Usuario usuario = usuarioRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Nombre de usuario no encontrado"));
 		List<SimpleGrantedAuthority> authorityList = new ArrayList<>();//usuarioRepository;
 		usuario.getRoles()
 			.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getRolEnum().name()))));
 		
-		
+		usuario.getRoles().stream().forEach(role -> System.out.println(role.getRolEnum()));
 		User user = new User(usuario.getUsername(),
 				usuario.getPassword(),
 				usuario.isEnabled(),
-				usuario.isAccountNoExpired(),
 				usuario.isCredentialNoExpired(),
+				usuario.isAccountNoExpired(),
 				usuario.isAccountNoLocked(),
 				authorityList);
 		

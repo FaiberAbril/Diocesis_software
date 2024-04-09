@@ -10,8 +10,10 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -29,6 +31,10 @@ public class SecurityConfig {
 				.csrf(csrf -> csrf.disable())
 				.httpBasic(Customizer.withDefaults())
 				.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(http -> {
+					http.requestMatchers("/curia/**").hasRole("ADMIN");
+				})
+				.formLogin(form->form.loginPage("/login").permitAll())
 				.build();
 	}
 	
@@ -49,6 +55,12 @@ public class SecurityConfig {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		return NoOpPasswordEncoder.getInstance();
 	}
+	
+	@Bean
+ 	public WebSecurityCustomizer webSecurityCustomizer() {
+ 		return (web) -> web.ignoring()
+ 				.requestMatchers("/css/**");
+ 	}
 }

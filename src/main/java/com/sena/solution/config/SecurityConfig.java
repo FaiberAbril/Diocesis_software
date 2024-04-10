@@ -30,11 +30,17 @@ public class SecurityConfig {
 		return httpSecurity
 				.csrf(csrf -> csrf.disable())
 				.httpBasic(Customizer.withDefaults())
-				.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				//.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(http -> {
 					http.requestMatchers("/curia/**").hasRole("ADMIN");
+					http.requestMatchers("/usuario/**").hasRole("ADMIN");
+					http.requestMatchers("/vicaria/**").hasRole("ADMIN");
+					http.requestMatchers("/parroquias/**").hasRole("PARROCO");
+					http.requestMatchers("/acg/**").hasAnyRole("PARROCO","SECRETARIA");
+					http.requestMatchers("/parroquiaAcg/**").hasAnyRole("PARROCO","SECRETARIA");
+					http.requestMatchers("/documento/**").hasAnyRole("PARROCO","SECRETARIA");
 				})
-				.formLogin(form->form.loginPage("/login").permitAll())
+				.formLogin(form->form.loginPage("/login").permitAll().defaultSuccessUrl("/curia/listar"))
 				.build();
 	}
 	
@@ -61,6 +67,6 @@ public class SecurityConfig {
 	@Bean
  	public WebSecurityCustomizer webSecurityCustomizer() {
  		return (web) -> web.ignoring()
- 				.requestMatchers("/css/**");
+ 				.requestMatchers("/css/**","/img/**","/js/**");
  	}
 }

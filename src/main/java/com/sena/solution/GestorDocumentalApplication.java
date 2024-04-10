@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import com.sena.solution.models.ArchivoCategoriaGeneral;
 import com.sena.solution.models.Curia;
 import com.sena.solution.models.Parroquia;
 import com.sena.solution.models.RolEntity;
@@ -124,7 +125,8 @@ public class GestorDocumentalApplication {
 			CuriaRepository curiaRepository, 
 			VicariaRepository vicariaRepository, 
 			ParroquiaRepository parroquiaRepository,
-			UsuarioRepository usuarioRepository) {
+			UsuarioRepository usuarioRepository,
+			ArchivoCategoriaGeneralRepository acgRepository) {
 		return arg ->{
 			RolEntity rolAdmin = new RolEntity(1L, RolEnum.ADMIN);
 			RolEntity rolParroco = new RolEntity(2L, RolEnum.PARROCO);
@@ -149,6 +151,9 @@ public class GestorDocumentalApplication {
 			usuarioPrueba.setAccountNoLocked(true);
 			usuarioPrueba.setCredentialNoExpired(true);
 			usuarioRepository.save(usuarioPrueba);
+			
+			
+			acgRepository.save(new ArchivoCategoriaGeneral(1L, "archivo de prueba"));
 		};
 	}
 

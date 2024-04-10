@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+<head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
+    <title>FORMULARIO ACTUALIZAR ARCHIVOS GENERALES</title>
+</head>
+
+<body class="sidebar-mini layout-fixed">
+
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+    </nav>
+
+    <aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+    </aside>
+
+    <div class="content-wrapper" id="fondo">
+		<div class="container-fluid text-center" style="padding-left: 25%;">
+			<div class="col-lg-8 d-flex aling-items-stretch">
+				<div class="card w-100 mt-5">
+					<div class="card-header fw-semibold mb-4"> Formulario Actualizar Registros Generales</div>
+					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
+						<form th:action="@{/acg/actualizarACG}" method="post" th:object="${objACG}">
+                            <input type="hidden" th:field="*{idACG}" id="idACG" name="idACG" required>
+                            <div>
+                                <div class="row text-center">
+                                    <div>
+                                        <label for="nombreACG" class="form-label">Nombre Archivo: </label>
+                                        <input class="form-control" type="text" th:field="*{nombreACG}" id="nombreACG" name="nombreACG" required>
+                                    </div>
+                                    <!--div>
+                                        <label for="parroquia" class="form-label"> Parroquia</label>
+                                        <select class="form-control" name="select" th:field="*{parroquia}">
+                                            <option th:each="Parroquia:${listaParroquias}" th:value="${Parroquia.id}"
+                                                th:text="${Parroquia.nombre}">
+                                            </option>
+                                        </select>
+                                    </div-->
+                                </div>
+                            <div class="text-center mt-5">
+                                <button class="btn btn-primary " type="submit">Guardar</button>
+                            </div>
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>    
+    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,26 @@
+
+.body-position{
+    position: fixed;
+}
+
+.aside-conf{
+    background-color: #D5D8DC;
+}
+
+.image{
+    text-align: center;
+}
+
+.logo-img{
+    display: inline;
+    width:50%;
+}
+
+.content-wrapper{
+    padding: 50px 20px;
+}
+
+#fondo {
+    background: skyblue;
+    height: 100vh;
+}

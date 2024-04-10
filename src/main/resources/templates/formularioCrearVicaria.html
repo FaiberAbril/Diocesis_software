@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+<head th:insert="~{layout/layoutNavegacion :: head}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<title>FORMULARIO CREAR VICARIAS</title>
+
+</head>
+
+<Body class="sidebar-mini layout-fixed">
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+	</nav>
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+	</aside>
+	<!--<a th:href="@{/parroquias/}">
+            <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
+        </a>-->
+	<div class="content-wrapper" id="fondo">
+		<div class="container-fluid text-center" style="padding-left: 25%;">
+			<div class="col-lg-8 d-flex aling-items-stretch">
+				<div class="card w-100 mt-2">
+					<div class="card-header fw-semibold mb-4">REGISTRO VICARIA</div>
+					<div class="card-body p-4" style="margin-left: 15%; margin-right: 15%;">
+						<form th:action="@{/vicaria/guardarVicaria}" method="post" th:object="${objVicaria}">
+							<div>
+								<div>
+									<div>
+										<label for="nombreVicaria" class="form-label"> Nombre Vicaria</label>
+										<input type="text" class="form-control" th:field="*{nombreVicaria}" id="nombreVicaria" name="nombreVicaria" required>
+										<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nombreVicaria')}" th:errors="*{nombreVicaria}"
+                      ></div>
+									</div>
+			
+									<div>
+										<label for="curia" class="form-label"> Curia</label>
+										<!--<input type="text" class="form-control" th:field="*{curia}" id="vicaria"
+												name="vicaria" required>-->
+										<select class="form-control" name="select" th:field="*{curia}">
+											<option th:each="Curia:${listaCurias}" th:value="${Curia.id}" th:text="${Curia.nombre}">
+											</option>
+										</select>
+									</div>
+			
+			
+								</div>
+								<div class="text-center mt-5">
+									<button class="btn btn-primary " type="submit">Guardar</button>
+								</div>
+							</div>
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+
+</Body>
+
+</html>

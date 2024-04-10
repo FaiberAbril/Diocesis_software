@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+<head th:insert="~{layout/layoutNavegacion :: head}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<title>LISTA DE VICARIAS</title>
+</head>
+
+<body class="sidebar-mini layout-fixed">
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+	</nav>
+
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+	</aside>
+	<!--<a th:href="@{/principal/}">
+		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
+		</a>-->
+		
+	<div class="content-wrapper" id="fondo" layout:fragment="page-content">
+		<div class="container text-center">
+			<H1>Lista de Vicarias</H1>
+			<br>
+			<H2>Crear Vicarias</H2>
+			<br>
+			<a th:href="@{/vicaria/formularioCrearVicarias}">
+				<button class="btn btn-primary" type="submit">Nueva Vicaria</button>
+			</a>
+			
+			<div  th:insert="~{layout/layoutNavegacion :: buscador}">
+				
+			</div>
+			
+			<div class="text-center mt-5">
+				<table class="table table-bordered">
+
+					<thead>
+						<tr>
+							<th>Id Vicaria</th>
+							<th>Nombre </th>
+							<th>Curia</th>
+							<th>Eliminar</th>
+							<th>Actualizar</th>
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr th:each="Vicaria:${listaVicarias.getContent}">
+							<td th:text="${Vicaria.idVicaria}"></td>
+							<td th:text="${Vicaria.nombreVicaria}"></td>
+							<td th:text="${Vicaria.curia != null} ? ${Vicaria.curia.nombre} : 'sin curia'"></td>
+							<td>
+								<a th:href="@{/vicaria/eliminarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
+									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
+								</a>
+							</td>
+							<td>
+								<a
+									th:href="@{/vicaria/formularioActualizarVicaria/{idVicaria}(idVicaria=${Vicaria.idVicaria})}">
+									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
+								</a>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center" th:if="${not #lists.isEmpty(listaVicarias.getContent)}">
+			<nav aria-label="...">
+				<ul class="pagination pagination-lg ">
+					<li class="page-item" aria-current="page"
+						th:each="i: ${#numbers.sequence(0,listaVicarias.getTotalPages-1)}">
+						<a th:href="@{/vicaria/listar(palabra=${palabra},page=${i})}" th:text="${i}" class="page-link"
+							th:classappend="${currentPage}==${i}?'active':''"></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+
+
+</body>
+<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+<script th:src="@{/js/page.js}"></script>
+
+</html>

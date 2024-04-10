@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+
+<head th:insert="~{layout/layoutNavegacion :: head}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<title>FORMULARIO AGREGAR DOCUMENTO</title>
+
+</head>
+
+<Body class="sidebar-mini layout-fixed">
+	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
+
+	</nav>
+
+	<aside th:insert="~{layout/layoutNavegacion :: aside}">
+
+	</aside>
+	<!--<a th:href="@{/parroquias/}">
+            <button class="btn btn-success" type="submit" $theme-colors="success">Volver Administracion</button>
+        </a>-->
+	<div class="container-fluid text-center" id="fondo" style="padding-left: 30%;">
+		<div class="col-lg-8 d-flex aling-items-stretch ">
+			<div class="card w-100 mt-5 bg-light">
+				<div class="card-header fw-semibold mb-4">
+          <h1 th:text="'Agregar documento a' +${acg.nombreACG}"></h1>
+          <p th:text="${parroquia.nombre}"></p>
+        </div>
+				<div class="card-body p-4 " style="margin-left: 15%; margin-right: 15%;">
+					<form th:action="@{/documento/agregar/{idParroquia}/{idAcg}(idParroquia=${parroquia.id},idAcg=${acg.idACG})}" method="post" enctype="multipart/form-data">
+						<div>
+							<div>
+								<div>
+									<label for="file" class="form-label"> Documento</label>
+									<input type="file" accept="file/*" class="form-control-file" id="file"
+										name="file" required>
+								</div>
+							</div>
+							<div class="text-center mt-5">
+								<button class="btn btn-primary toastrDefaultSuccess " type="submit" >Agregar Documento</button>
+							</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+
+
+</Body>
+
+</html>

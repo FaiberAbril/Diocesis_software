@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+  <head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href=""
+      th:href="@{/css/bootstrap/bootstrap.min.css}"
+    />
+    <title>LISTA DE PARROQUIAS ACG</title>
+  </head>
+
+  <body class="sidebar-mini layout-fixed">
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
+
+    <aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
+    <!--<a th:href="@{/principal/}">
+		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
+		</a>-->
+    <div class="content-wrapper" id="fondo" layout:fragment="page-content">
+      <div class="container text-center">
+        <h1>Lista de parroquias y acg</h1>
+        <a th:href="@{/parroquiaAcg/formularioCrearParroquiaAcg}">
+          <button class="btn btn-primary" type="submit">Nueva Relacion</button>
+        </a>
+        <div class="text-center mt-5">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Parroquia</th>
+                <th>Archivo Categoria General</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="parroquiaAcg:${listaParroquiaAcg}">
+                <td th:text="${parroquiaAcg.parroquia.nombre}"></td>
+                <td th:text="${parroquiaAcg.acg.nombreACG}"></td>
+
+                <td>
+                  <a
+                    th:href="@{/parroquiaAcg/eliminarParroquiaAcg/{idParroquia}/acg/{idAcg}(idParroquia=${parroquiaAcg.parroquia.id}, idAcg=${parroquiaAcg.acg.idACG})}"
+                  >
+                    <button type="button" class="btn btn-outline-danger">
+                      ELIMINAR
+                    </button>
+                  </a>
+                  <!--a
+                    th:href="@{/parroquiaAcg/formularioActualizarParroquiaAcg/{idParroquia}/acg/{idAcg}(idParroquia=${parroquiaAcg.parroquia.id}, idAcg=${parroquiaAcg.acg.idACG})}"
+                    
+                  >
+                    <button type="button" class="btn btn-outline-info" disabled>
+                      ACTUALIZAR
+                    </button>
+                  </a-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+  <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+  <head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href=""
+      th:href="@{/css/bootstrap/bootstrap.min.css}"
+    />
+    <title>FORMULARIO ACTUALIZAR USUARIOS</title>
+  </head>
+
+  <body class="sidebar-mini layout-fixed">
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
+    <aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
+    <div class="content-wrapper" id="fondo">
+      <div class="container-fluid text-center" style="padding-left: 25%">
+        <div class="col-lg-8 d-flex aling-items-stretch">
+          <div class="card w-100 mt-5">
+            <div class="card-header fw-semibold mb-4">
+              Formulario Actualizar Usuarios
+            </div>
+            <div
+              class="card-body p-4"
+              style="margin-left: 15%; margin-right: 15%"
+            >
+              <form
+                th:action="@{/usuario/actualizarUsuario}"
+                method="post"
+                th:object="${objUsuario}"
+              >
+                <input
+                  type="hidden"
+                  th:field="*{id}"
+                  id="id"
+                  name="id"
+                  required
+                />
+                <div>
+                  <div class="row text-center">
+                    <div>
+                      <label for="nombre" class="form-label"
+                        >Nombre Usuario:
+                      </label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        th:field="*{nombre}"
+                        id="nombre"
+                        name="nombre"
+                        required
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('nombre')} "
+                        th:errors="*{nombre}"
+                      ></div>
+                    </div>
+                    <div>
+                      <label for="apellido" class="form-label">Apellido</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        th:field="*{apellido}"
+                        id="apellido"
+                        name="apellido"
+                        required
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('apellido')} "
+                        th:errors="*{apellido}"
+                      ></div>
+                    </div>
+                    <div>
+                      <label for="cedula" class="form-label"> Cedula</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        th:field="*{cedula}"
+                        id="cedula"
+                        name="cedula"
+                        required
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('cedula')}"
+                        th:errors="*{cedula}"
+                      ></div>
+                    </div>
+                    <div>
+                      <label for="telefono" class="form-label"> Telefono</label>
+                      <input
+                        class="form-control"
+                        type="tel"
+                        th:field="*{telefono}"
+                        id="telefono"
+                        name="telefono"
+                        required
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('telefono')}"
+                        th:errors="*{telefono}"
+                      ></div>
+                    </div>
+                    <div>
+                      <label for="email" class="form-label"> Email</label>
+                      <input
+                        class="form-control"
+                        type="email"
+                        th:field="*{email}"
+                        id="email"
+                        name="email"
+                        required
+                      />
+                      <div
+                        class="invalid-feedback d-block"
+                        th:if="${#fields.hasErrors('email')}"
+                        th:errors="*{email}"
+                      ></div>
+                    </div>
+
+                    <div>
+                      <label for="rol" class="form-label"> Rol Usuario</label>
+                      <br /><br />
+                      <th:block th:each="rolUsuario : ${listaRol}">
+                        <input
+                          type="checkbox"
+                          name="rolesArreglo"
+                          th:field="*{roles}"
+                          th:value="${rolUsuario.id}"
+                        />
+                        <label
+                          th:text="${rolUsuario.rolEnum}"
+                          th:for="${#ids.prev('roles')}"
+                        ></label>
+                      </th:block>
+                      <!--select class="form-control" name="select" th:field="*{roles}">
+                            <option th:each="RolUsuario:${listaRol}" th:value="${RolUsuario.id}"
+                                th:text="${RolUsuario.rolEnum}">
+                            </option>
+                        </select-->
+                    </div>
+                    <div>
+                      <label for="parroquia" class="form-label">
+                        Parroquia/Pertenece</label
+                      >
+                      <select
+                        class="form-control"
+                        name="select"
+                        th:field="*{parroquia}"
+                      >
+                        <option
+                          th:each="Parroquia:${listaParroquias}"
+                          th:value="${Parroquia.id}"
+                          th:text="${Parroquia.nombre}"
+                        ></option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label th:for="${#ids.next('isEnabled')}"
+                        >Usuario disponible</label
+                      >
+                      <input
+                        type="checkbox"
+                        th:field="*{isEnabled}"
+                        th:value="${objUsuario}"
+                        th:checked="*{isEnabled}"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label th:for="${#ids.next('accountNoExpired')}"
+                        >La cuenta no ha expirado</label
+                      >
+                      <input type="checkbox" th:field="*{accountNoExpired}" />
+                    </div>
+
+                    <div class="form-group">
+                      <label th:for="${#ids.next('accountNoLocked')}"
+                        >La cuenta no está bloqueada</label
+                      >
+                      <input type="checkbox" th:field="*{accountNoLocked}" />
+                    </div>
+
+                    <div class="form-group">
+                      <label th:for="${#ids.next('credentialNoExpired')}"
+                        >La credenciales no expiradas</label
+                      >
+                      <input
+                        type="checkbox"
+                        th:field="*{credentialNoExpired}"
+                      />
+                    </div>
+
+                    <!--div>
+                        <label for="username" class="form-label">username</label>
+                        <input type="text" class="form-control" th:field="*{username}" id="username"
+                            name="username" required>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('username')} "
+                            th:errors="*{username}"></div>
+                        <div class="invalid-feedback d-block" th:if="${messageErrorUsername != ''}" th:text="${messageErrorUsername}"></div>
+                    </div-->
+
+                    <!--div>
+                        <label for="password" class="form-label">contraseña</label>
+                        <input type="password" class="form-control" th:field="*{password}" id="password"
+                            name="password" th:text="*{password}"required>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('password')} "
+                            th:errors="*{password}">
+                        </div>
+                    </div-->
+                  </div>
+                  <div class="text-center mt-5">
+                    <button class="btn btn-primary" type="submit">
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+  </body>
+</html>

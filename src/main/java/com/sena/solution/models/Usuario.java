@@ -21,7 +21,7 @@ public class Usuario extends Persona {
 	private Long idUsuario;*/
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
 	private Parroquia parroquia;
 	
 	public Usuario() {

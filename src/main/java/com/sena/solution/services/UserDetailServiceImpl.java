@@ -39,8 +39,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
 		List<SimpleGrantedAuthority> authorityList = new ArrayList<>();//usuarioRepository;
 		usuario.getRoles()
 			.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getRolEnum().name()))));
-		
-		usuario.getRoles().stream().forEach(role -> System.out.println(role.getRolEnum()));
+	
 		User user = new User(usuario.getUsername(),
 				usuario.getPassword(),
 				usuario.isEnabled(),

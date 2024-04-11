@@ -38,9 +38,10 @@ public class SecurityConfig {
 					http.requestMatchers("/parroquias/**").hasRole("PARROCO");
 					http.requestMatchers("/acg/**").hasAnyRole("PARROCO","SECRETARIA");
 					http.requestMatchers("/parroquiaAcg/**").hasAnyRole("PARROCO","SECRETARIA");
+					http.requestMatchers("/encargado/**").hasRole("ADMIN");
 					http.requestMatchers("/documento/**").hasAnyRole("PARROCO","SECRETARIA");
 				})
-				.formLogin(form->form.loginPage("/login").permitAll().defaultSuccessUrl("/curia/listar"))
+				.formLogin(form->form.loginPage("/login").permitAll().defaultSuccessUrl("/curia/listar",true))
 				.build();
 	}
 	

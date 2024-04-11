@@ -20,4 +20,6 @@ public interface EncargadoRepository extends JpaRepository<Encargado, Long>{
 	
 	
 	public List<Encargado> findByCuria(Curia curia);
+	
+	public boolean existsByUsername(String username);
 }

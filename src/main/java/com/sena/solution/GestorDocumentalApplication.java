@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import com.sena.solution.models.ArchivoCategoriaGeneral;
 import com.sena.solution.models.Curia;
@@ -25,6 +26,7 @@ import com.sena.solution.repositories.ParroquiaRepository;
 import com.sena.solution.repositories.VicariaRepository;
 
 @SpringBootApplication
+@EnableScheduling
 public class GestorDocumentalApplication {
 	
 	private static CuriaRepository curiaRepository;

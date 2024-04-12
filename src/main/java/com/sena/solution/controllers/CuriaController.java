@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.sena.solution.controllers.views.CuriaView;
+import com.sena.solution.message.EjemploMensaje;
 import com.sena.solution.models.Curia;
 import com.sena.solution.models.Encargado;
 import com.sena.solution.models.Vicaria;
@@ -50,13 +55,14 @@ public class CuriaController {
 	}
 	
 	@GetMapping("/listar")
-	public ModelAndView listaCurias(@RequestParam(defaultValue = "0")int page, @Param("palabra")String palabra) {
+	public ModelAndView listaCurias(@RequestParam(defaultValue = "0")int page, @Param("palabra")String palabra,@ModelAttribute("message")final EjemploMensaje message) {
 		
 		
 		ModelAndView modelAndView = new ModelAndView(CuriaView.LISTC);
 		modelAndView.addObject("url", DIRECCION);
 		modelAndView.addObject("palabra", palabra);
 		modelAndView.addObject("currentPage", page);
+
 		Pageable pg = PageRequest.of(page, 4);
 		if(palabra != null) {
 			modelAndView.addObject("listaCurias", curiaService.encontrarCuriaEspecifica(palabra,pg));
@@ -91,7 +97,7 @@ public class CuriaController {
 	}
 		
 	@GetMapping("/formularioActualizarCuria/{idCuria}")
-	public ModelAndView formularioActualizarCuria(@PathVariable("idCuria")Long idCuria) {
+	public ModelAndView formularioActualizarCuria(@PathVariable("idCuria")Long idCuria,@ModelAttribute("message")final EjemploMensaje message) {
 		ModelAndView modelAndView = new ModelAndView(CuriaView.FORMUPC);
 		modelAndView.addObject("objCuria", curiaService.buscarPorIdCuria(idCuria));
 		
@@ -99,19 +105,24 @@ public class CuriaController {
 	}
 		
 	@PostMapping("/actualizarCuria")
-	public String actualizarCuria(@Valid @ModelAttribute("objCuria") Curia curia,BindingResult br, Model model) {
+	public String actualizarCuria(@Valid @ModelAttribute("objCuria") Curia curia,BindingResult br,RedirectAttributes redirectAttributes) {
 		if (br.hasErrors()) {
-			return CuriaView.FORMUPC;
+			redirectAttributes.addFlashAttribute("message",new EjemploMensaje("error", "Elemento actualizado satisfactoriamente"));
+			return "redirect:/curia/formularioActualizarCuria/"+curia.getId();
 		}
 		
 		curiaService.actualizarCuria(curia);
+		
+		
+		redirectAttributes.addFlashAttribute("message",new EjemploMensaje("success", "Elemento actualizado satisfactoriamente"));
+		
 		
 		return "redirect:/curia/listar";
 			
 	}
 	
 	@GetMapping("/eliminarCuria/{idCuria}")
-	public String eliminarCuria(@PathVariable("idCuria")Long idCuria) {
+	public String eliminarCuria(@PathVariable("idCuria")Long idCuria,RedirectAttributes redirectAttributes, ModelMap model) {
 		
 		
 		List<Vicaria> listaVicaria = vicariaService.buscarPorCuria(curiaService.buscarPorIdCuria(idCuria));
@@ -138,8 +149,18 @@ public class CuriaController {
 				encargadoService.actualizarEncargado(encargado);
 			}
 		}
-		
 		curiaService.eliminarCuria(curiaService.buscarPorIdCuria(idCuria));
+		
+		
+		
+		redirectAttributes.addFlashAttribute("message",new EjemploMensaje("success", "Elemento eliminado satisfactoriamente"));
+		/*try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}*/
+		
+		
 		
 		return "redirect:/curia/listar";
 	}

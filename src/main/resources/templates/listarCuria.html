@@ -56,12 +56,15 @@
 							<td th:text="${Curia.id}"></td>
 							<td th:text="${Curia.nombre}"></td>
 							<td th:text="${Curia.direccion}"></td>
+							
+							
 							<td th:text="${Curia.telefono}"></td>
 							<td th:text="${Curia.ciudad}"></td>
 							<td th:text="${Curia.Email}"></td>
+							
 							<td>
 								<a th:href="@{/curia/eliminarCuria/{id}(id=${Curia.id})}">
-									<button type="button" class="btn btn-outline-danger" onclick="eliminarCuria()">ELIMINAR</button>
+									<button type="button" class="btn btn-outline-danger" onclick="eliminar()">ELIMINAR</button>
 								</a>
 							</td>
 							<td>
@@ -87,11 +90,34 @@
 			
 		</div>
 	</div>
+	
+	
 	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
 	<script th:src="@{/js/sweetalert2/sweetalert2.all.min.js}"></script>
 	<script th:src="@{/js/alertas.js}"></script>
 	<script th:src="@{/js/page.js}"></script>
+	<script th:inline="javascript">
+		
+		
+		/*<![CDATA[*/
+
+	    var icon = /*[[${message.icon}]]*/'';
+	    var title = /*[[${message.title}]]*/'';
+	    if(icon){
+	    console.log(icon);
+	    Swal.fire({timer:3000,
+        position: "top-end",
+        icon: icon,
+		title:title,
+        showConfirmButton: false,
+    	});
+    	}
+
+		/*]]>*/
+		
+
+	</script>
 
 </body>
 

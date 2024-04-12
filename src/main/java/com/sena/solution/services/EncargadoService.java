@@ -49,4 +49,8 @@ public class EncargadoService {
 		return encargadoRepository.findByCuria(curia);
 	}
 	
+	public boolean existeEncargado(String username) {
+		return encargadoRepository.existsByUsername(username);
+	}
+	
 }

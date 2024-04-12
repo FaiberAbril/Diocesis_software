@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
+import org.springframework.jdbc.core.metadata.SybaseCallMetaDataProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sena.solution.controllers.views.UsuarioView;
 import com.sena.solution.models.Usuario;
+import com.sena.solution.models.Dto.UsuarioDTO;
 import com.sena.solution.services.ParroquiaService;
 import com.sena.solution.services.UsuarioService;
 
@@ -66,14 +68,21 @@ public class UsuarioController {
 
 	@PostMapping("/guardarUsuario")
 	public String guardarUsuario(@Valid @ModelAttribute("objUsuario") Usuario nuevoUsuario, BindingResult br, Model model) {
-		
-		if (br.hasErrors()) {
+		String message = "";
+		if (usuarioService.existeUsuario(nuevoUsuario.getUsername())) {
+			message = "El usuario ya existe";
+		}
+		if (br.hasErrors() || !message.isEmpty()) {
 			model.addAttribute("listaParroquias", parroquiaService.listarParroquias());
 			model.addAttribute("listaRol", usuarioService.listarRoles());
-			
+			model.addAttribute("messageErrorUsername", message);
 			return UsuarioView.FORMU;
 		}
 		
+		nuevoUsuario.setEnabled(true);
+		nuevoUsuario.setAccountNoExpired(true);
+		nuevoUsuario.setAccountNoLocked(true);
+		nuevoUsuario.setCredentialNoExpired(true);
 		usuarioService.guardarUsuario(nuevoUsuario);
 		return "redirect:/usuario/listar";
 	}
@@ -81,23 +90,22 @@ public class UsuarioController {
 	@GetMapping("/formularioActualizarUsuario/{idUsuario}")
 	public ModelAndView formularioActualizarUsuario(@PathVariable("idUsuario") Long idUsuario) {
 		ModelAndView modelandview = new ModelAndView(UsuarioView.FORMUPU);
-		modelandview.addObject("objUsuario", usuarioService.buscarPorIdUsuario(idUsuario));
+		modelandview.addObject("objUsuario",usuarioService.convertirUsuarioToDTO(usuarioService.buscarPorIdUsuario(idUsuario)));
 		modelandview.addObject("listaParroquias", parroquiaService.listarParroquias());
 		modelandview.addObject("listaRol", usuarioService.listarRoles()); 
 		return modelandview;
 	}
 
 	@PostMapping("/actualizarUsuario")
-	public String actualizarUsuario(@Valid @ModelAttribute("objUsuario") Usuario usuario, BindingResult br, Model model) {
-		
+	public String actualizarUsuario(@Valid @ModelAttribute("objUsuario") UsuarioDTO usuarioDTO, BindingResult br, Model model) {
+		Usuario usuarioModificar = usuarioService.convertirDTOToUsuario(usuarioDTO);
 		if (br.hasErrors()) {
 			model.addAttribute("listaParroquias", parroquiaService.listarParroquias());
 			model.addAttribute("listaRol", usuarioService.listarRoles());
-			
 			return UsuarioView.FORMUPU;
 		}
-		
-		usuarioService.actualizarUsuario(usuario);
+
+		usuarioService.actualizarUsuario(usuarioModificar);
 		return "redirect:/usuario/listar";
 	}
 	

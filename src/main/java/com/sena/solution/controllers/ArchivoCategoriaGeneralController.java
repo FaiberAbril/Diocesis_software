@@ -40,7 +40,7 @@ public class ArchivoCategoriaGeneralController {
 		modelAndView.addObject("url", DIRECCION);
 		modelAndView.addObject("palabra", palabra);
 		modelAndView.addObject("currentPage", page);
-		Pageable pg = PageRequest.of(page, 1);
+		Pageable pg = PageRequest.of(page, 4);
 		if (palabra != null) {
 			modelAndView.addObject("listaACG", aCGService.encontrarACG(palabra, pg));
 		} else {

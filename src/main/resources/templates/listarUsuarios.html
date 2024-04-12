@@ -1,100 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{layout/layoutNavegacion}">
+  <head th:insert="~{layout/layoutNavegacion :: head}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href=""
+      th:href="@{/css/bootstrap/bootstrap.min.css}"
+    />
+    <title>LISTA DE USUARIOS</title>
+  </head>
 
-<head th:insert="~{layout/layoutNavegacion :: head}">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="" th:href="@{/css/bootstrap/bootstrap.min.css}">
-	<title>LISTA DE USUARIOS</title>
-</head>
+  <body class="sidebar-mini layout-fixed">
+    <nav th:insert="~{layout/layoutNavegacion :: navbar}"></nav>
 
-<body class="sidebar-mini layout-fixed">
-	<nav th:insert="~{layout/layoutNavegacion :: navbar}">
-
-	</nav>
-
-	<aside th:insert="~{layout/layoutNavegacion :: aside}">
-
-	</aside>
-	<!--<a th:href="@{/principal/}">
+    <aside th:insert="~{layout/layoutNavegacion :: aside}"></aside>
+    <!--<a th:href="@{/principal/}">
 		<button class="btn btn-success" type="submit" $theme-colors="success">Pagina Principal</button>
 		</a>-->
-	<div class="content-wrapper" id="fondo" layout:fragment="page-content">
-		<div class="container text-center">
-			<H1>Lista de Usuarios</H1>
-			<br>
-			<H2>Crear Usuario</H2>
-			<br>
-			<a th:href="@{/usuario/formularioCrearUsuario}">
-				<button class="btn btn-primary" type="submit">Nuevo Usuario</button>
-			</a>
-			
-			<div  th:insert="~{layout/layoutNavegacion :: buscador}"></div>
-			<div class="text-center mt-5">
-				<table class="table table-bordered">
-	
-					<thead>
-						<tr>
-							<th>Id Usuario</th>
-							<th>Nombre </th>
-							<th>Apellido</th>
-							<th>Cedula</th>
-							<th>Telefono</th>
-							<th>Email</th>
-							<th>Rol Usuario</th>
-							<th>Parroquia/Pertenece</th>
-							<th>Eliminar</th>
-							<th>Actualizar</th>
-							<th>Archivos</th>
-						</tr>
-	
-					</thead>
-					<tbody>
-						<tr th:each="usuario:${listaUsuarios.getContent}">
-							<td th:text="${usuario.id}"></td>
-							<td th:text="${usuario.nombre}"></td>
-							<td th:text="${usuario.apellido}"></td>
-							<td th:text="${usuario.cedula}"></td>
-							<td th:text="${usuario.telefono}"></td>
-							<td th:text="${usuario.email}"></td>
-							<td th:text="${usuario.rolUsuario}"></td>
-							<td th:text="${usuario.parroquia != null} ? ${usuario.parroquia.nombre} : 'sin parroquia'"></td>
-							<td>
-								<a th:href="@{/usuario/eliminarUsuario/{idUsuario}(idUsuario=${usuario.id})}">
-									<button type="button" class="btn btn-outline-danger">ELIMINAR</button>
-								</a>
-							</td>
-							<td>
-								<a th:href="@{/usuario/formularioActualizarUsuario/{idUsuario}(idUsuario=${usuario.id})}">
-									<button type="button" class="btn btn-outline-info">ACTUALIZAR</button>
-								</a>
-							</td>
-							<td>
-								<a th:href="@{/archivo/archivosACG/{idUsuario}(idUsuario=${usuario.id})}">
-									<button type="button" class="btn btn-outline-info">ACCEDER</button>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="d-flex justify-content-center sm" th:if="${not #lists.isEmpty(listaUsuarios.getContent)}" >
-			<nav aria-label="...">
-				<ul class="pagination pagination-lg">
-					<li class="page-item " aria-current="page" th:each="i: ${#numbers.sequence(0,listaUsuarios.getTotalPages-1)}">
-						<a th:href="@{/usuario/listar(palabra=${palabra},page=${i})}" th:text="${i}" class="page-link"
-							th:classappend="${currentPage}==${i}?'active':''"></a>
-					</li>
-				</ul>
-			</nav>
-			
-		</div>
-	</div>
-	<script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-	<script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
-	<script th:src="@{/js/page.js}"></script>
-</body>
+    <div class="content-wrapper" id="fondo" layout:fragment="page-content">
+      <div class="container text-center">
+        <h1>Lista de Usuarios</h1>
+        <br />
+        <h2>Crear Usuario</h2>
+        <br />
+        <a th:href="@{/usuario/formularioCrearUsuario}">
+          <button class="btn btn-primary" type="submit">Nuevo Usuario</button>
+        </a>
 
-
+        <div th:insert="~{layout/layoutNavegacion :: buscador}"></div>
+        <div class="text-center mt-5 overflow-auto">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Id Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Rol Usuario</th>
+                <th>Parroquia/Pertenece</th>
+                <th>Eliminar</th>
+                <th>Actualizar</th>
+                <th>Archivos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="usuario:${listaUsuarios.getContent}">
+                <td th:text="${usuario.id}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.apellido}"></td>
+                <td th:text="${usuario.cedula}"></td>
+                <td th:text="${usuario.telefono}"></td>
+                <td th:text="${usuario.email}"></td>
+                <!--${#strings.arrayJoin(members_array.![nickname], ',')}-->
+                <!--td th:each="rol:${usuario.roles}" th:text="${rol.rolEnum}"></td-->
+                <td
+                  th:text="${#strings.arrayJoin(usuario.roles.![rolEnum],',')}"
+                ></td>
+                <td
+                  th:text="${usuario.parroquia != null} ? ${usuario.parroquia.nombre} : 'sin parroquia'"
+                ></td>
+                <td>
+                  <a
+                    th:href="@{/usuario/eliminarUsuario/{idUsuario}(idUsuario=${usuario.id})}"
+                  >
+                    <button type="button" class="btn btn-outline-danger">
+                      ELIMINAR
+                    </button>
+                  </a>
+                </td>
+                <td>
+                  <a
+                    th:href="@{/usuario/formularioActualizarUsuario/{idUsuario}(idUsuario=${usuario.id})}"
+                  >
+                    <button type="button" class="btn btn-outline-info">
+                      ACTUALIZAR
+                    </button>
+                  </a>
+                </td>
+                <td>
+                  <a
+                    th:href="@{/archivo/archivosACG/{idUsuario}(idUsuario=${usuario.id})}"
+                  >
+                    <button type="button" class="btn btn-outline-info">
+                      ACCEDER
+                    </button>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        class="d-flex justify-content-center sm"
+        th:if="${not #lists.isEmpty(listaUsuarios.getContent)}"
+      >
+        <nav aria-label="...">
+          <ul class="pagination pagination-lg">
+            <li
+              class="page-item"
+              aria-current="page"
+              th:each="i: ${#numbers.sequence(0,listaUsuarios.getTotalPages-1)}"
+            >
+              <a
+                th:href="@{/usuario/listar(palabra=${palabra},page=${i})}"
+                th:text="${i}"
+                class="page-link"
+                th:classappend="${currentPage}==${i}?'active':''"
+              ></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <script src="" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script src="" th:src="@{/js/bootstrap/jquery.js}"></script>
+    <script th:src="@{/js/page.js}"></script>
+  </body>
 </html>

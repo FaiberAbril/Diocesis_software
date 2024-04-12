@@ -56,15 +56,21 @@ public class ParroquiaAcgController {
 		ModelAndView modelAndView = new ModelAndView(ParroquiaAcgView.FORMPA);
 		modelAndView.addObject("ObjParroquiaAcg", new ParroquiaAcg());
 		modelAndView.addObject("listaParroquias", parroquiaService.listarParroquias());
-    modelAndView.addObject("listaAcg", acgService.listarACG());
+		modelAndView.addObject("listaAcg", acgService.listarACG());
 		
 		return modelAndView;
 	}
 	
 	@PostMapping("/guardarParroquiaAcg")
 	public String guardarParroquiaAcg(@ModelAttribute("ObjParroquiaAcg") ParroquiaAcg parroquiaAcg) {
-		parroquiaAcg.setId(new ParroquiaAcgPK(parroquiaAcg.getParroquia().getId(), parroquiaAcg.getAcg().getIdACG()));
-		parroquiaAcgService.guardarParroquiaAcg(parroquiaAcg);
+		
+		
+		if(parroquiaAcg.getParroquia() != null && parroquiaAcg.getAcg() != null) {
+			
+			parroquiaAcg.setId(new ParroquiaAcgPK(parroquiaAcg.getParroquia().getId(), parroquiaAcg.getAcg().getIdACG()));
+			parroquiaAcgService.guardarParroquiaAcg(parroquiaAcg);
+		}
+		
 		
 		return "redirect:/parroquiaAcg/listar";
 			
@@ -76,7 +82,7 @@ public class ParroquiaAcgController {
 		ModelAndView modelAndView = new ModelAndView(ParroquiaAcgView.FORMUPPA);
 		modelAndView.addObject("ObjParroquiaAcg", parroquiaAcgService.buscarPorIdParroquiaAcg(new ParroquiaAcgPK(idparroquia, idAcg)));
 		modelAndView.addObject("listaParroquias", parroquiaService.listarParroquias());
-    modelAndView.addObject("listaAcg", acgService.listarACG());
+		modelAndView.addObject("listaAcg", acgService.listarACG());
 		
 		return modelAndView;
 	}

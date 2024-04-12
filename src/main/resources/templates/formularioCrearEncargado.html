@@ -71,6 +71,25 @@
 										</select>
 			
 									</div>
+									
+									<div>
+										<label for="username" class="form-label">username</label>
+										<input type="text" class="form-control" th:field="*{username}" id="username"
+											name="username" required>
+										<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('username')} "
+											th:errors="*{username}"></div>
+										<div class="invalid-feedback d-block" th:if="${messageErrorUsername != ''}" th:text="${messageErrorUsername}"></div>
+									</div>
+
+
+									<div>
+										<label for="password" class="form-label">contraseña</label>
+										<input type="password" class="form-control" th:field="*{password}" id="password"
+											name="password" required>
+										<div class="invalid-feedback d-block" th:if="${#fields.hasErrors('password')} "
+											th:errors="*{password}"></div>
+										
+									</div>
 			
 								</div>
 								<div class="text-center mt-5">

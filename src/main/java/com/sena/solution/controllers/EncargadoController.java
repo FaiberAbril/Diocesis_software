@@ -1,5 +1,7 @@
 package com.sena.solution.controllers;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sena.solution.controllers.views.EncargadoView;
 import com.sena.solution.models.Encargado;
+import com.sena.solution.models.RolEntity;
+import com.sena.solution.repositories.RolRepository;
 import com.sena.solution.services.CuriaService;
 import com.sena.solution.services.EncargadoService;
 
@@ -30,6 +34,9 @@ public class EncargadoController {
 	
 	@Autowired
 	private CuriaService curiaService;
+	
+	@Autowired
+	private RolRepository rolRepository;
 	
 	private static final String DIRRECCION = "/encargado/listar";
 	
@@ -70,13 +77,22 @@ public class EncargadoController {
 	
 	@PostMapping("/guardarEncargado")
 	public String guardarEncargado(@Valid @ModelAttribute("ObjEncargado") Encargado encargado, BindingResult br, Model model) {
-		
+		String message = "";
+		if (encargadoService.existeEncargado(encargado.getNombre())) {
+			message = "El nombre del Encargado ya existe";
+		}
 		if (br.hasErrors()) {
 			model.addAttribute("listaCurias", curiaService.listarCurias());
-			
+			model.addAttribute("messageErrorUsername", message);
 			return EncargadoView.FORME;
 		}
 		
+		Set<RolEntity> listaRol = Set.of(rolRepository.findById(1L).orElse(null));
+		encargado.setRoles(listaRol);
+		encargado.setEnabled(true);
+		encargado.setAccountNoExpired(true);
+		encargado.setAccountNoLocked(true);
+		encargado.setCredentialNoExpired(true);
 		encargadoService.guardarEncargado(encargado);
 		
 		return "redirect:/encargado/listar";

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -35,6 +35,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/curia")
+//@PreAuthorize("hasRole('ADMIN')")
 public class CuriaController {
 	
 	

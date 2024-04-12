@@ -1,6 +1,7 @@
 package com.sena.solution.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,4 +25,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	
 	public List<Usuario> findByParroquia(Parroquia parroquia);
+	
+	public Optional<Usuario> findByUsername(String username);
+	
+	public boolean existsByUsername(String username);
+
+	public boolean existsById(Long id);
 }
